@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -e
+set -o pipefail
+
+if [ -d .git ]
+then
+	mod=$([ -z "$(git status -suno)" ] || echo "+")
+	tag="$(git describe --always --tags)"
+	ver="$(echo "$tag" | sed 's/^v//')$mod"
+else
+	ver="$(cat version)"
+fi
+
+if [ $# = 0 ]
+then
+	echo "$ver"
+	exit
+fi
+
+[ $# = 1 ]
+f="$1"
+
+src=$(echo "#include "'"'"toslibc/version.h"'"'"
+
+const char *toslibc_version(void) { return "'"'"$ver"'"'"; }")
+
+if [ ! -f "$f" ] || ! echo "$src" | cmp --quiet - "$f"
+then
+	echo "$src" >"$f".tmp
+	mv "$f".tmp "$f"
+	echo "$f"
+else
+	:
+fi
