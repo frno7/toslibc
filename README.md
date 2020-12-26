@@ -18,3 +18,11 @@ significant advantages with a 32-bit libc:
 The are also two potentially significant disadvantages compared with a 16-bit
 libc: lower performance and greater memory use. However, with judicious
 optimisations such losses can often be recovered.
+
+TOS/libc includes interfaces for the following Atari TOS specific libraries:
+
+- AES (application environment services),
+- BIOS (basic input/output system),
+- GEMDOS (graphics environment manager disk operating system),
+- XBIOS (extended BIOS),
+- XGEMDOS (extended GEMDOS).
