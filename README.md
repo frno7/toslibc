@@ -19,6 +19,10 @@ The are also two potentially significant disadvantages compared with a 16-bit
 libc: lower performance and greater memory use. However, with judicious
 optimisations such losses can often be recovered.
 
+Programs linked with TOS/libc can use the `--gc-sections` option to the
+GNU linker and thereby drastically reduce their size. The supplied example
+programs compile to about 2 kB each, for instance.
+
 TOS/libc includes interfaces for the following Atari TOS specific libraries:
 
 - AES (application environment services),
