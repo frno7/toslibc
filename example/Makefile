@@ -18,8 +18,7 @@ $(EXAMPLE_OBJ): %.o : %.c
 	$(QUIET_CC)$(CROSS_COMPILE)gcc $(PRG_CFLAGS) -c -o $@ $<
 
 example/HELLO.TOS.o: example/hello.o $(TOSLIBC)
-	$(QUIET_LINK)$(CROSS_COMPILE)ld $(PRG_LDFLAGS) -o $@		\
-		$^
+	$(QUIET_LINK)$(CROSS_COMPILE)ld $(PRG_LDFLAGS) -o $@ $^
 
 example/HELLO.TOS: example/HELLO.TOS.o
 	$(QUIET_LINK)vlink $(PRG_VLINKFLAGS) -o $@ $^
