@@ -5,10 +5,6 @@
 
 /* Macro definitions from the Linux kernel. */
 
-#define __ALIGN__MASK(x, mask) (((x) + (mask)) & ~(mask))
-#define __ALIGN_(x, a) __ALIGN__MASK(x, (typeof(x))(a) - 1)
-#define ALIGN(x, a) __ALIGN_((x), (a))
-
 #define STR(x) #x
 #define XSTR(x) STR(x)
 
@@ -23,14 +19,6 @@
 
 #define __UNIQUE_ID(prefix) __PASTE(__PASTE(__UNIQUE_ID_, prefix), __COUNTER__)
 
-#define DIV_ROUND_CLOSEST_U32(x_, divisor_)(				\
-{									\
-	const typeof(divisor_) __d = divisor_;				\
-	const uint32_t _tmp = (x_) + (__d / 2);				\
-	_tmp / __d;							\
-}									\
-)
-
 /*
  * This returns a constant expression while determining if an argument is
  * a constant expression, most importantly without evaluating the argument.
@@ -41,12 +29,6 @@
 
 #define __no_side_effects(x, y) \
 		(__is_constexpr(x) && __is_constexpr(y))
-
-#define preserve(x)							\
-	for (typeof(x) x__ = (x), y__ = 0; !y__; (x) = x__, y__ = !y__)
-
-#define swap(a, b)							\
-	do { typeof(a) __tmp = (a); (a) = (b); (b) = __tmp; } while (0)
 
 #define NORETURN __attribute__((__noreturn__))
 
