@@ -32,7 +32,7 @@ version:
 
 .PHONY: clean
 clean:
-	$(QUIET_RM)$(RM) -f *.a */*.o* */*/*.o*				\
+	$(QUIET_RM)$(RM) -f *.a */*.o* */*/*.o* lib/toslibc/version.c	\
 		*/*.PRG */*.TOS */*.TTP					\
 		GPATH GRTAGS GTAGS
 
