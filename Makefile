@@ -16,7 +16,9 @@ endif
 DEP_CFLAGS += $(CFLAGS) $(BASIC_CFLAGS)
 ALL_CFLAGS += $(DEP_CFLAGS) $(HAVE_CFLAGS) $(S_CFLAGS)
 
-EXAMPLE := example/HELLO.TOS
+EXAMPLE :=								\
+	example/ALERT.PRG						\
+	example/HELLO.TOS
 
 TOSLIBC := toslibc.a
 

@@ -17,6 +17,12 @@ EXAMPLE_OBJ += $(patsubst %.c, %.o, $(EXAMPLE_SRC))
 $(EXAMPLE_OBJ): %.o : %.c
 	$(QUIET_CC)$(CROSS_COMPILE)gcc $(PRG_CFLAGS) -c -o $@ $<
 
+example/ALERT.PRG.o: example/alert.o $(TOSLIBC)
+	$(QUIET_LINK)$(CROSS_COMPILE)ld $(PRG_LDFLAGS) -o $@ $^
+
+example/ALERT.PRG: example/ALERT.PRG.o
+	$(QUIET_LINK)vlink $(PRG_VLINKFLAGS) -o $@ $^
+
 example/HELLO.TOS.o: example/hello.o $(TOSLIBC)
 	$(QUIET_LINK)$(CROSS_COMPILE)ld $(PRG_LDFLAGS) -o $@ $^
 
