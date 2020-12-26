@@ -5,13 +5,13 @@
 
 /* Macro definitions from the Linux kernel. */
 
-#define STR(x) #x
-#define XSTR(x) STR(x)
+#define __STR(x) #x
+#define __XSTR(x) __STR(x)
 
-#define CONCAT__(a, b) a ## b
-#define CONCATENATE(a, b) CONCAT__(a, b)
+#define __CONCAT__(a, b) a ## b
+#define __CONCATENATE(a, b) __CONCAT__(a, b)
 
-#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
+#define __ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
 /* Indirect macros required for expanded argument pasting, eg. __LINE__. */
 #define ___PASTE(a,b) a##b
@@ -30,7 +30,7 @@
 #define __no_side_effects(x, y) \
 		(__is_constexpr(x) && __is_constexpr(y))
 
-#define NORETURN __attribute__((__noreturn__))
+#define __NORETURN __attribute__((__noreturn__))
 
 #define __mode(x) __attribute__((__mode__(x)))
 
