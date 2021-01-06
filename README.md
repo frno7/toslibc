@@ -25,8 +25,12 @@ programs compile to about 2 kB each, for instance.
 
 TOS/libc includes interfaces for the following Atari TOS specific libraries:
 
-- AES (application environment services),
 - BIOS (basic input/output system),
-- GEMDOS (graphics environment manager disk operating system),
 - XBIOS (extended BIOS),
-- XGEMDOS (extended GEMDOS).
+- GEMDOS (graphics environment manager disk operating system),
+- XGEMDOS (extended GEMDOS),
+- AES (application environment services),
+- VDI (virtual device interface).
+
+The AES and VDI interfaces are part of the
+[GEM desktop environment](https://en.wikipedia.org/wiki/GEM_(desktop_environment)).
