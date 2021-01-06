@@ -12,7 +12,8 @@ int main(int argc, char *argv[])
 	if (ap_id == -1)
 		return EXIT_FAILURE;
 
-	aes_form_alert(&aes, 1, "[1][Hello, GEM.][ OK ]");
+	aes_form_alertf(&aes, 1, "[%d][%s][ OK ]",
+		AES_FORM_ICON_EXCLAMATION, "Hello, GEM.");
 
 	aes_appl_exit(&aes);
 
