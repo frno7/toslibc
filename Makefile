@@ -18,7 +18,8 @@ ALL_CFLAGS += $(DEP_CFLAGS) $(HAVE_CFLAGS) $(S_CFLAGS)
 
 EXAMPLE :=								\
 	example/ALERT.PRG						\
-	example/HELLO.TOS
+	example/HELLO.TOS						\
+	example/WINDOW.PRG
 
 TOSLIBC := toslibc.a
 

@@ -29,4 +29,10 @@ example/HELLO.TOS.o: example/hello.o $(TOSLIBC)
 example/HELLO.TOS: example/HELLO.TOS.o
 	$(QUIET_LINK)vlink $(PRG_VLINKFLAGS) -o $@ $^
 
+example/WINDOW.PRG.o: example/window.o $(TOSLIBC)
+	$(QUIET_LINK)$(CROSS_COMPILE)ld $(PRG_LDFLAGS) -o $@ $^
+
+example/WINDOW.PRG: example/WINDOW.PRG.o
+	$(QUIET_LINK)vlink $(PRG_VLINKFLAGS) -o $@ $^
+
 endif

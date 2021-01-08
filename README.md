@@ -21,7 +21,8 @@ optimisations such losses can often be recovered.
 
 Programs linked with TOS/libc can use the `--gc-sections` option to the
 GNU linker and thereby drastically reduce their size. The supplied example
-programs compile to about 2 kB each, for instance.
+programs compile to a few kilobytes each, for instance, which make them
+several times smaller than had the whole TOS/libc been linked.
 
 TOS/libc includes interfaces for the following Atari TOS specific libraries:
 
