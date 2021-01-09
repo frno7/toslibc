@@ -8,18 +8,6 @@
 #include <stdint.h>
 #include <sys/types.h>
 
-#if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
-#define __BITFIELD_FIELD(field, more)					\
-	field;								\
-	more
-#elif __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
-#define __BITFIELD_FIELD(field, more)					\
-	more								\
-	field;
-#else
-#error "bitfield neither big nor little endian?"
-#endif
-
 /* Macro definitions from the Linux kernel. */
 
 /* Are two types/vars the same type (ignoring qualifiers)? */
