@@ -41,6 +41,7 @@ TOSLIBC_C_SRC +=							\
 	lib/toslibc/snprintf.c						\
 	lib/toslibc/start.c						\
 	lib/toslibc/strcmp.c						\
+	lib/toslibc/strerror.c						\
 	lib/toslibc/strlen.c						\
 	lib/toslibc/strncmp.c						\
 	lib/toslibc/strncpy.c						\
