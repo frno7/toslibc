@@ -35,4 +35,10 @@ example/WINDOW.PRG.o: example/window.o $(TOSLIBC)
 example/WINDOW.PRG: example/WINDOW.PRG.o
 	$(QUIET_LINK)vlink $(PRG_VLINKFLAGS) -o $@ $^
 
+example/XBRA.PRG.o: example/xbra.o $(TOSLIBC)
+	$(QUIET_LINK)$(CROSS_COMPILE)ld $(PRG_LDFLAGS) -o $@ $^
+
+example/XBRA.PRG: example/XBRA.PRG.o
+	$(QUIET_LINK)vlink $(PRG_VLINKFLAGS) -o $@ $^
+
 endif
