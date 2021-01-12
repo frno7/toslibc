@@ -8,8 +8,7 @@ Many, if not most, other libc for Atari TOS are 16-bit. There are two
 significant advantages with a 32-bit libc:
 
 - the [GNU compiler collection](https://en.wikipedia.org/wiki/GNU_Compiler_Collection)
-  (GCC) for the [m68k](https://en.wikipedia.org/wiki/m68k)/[Linux](https://en.wikipedia.org/wiki/Linux)
-  target works unmodified also for Atari TOS;
+  (GCC) for the `m68k-elf` target works unmodified also for Atari TOS;
 
 - modern C programs and libraries often assume the C integer type `int` is
   at least 32 bits, since that has been the case for most modern operating

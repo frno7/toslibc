@@ -82,7 +82,8 @@ $(TOSLIBC_S_OBJ): %.o : %.S
 $(TOSLIBC_C_OBJ): %.o : %.c
 	$(QUIET_CC)$(CROSS_COMPILE)gcc $(TOSLIBC_CFLAGS) -c -o $@ $<
 
+$(TOSLIBC): check
 $(TOSLIBC): $(TOSLIBC_OBJ)
-	$(QUIET_AR)$(CROSS_COMPILE)ar rcs $@ $^
+	$(QUIET_AR)$(CROSS_COMPILE)ar rcs $@ $(TOSLIBC_OBJ)
 
 endif

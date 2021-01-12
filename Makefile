@@ -27,6 +27,7 @@ TOSLIBC := toslibc.a
 .PHONY: all
 all: $(TOSLIBC) $(EXAMPLE)
 
+include check/Makefile
 include lib/Makefile
 include example/Makefile
 
@@ -37,6 +38,7 @@ version:
 .PHONY: clean
 clean:
 	$(QUIET_RM)$(RM) -f *.a */*.o* */*/*.o* lib/toslibc/version.c	\
+		check/68000.actual					\
 		*/*.PRG */*.TOS */*.TTP					\
 		GPATH GRTAGS GTAGS
 
@@ -67,6 +69,7 @@ QUIET_CC      = $(Q:@=@echo    '  CC      '$@;)
 QUIET_GEN     = $(Q:@=@echo    '  GEN     '$@;)
 QUIET_LINK    = $(Q:@=@echo    '  LD      '$@;)
 QUIET_RM      = $(Q:@=@echo    '  RM      '$@;)
+QUIET_CHECK   = $(Q:@=@echo    '  CHECK   '$@;)
 QUIET_TEST    = $(Q:@=@echo    '  TEST    '$@;)
 
 BASIC_CFLAGS += -Wp,-MD,$(@D)/$(@F).d -MT $(@D)/$(@F)
