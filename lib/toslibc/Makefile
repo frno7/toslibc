@@ -9,8 +9,8 @@ $(VER):
 	@script/version $@
 
 TOSLIBC_CFLAGS +=  $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
-	-ffunction-sections -fdata-sections -isystem include/toslibc	\
-	-D_TOSLIBC_SOURCE
+	-ffunction-sections -fdata-sections -ffreestanding		\
+	-isystem include/toslibc -D_TOSLIBC_SOURCE
 
 TOSLIBC_S_SRC +=							\
 	lib/toslibc/crt0.S						\

@@ -1,7 +1,7 @@
 /*
  * Check that the compiler generates 68000 when given -march=68000. Some
- * compilers such as m68k-linux-*-* emits 68020 despite given -march=68000
- * and this will crash a 68000 processor.
+ * compilers such as m68k-linux-* emit 68020 despite given -march=68000 and
+ * this will crash a 68000 processor.
  *
  * The recommended compiler target for -march=68000 is m68k-elf.
  *

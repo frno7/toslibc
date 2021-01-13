@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0
 
-CHECK_CFLAGS += -O2 -Wall -march=68000
+CHECK_CFLAGS += -O2 -Wall -march=68000 -ffreestanding
 
 CHECK_SRC := check/68000.c
 
