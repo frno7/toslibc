@@ -1,4 +1,4 @@
-TOS/libc is a 32-bit
+Fuji/libc is a 32-bit
 [C standard library](https://en.wikipedia.org/wiki/C_standard_library)
 to [cross-compile](https://en.wikipedia.org/wiki/Cross_compiler) programs and
 libraries for [Atari TOS](https://en.wikipedia.org/wiki/Atari_TOS) and the
@@ -18,12 +18,12 @@ The are also two potentially significant disadvantages compared with a 16-bit
 libc: lower performance and greater memory use. However, with judicious
 optimisations such losses can often be recovered.
 
-Programs linked with TOS/libc can use the `--gc-sections` option to the
+Programs linked with Fuji/libc can use the `--gc-sections` option to the
 GNU linker and thereby drastically reduce their size. The supplied example
 programs compile to a few kilobytes each, for instance, which make them
-several times smaller than had the whole TOS/libc been linked.
+several times smaller than had the whole Fuji/libc been linked.
 
-TOS/libc includes interfaces for the following Atari TOS specific libraries:
+Fuji/libc includes interfaces for the following Atari TOS specific libraries:
 
 - BIOS (basic input/output system),
 - XBIOS (extended BIOS),
