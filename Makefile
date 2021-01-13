@@ -22,10 +22,10 @@ EXAMPLE :=								\
 	example/WINDOW.PRG						\
 	example/XBRA.PRG
 
-TOSLIBC := toslibc.a
+FUJILIBC := toslibc.a
 
 .PHONY: all
-all: $(TOSLIBC) $(EXAMPLE)
+all: $(FUJILIBC) $(EXAMPLE)
 
 include check/Makefile
 include lib/Makefile
