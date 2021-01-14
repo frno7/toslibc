@@ -9,7 +9,7 @@ $(VER):
 	@script/version $@
 
 FUJILIBC_CFLAGS +=  $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
-	-ffunction-sections -fdata-sections -ffreestanding		\
+	-ffunction-sections -fdata-sections 				\
 	-isystem include/fujilibc -D_FUJILIBC_SOURCE
 
 FUJILIBC_S_SRC +=							\
@@ -68,13 +68,16 @@ FUJILIBC_C_SRC +=							\
 	lib/fujilibc/__udivdi3.c					\
 	lib/fujilibc/__udivmoddi4.c					\
 	lib/fujilibc/__udivmodsi4.c					\
-	lib/fujilibc/__udivsi3.c						\
+	lib/fujilibc/__udivsi3.c					\
 	lib/fujilibc/__umoddi3.c
 
 FUJILIBC_S_OBJ += $(patsubst %.S, %.o, $(FUJILIBC_S_SRC))
 FUJILIBC_C_OBJ += $(patsubst %.c, %.o, $(FUJILIBC_C_SRC))
 
 FUJILIBC_OBJ += $(FUJILIBC_S_OBJ) $(FUJILIBC_C_OBJ)
+
+lib/fujilibc/memcpy.o							\
+lib/fujilibc/memset.o: FUJILIBC_CFLAGS += -fno-tree-loop-distribute-patterns
 
 $(FUJILIBC_S_OBJ): %.o : %.S
 	$(QUIET_CC)$(CROSS_COMPILE)gcc $(FUJILIBC_CFLAGS) -c -o $@ $<
