@@ -22,7 +22,7 @@ EXAMPLE :=								\
 	example/WINDOW.PRG						\
 	example/XBRA.PRG
 
-FUJILIBC := fujilibc.a
+FUJILIBC := toslibc.a
 
 .PHONY: all
 all: $(FUJILIBC) $(EXAMPLE)
@@ -37,7 +37,7 @@ version:
 
 .PHONY: clean
 clean:
-	$(QUIET_RM)$(RM) -f *.a */*.o* */*/*.o* lib/fujilibc/version.c	\
+	$(QUIET_RM)$(RM) -f *.a */*.o* */*/*.o* lib/toslibc/version.c	\
 		check/68000.actual					\
 		*/*.PRG */*.TOS */*.TTP					\
 		GPATH GRTAGS GTAGS
