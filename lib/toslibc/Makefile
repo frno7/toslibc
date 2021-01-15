@@ -8,11 +8,11 @@ VER := lib/toslibc/version.c
 $(VER):
 	@script/version $@
 
-FUJILIBC_CFLAGS +=  $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
+TOSLIBC_CFLAGS +=  $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
 	-ffunction-sections -fdata-sections				\
 	-isystem include/fujilibc -D_FUJILIBC_SOURCE
 
-FUJILIBC_S_SRC +=							\
+TOSLIBC_S_SRC +=							\
 	lib/toslibc/crt0.S						\
 	lib/toslibc/bios.S						\
 	lib/toslibc/gemdos.S						\
@@ -20,7 +20,7 @@ FUJILIBC_S_SRC +=							\
 	lib/toslibc/xgemdos.S						\
 	lib/toslibc/__mulsi3.S
 
-FUJILIBC_C_SRC +=							\
+TOSLIBC_C_SRC +=							\
 	lib/toslibc/aes.c						\
 	lib/toslibc/close.c						\
 	lib/toslibc/ctype.c						\
@@ -71,22 +71,22 @@ FUJILIBC_C_SRC +=							\
 	lib/toslibc/__udivsi3.c						\
 	lib/toslibc/__umoddi3.c
 
-FUJILIBC_S_OBJ += $(patsubst %.S, %.o, $(FUJILIBC_S_SRC))
-FUJILIBC_C_OBJ += $(patsubst %.c, %.o, $(FUJILIBC_C_SRC))
+TOSLIBC_S_OBJ += $(patsubst %.S, %.o, $(TOSLIBC_S_SRC))
+TOSLIBC_C_OBJ += $(patsubst %.c, %.o, $(TOSLIBC_C_SRC))
 
-FUJILIBC_OBJ += $(FUJILIBC_S_OBJ) $(FUJILIBC_C_OBJ)
+TOSLIBC_OBJ += $(TOSLIBC_S_OBJ) $(TOSLIBC_C_OBJ)
 
 lib/toslibc/memcpy.o							\
-lib/toslibc/memset.o: FUJILIBC_CFLAGS += -fno-tree-loop-distribute-patterns
+lib/toslibc/memset.o: TOSLIBC_CFLAGS += -fno-tree-loop-distribute-patterns
 
-$(FUJILIBC_S_OBJ): %.o : %.S
-	$(QUIET_CC)$(CROSS_COMPILE)gcc $(FUJILIBC_CFLAGS) -c -o $@ $<
+$(TOSLIBC_S_OBJ): %.o : %.S
+	$(QUIET_CC)$(CROSS_COMPILE)gcc $(TOSLIBC_CFLAGS) -c -o $@ $<
 
-$(FUJILIBC_C_OBJ): %.o : %.c
-	$(QUIET_CC)$(CROSS_COMPILE)gcc $(FUJILIBC_CFLAGS) -c -o $@ $<
+$(TOSLIBC_C_OBJ): %.o : %.c
+	$(QUIET_CC)$(CROSS_COMPILE)gcc $(TOSLIBC_CFLAGS) -c -o $@ $<
 
-$(FUJILIBC): check
-$(FUJILIBC): $(FUJILIBC_OBJ)
-	$(QUIET_AR)$(CROSS_COMPILE)ar rcs $@ $(FUJILIBC_OBJ)
+$(TOSLIBC): check
+$(TOSLIBC): $(TOSLIBC_OBJ)
+	$(QUIET_AR)$(CROSS_COMPILE)ar rcs $@ $(TOSLIBC_OBJ)
 
 endif
