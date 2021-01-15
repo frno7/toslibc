@@ -49,8 +49,8 @@ gtags:
 .PHONY: help
 help:
 	@echo "Targets:"
-	@echo "  all            - compile Fuji/libc (default)"
-	@echo "  version        - display Fuji/libc version"
+	@echo "  all            - compile TOS/libc (default)"
+	@echo "  version        - display TOS/libc version"
 	@echo "  clean          - remove generated files"
 	@echo
 	@echo "Options:"
