@@ -59,7 +59,7 @@ help:
 	@echo "  CROSS_COMPILE  - set m68k cross compiler to use for Atari ST code"
 	@echo
 	@echo "Example:"
-	@echo "  make CROSS_COMPILE=m68k-unknown-linux-gnu-"
+	@echo "  make CROSS_COMPILE=m68k-elf-"
 
 V             = @
 Q             = $(V:1=)
