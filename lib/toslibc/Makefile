@@ -10,7 +10,7 @@ $(VER):
 
 TOSLIBC_CFLAGS +=  $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
 	-ffunction-sections -fdata-sections				\
-	-isystem include/fujilibc -D_TOSLIBC_SOURCE
+	-isystem include/toslibc -D_TOSLIBC_SOURCE
 
 TOSLIBC_S_SRC +=							\
 	lib/toslibc/crt0.S						\

@@ -21,9 +21,9 @@ fi
 [ $# = 1 ]
 f="$1"
 
-src=$(echo "#include "'"'"fujilibc/version.h"'"'"
+src=$(echo "#include "'"'"toslibc/version.h"'"'"
 
-const char *fujilibc_version(void) { return "'"'"$ver"'"'"; }")
+const char *toslibc_version(void) { return "'"'"$ver"'"'"; }")
 
 if [ ! -f "$f" ] || ! echo "$src" | cmp --quiet - "$f"
 then
