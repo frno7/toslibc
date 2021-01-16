@@ -9,8 +9,8 @@
 #define O_WRONLY	S_WRITE
 #define O_RDWR		S_READWRITE
 
-#define O_CREAT		0	/* FIXME */
-#define O_TRUNC		0	/* FIXME */
+#define O_CREAT		0x4000
+#define O_TRUNC		0x2000
 
 int open(const char *pathname, int flags, ...);
 
