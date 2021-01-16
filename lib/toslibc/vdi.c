@@ -170,3 +170,34 @@ int16_t vdi_vsf_color(int16_t vdi_id, int16_t color)
 
 	return intout[0];
 }
+
+bool vdi_vq_color(int16_t vdi_id, int16_t index,
+	enum vdi_color_query query, struct vdi_color *color)
+{
+	const int16_t intint[] = { index, query };
+	int16_t intout[4] = { };
+
+	struct vdi_contrl contrl = {
+		.opc = VDI_OPC_VQ_COLOR,
+		.intin = __ARRAY_SIZE(intint),
+		.intout = __ARRAY_SIZE(intout),
+		.vdi_id = vdi_id,
+	};
+
+	struct vdi_pb pb = {
+		.contrl = &contrl,
+		.intin = intint,
+		.intout = intout,
+	};
+
+	xgemdos_vdi(&pb);
+
+	if (color)
+		*color = (struct vdi_color) {
+			.r = intout[1],
+			.g = intout[2],
+			.b = intout[3],
+		};
+
+	return intout[0] != -1;
+}

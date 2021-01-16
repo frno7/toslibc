@@ -28,6 +28,23 @@ struct vdi_bar {
 };
 
 /**
+ * struct vdi_color - VDI RGB color
+ * @r: red 0..1000
+ * @g: green 0..1000
+ * @b: blue 0..1000
+ */
+struct vdi_color {
+	uint16_t r;
+	uint16_t g;
+	uint16_t b;
+};
+
+enum vdi_color_query {
+	VDI_COLOR_REQUESTED,
+	VDI_COLOR_ACTUAL,
+};
+
+/**
  * struct vdi_contrl - VDI control structure
  * @opc: function operation code
  * @ptsin: number of input vertices in ptsin
@@ -211,5 +228,8 @@ void vdi_vs_clip_on(int16_t vdi_id, struct vdi_bar bar);
 void vdi_vs_clip_off(int16_t vdi_id);
 
 int16_t vdi_vsf_color(int16_t vdi_id, int16_t color);
+
+bool vdi_vq_color(int16_t vdi_id, int16_t index,
+	enum vdi_color_query query, struct vdi_color *color);
 
 #endif /* _TOSLIBC_TOS_VDI_H */
