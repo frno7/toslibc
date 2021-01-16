@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[])
 {
-	printf("Hello, TOS.\n");
+	printf("Hello, TOS.");
 
 	gemdos_cnecin();
 
