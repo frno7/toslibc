@@ -44,3 +44,11 @@ contains applications of TOS/libc:
 ![HELLO.PRG](https://raw.githubusercontent.com/frno7/toslibc/main/example/hello.png)
 ![WINDOW.PRG](https://raw.githubusercontent.com/frno7/toslibc/main/example/window.png)
 ![XBRA.PRG](https://raw.githubusercontent.com/frno7/toslibc/main/example/xbra.png)
+
+# How to build
+
+`make help` lists targets and options. A working GCC/m68k cross-compiler
+is required. Assuming the compiler is `m68k-elf-gcc`, build TOS/libc with
+`make CROSS_COMPILE=m68k-elf-` to produce a `toslibc.a`
+[static library](https://en.wikipedia.org/wiki/Static_library),
+and example applications.
