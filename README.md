@@ -34,3 +34,13 @@ TOS/libc includes interfaces for the following Atari TOS specific libraries:
 
 The AES and VDI interfaces are part of the
 [GEM desktop environment](https://en.wikipedia.org/wiki/GEM_(desktop_environment)).
+
+# Examples
+
+The [`example`](https://github.com/frno7/toslibc/tree/main/example) directory
+contains applications of TOS/libc:
+
+![ALERT.PRG](https://raw.githubusercontent.com/frno7/toslibc/main/example/alert.png)
+![HELLO.PRG](https://raw.githubusercontent.com/frno7/toslibc/main/example/hello.png)
+![WINDOW.PRG](https://raw.githubusercontent.com/frno7/toslibc/main/example/window.png)
+![XBRA.PRG](https://raw.githubusercontent.com/frno7/toslibc/main/example/xbra.png)
