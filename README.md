@@ -52,3 +52,15 @@ is required. Assuming the compiler is `m68k-elf-gcc`, build TOS/libc with
 `make CROSS_COMPILE=m68k-elf-` to produce a `toslibc.a`
 [static library](https://en.wikipedia.org/wiki/Static_library),
 and example applications.
+
+# How it works
+
+TOS/libc automatically converts 32-bit integers to 16-bit integers for
+Atari TOS. The main complication is the `trap` system call with its stack
+arguments, which must handle
+[reentrancy](https://en.wikipedia.org/wiki/Reentrancy_(computing)). This
+conversion is done in
+[`include/toslibc/tos/trap.S`](https://github.com/frno7/toslibc/tree/main/include/toslibc/tos/trap.S).
+Integers in structures for Atari TOS are generally defined as `int16_t` or
+`uint16_t`. [Bit fields](https://en.wikipedia.org/wiki/Bit_field) are generally
+used to improve notation with modern C standards.
