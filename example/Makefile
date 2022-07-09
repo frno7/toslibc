@@ -18,15 +18,11 @@ $(EXAMPLE_OBJ): %.o : %.c
 	$(QUIET_CC)$(CROSS_COMPILE)gcc $(PRG_CFLAGS) -c -o $@ $<
 
 example/ALERT.PRG.o: example/alert.o $(TOSLIBC)
-	$(QUIET_LINK)$(CROSS_COMPILE)ld $(PRG_LDFLAGS) -o $@ $^
-
 example/HELLO.TOS.o: example/hello.o $(TOSLIBC)
-	$(QUIET_LINK)$(CROSS_COMPILE)ld $(PRG_LDFLAGS) -o $@ $^
-
 example/WINDOW.PRG.o: example/window.o $(TOSLIBC)
-	$(QUIET_LINK)$(CROSS_COMPILE)ld $(PRG_LDFLAGS) -o $@ $^
-
 example/XBRA.PRG.o: example/xbra.o $(TOSLIBC)
+
+$(patsubst %, %.o, $(EXAMPLE)):
 	$(QUIET_LINK)$(CROSS_COMPILE)ld $(PRG_LDFLAGS) -o $@ $^
 
 $(EXAMPLE): % : %.o
