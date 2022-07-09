@@ -21,7 +21,7 @@ fi
 [ $# = 1 ]
 f="$1"
 
-src=$(echo "#include "'"'"toslibc/version.h"'"'"
+src=$(echo "#include "'"'"internal/version.h"'"'"
 
 const char *toslibc_version(void) { return "'"'"$ver"'"'"; }")
 

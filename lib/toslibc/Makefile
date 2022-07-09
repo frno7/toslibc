@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: GPL-2.0
 
-ifneq "x$(CROSS_COMPILE)" "x"
+TOSLIBC_VERSION_SRC := lib/toslibc/version.c
 
-VER := lib/toslibc/version.c
-
-.PHONY: $(shell script/version $(VER))
-$(VER):
+.PHONY: $(shell script/version $(TOSLIBC_VERSION_SRC))
+$(TOSLIBC_VERSION_SRC):
 	@script/version $@
+
+ifneq "x$(CROSS_COMPILE)" "x"
 
 TOSLIBC_CFLAGS +=  $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
 	-ffunction-sections -fdata-sections				\
