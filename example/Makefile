@@ -13,7 +13,7 @@ PRG_VLINKFLAGS += -b ataritos -tos-fastload -e _start
 
 lowercase = $(shell echo "$(1)" | tr '[:upper:]' '[:lower:]')
 
-EXAMPLE_SRC := $(wildcard example/*.c)
+EXAMPLE_SRC := $(foreach e,$(EXAMPLE),$(call lowercase,$(basename $(e))).c)
 EXAMPLE_OBJ += $(patsubst %.c, %.o, $(EXAMPLE_SRC))
 
 $(EXAMPLE_OBJ): %.o : %.c
