@@ -10,6 +10,7 @@ PHDRS
 SECTIONS
 {
 	.text : ALIGN(4) {
+		*(.text._start)
 		*(.text)
 		*(.text.*)
 		. = ALIGN(4);

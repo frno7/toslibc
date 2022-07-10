@@ -7,7 +7,7 @@
 
 	.equ	stack_size, 0x2000
 
-	.text
+	.section ".text._start", "ax"
 
 	.globl	_start
 	.type	_start,@function
