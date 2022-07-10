@@ -11,16 +11,19 @@ PRG_LDFLAGS += --relocatable --gc-sections --strip-all --entry _start	\
 
 PRG_VLINKFLAGS += -b ataritos -tos-fastload -e _start
 
+lowercase = $(shell echo "$(1)" | tr '[:upper:]' '[:lower:]')
+
 EXAMPLE_SRC := $(wildcard example/*.c)
 EXAMPLE_OBJ += $(patsubst %.c, %.o, $(EXAMPLE_SRC))
 
 $(EXAMPLE_OBJ): %.o : %.c
 	$(QUIET_CC)$(CROSS_COMPILE)gcc $(PRG_CFLAGS) -c -o $@ $<
 
-example/ALERT.PRG.o: example/alert.o $(TOSLIBC)
-example/HELLO.TOS.o: example/hello.o $(TOSLIBC)
-example/WINDOW.PRG.o: example/window.o $(TOSLIBC)
-example/XBRA.PRG.o: example/xbra.o $(TOSLIBC)
+define EXAMPLE_OBJ_target
+$(1).o: $(call lowercase,$(basename $(1))).o $$(TOSLIBC)
+endef
+
+$(foreach e,$(EXAMPLE),$(eval $(call EXAMPLE_OBJ_target,$(e))))
 
 $(patsubst %, %.o, $(EXAMPLE)):
 	$(QUIET_LINK)$(CROSS_COMPILE)ld $(PRG_LDFLAGS) -o $@ $^
