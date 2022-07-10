@@ -2,6 +2,14 @@
 
 ifneq "x$(CROSS_COMPILE)" "x"
 
+EXAMPLE :=								\
+	example/ALERT.PRG						\
+	example/HELLO.TOS						\
+	example/WINDOW.PRG						\
+	example/XBRA.PRG
+
+all: $(EXAMPLE)
+
 PRG_CFLAGS += $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib		\
 	-ffunction-sections -fdata-sections -isystem include/toslibc	\
 	-D_TOSLIBC_SOURCE

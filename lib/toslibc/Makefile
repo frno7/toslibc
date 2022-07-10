@@ -8,6 +8,10 @@ $(TOSLIBC_VERSION_SRC):
 
 ifneq "x$(CROSS_COMPILE)" "x"
 
+TOSLIBC := toslibc.a
+
+all: $(TOSLIBC)
+
 TOSLIBC_CFLAGS +=  $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
 	-ffunction-sections -fdata-sections				\
 	-isystem include/toslibc -D_TOSLIBC_SOURCE
