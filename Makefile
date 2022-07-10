@@ -27,7 +27,6 @@ TOSLIBC := toslibc.a
 .PHONY: all
 all: $(TOSLIBC) $(EXAMPLE)
 
-include check/Makefile
 include lib/Makefile
 include example/Makefile
 
@@ -38,7 +37,6 @@ version:
 .PHONY: clean
 clean:
 	$(QUIET_RM)$(RM) -f *.a */*.o* */*/*.o* lib/toslibc/version.c	\
-		check/68000.actual					\
 		*/*.PRG */*.TOS */*.TTP					\
 		GPATH GRTAGS GTAGS
 

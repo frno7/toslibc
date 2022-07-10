@@ -9,6 +9,7 @@
 #include <strsplit.h>
 
 #include "internal/build-assert.h"
+#include "internal/check-compiler.h"
 
 #include "tos/basepage.h"
 
