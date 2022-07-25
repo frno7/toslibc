@@ -44,4 +44,7 @@
 
 #define __mode(x) __attribute__((__mode__(x)))
 
+#define preserve(x)							\
+	for (typeof(x) x__ = (x), y__ = 0; !y__; (x) = x__, y__ = !y__)
+
 #endif /* INTERNAL_MACRO_H */
