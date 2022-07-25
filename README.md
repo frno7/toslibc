@@ -53,6 +53,11 @@ is required. Assuming the compiler is `m68k-elf-gcc`, build TOS/libc with
 [static library](https://en.wikipedia.org/wiki/Static_library),
 and example applications.
 
+Precompiled example applications are available for download under the Github
+[actions](https://github.com/frno7/toslibc/actions) tab. These are
+automatically built with
+[`.github/workflows/compilation.yml`](https://github.com/frno7/toslibc/blob/main/.github/workflows/compilation.yml).
+
 # How it works
 
 TOS/libc automatically converts 32-bit integers to 16-bit integers for
