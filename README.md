@@ -69,3 +69,9 @@ conversion is done in
 Integers in structures for Atari TOS are generally defined as `int16_t` or
 `uint16_t`. [Bit fields](https://en.wikipedia.org/wiki/Bit_field) are generally
 used to improve notation with modern C standards.
+
+A standard, unmodified, GCC/m68k package is used to compile
+[ELF](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) object
+files, having a specific structure defined in
+[`script/prg.ld`](https://github.com/frno7/toslibc/blob/main/script/prg.ld).
+The `tool/toslink` linker is used to produce the final Atari TOS program files.
