@@ -17,7 +17,7 @@ PRG_CFLAGS += $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib		\
 PRG_LDFLAGS += --relocatable --gc-sections --strip-all --entry _start	\
 	--script=script/prg.ld
 
-PRG_VLINKFLAGS += -b ataritos -tos-fastload -e _start
+PRG_VLINKFLAGS += -b ataritos -e _start
 
 lowercase = $(shell echo "$(1)" | tr '[:upper:]' '[:lower:]')
 
