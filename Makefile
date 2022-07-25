@@ -20,6 +20,7 @@ ALL_CFLAGS += $(DEP_CFLAGS) $(HAVE_CFLAGS) $(S_CFLAGS)
 all:
 
 include lib/Makefile
+include tool/Makefile
 include example/Makefile
 
 .PHONY: version
