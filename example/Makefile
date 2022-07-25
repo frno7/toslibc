@@ -17,8 +17,6 @@ PRG_CFLAGS += $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib		\
 PRG_LDFLAGS += --relocatable --gc-sections --strip-all --entry _start	\
 	--script=script/prg.ld
 
-PRG_VLINKFLAGS += -b ataritos -e _start
-
 lowercase = $(shell echo "$(1)" | tr '[:upper:]' '[:lower:]')
 
 EXAMPLE_SRC := $(foreach e,$(EXAMPLE),$(call lowercase,$(basename $(e))).c)
@@ -36,7 +34,9 @@ $(foreach e,$(EXAMPLE),$(eval $(call EXAMPLE_OBJ_target,$(e))))
 $(patsubst %, %.o, $(EXAMPLE)):
 	$(QUIET_LINK)$(CROSS_COMPILE)ld $(PRG_LDFLAGS) -o $@ $^
 
+$(EXAMPLE): $(TOSLINK)
+
 $(EXAMPLE): % : %.o
-	$(QUIET_TOSLINK)vlink $(PRG_VLINKFLAGS) -o $@ $^
+	$(QUIET_TOSLINK)$(TOSLINK) -o $@ $<
 
 endif
