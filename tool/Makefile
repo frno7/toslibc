@@ -1,30 +1,31 @@
 # SPDX-License-Identifier: GPL-2.0
 
-TOSLINK := tool/toslink
+TOSLIBC_TOOL_SUBDIR := $(dir $(lastword $(MAKEFILE_LIST)))
+
+TOSLINK := $(TOSLIBC_TOOL_SUBDIR)toslink
 
 TOSLINK_CFLAGS = $(BASIC_CFLAGS) $(S_CFLAGS) $(CFLAGS)
 
-TOSLIBC_VERSION_SRC := tool/version.c
+TOSLIBC_VERSION_SRC := $(TOSLIBC_TOOL_SUBDIR)version.c
 
 .PHONY: $(shell script/version --check $(TOSLIBC_VERSION_SRC))
 $(TOSLIBC_VERSION_SRC):
 	$(QUIET_GEN)script/version $@
 
-TOSLINK_VERSION_OBJ := $(dir $(TOSLINK))version.o
+TOSLINK_SRC = $(addprefix $(TOSLIBC_TOOL_SUBDIR),			\
+	elf32.c								\
+	file.c								\
+	memory.c							\
+	print.c								\
+	toslink.c)							\
+	$(TOSLIBC_VERSION_SRC)
 
-TOSLINK_OBJ = $(TOSLINK).o $(addprefix $(dir $(TOSLINK)),		\
-	elf32.o								\
-	file.o								\
-	memory.o							\
-	print.o)
+TOSLINK_OBJ = $(TOSLINK_SRC:%.c=%.o)
 
-ALL_OBJ += $(TOSLINK_VERSION_OBJ) $(TOSLINK_OBJ)
-
-$(TOSLINK_VERSION_OBJ): $(TOSLIBC_VERSION_SRC)
-	$(QUIET_CC)$(CC) $(TOSLINK_CFLAGS) -c -o $@ $<
+ALL_OBJ += $(TOSLINK_OBJ)
 
 $(TOSLINK_OBJ): %.o: %.c
 	$(QUIET_CC)$(CC) $(TOSLINK_CFLAGS) -c -o $@ $<
 
-$(TOSLINK): $(TOSLINK_OBJ) $(TOSLINK_VERSION_OBJ)
+$(TOSLINK): $(TOSLINK_OBJ)
 	$(QUIET_LINK)$(CC) $(TOSLINK_CFLAGS) -o $@ $^
