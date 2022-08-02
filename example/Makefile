@@ -37,6 +37,6 @@ $(patsubst %, %.o, $(EXAMPLE)):
 $(EXAMPLE): $(TOSLINK)
 
 $(EXAMPLE): % : %.o
-	$(QUIET_TOSLINK)$(TOSLINK) -o $@ $<
+	$(QUIET_LINK)$(TOSLINK) -o $@ $<
 
 endif
