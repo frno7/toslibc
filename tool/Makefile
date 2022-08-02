@@ -4,6 +4,12 @@ TOSLINK := tool/toslink
 
 TOSLINK_CFLAGS = $(BASIC_CFLAGS) $(S_CFLAGS) $(CFLAGS)
 
+TOSLIBC_VERSION_SRC := tool/version.c
+
+.PHONY: $(shell script/version --check $(TOSLIBC_VERSION_SRC))
+$(TOSLIBC_VERSION_SRC):
+	$(QUIET_GEN)script/version $@
+
 TOSLINK_VERSION_OBJ := $(dir $(TOSLINK))version.o
 
 TOSLINK_OBJ = $(TOSLINK).o $(addprefix $(dir $(TOSLINK)),		\

@@ -2,19 +2,13 @@
 
 TOSLIBC_LIB_SUBDIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
-TOSLIBC_VERSION_SRC := $(TOSLIBC_LIB_SUBDIR)version.c
-
-.PHONY: $(shell script/version --check $(TOSLIBC_VERSION_SRC))
-$(TOSLIBC_VERSION_SRC):
-	$(QUIET_GEN)script/version $@
-
 TOSLIBC := $(TOSLIBC_LIB_SUBDIR)toslibc.a
 
-TOSLIBC_CFLAGS = $(BASIC_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
+TOSLIBC_LIB_CFLAGS = $(BASIC_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
 	-ffunction-sections -fdata-sections				\
 	-isystem include/toslibc -D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
 
-TOSLIBC_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\
+TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\
 	aes.c								\
 	bios.S								\
 	close.c								\
@@ -74,17 +68,17 @@ TOSLIBC_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\
 
 $(TOSLIBC_LIB_SUBDIR)memcpy.o						\
 $(TOSLIBC_LIB_SUBDIR)memset.o:						\
-	TOSLIBC_CFLAGS += -fno-tree-loop-distribute-patterns
+	TOSLIBC_LIB_CFLAGS += -fno-tree-loop-distribute-patterns
 
 define TOSLIBC_OBJ_target
-TOSLIBC_OBJ += $(basename $(1)).o
+TOSLIBC_LIB_OBJ += $(basename $(1)).o
 $(basename $(1)).o: $(1)
-	$$(QUIET_CC)$$(TARGET_CC) $$(TOSLIBC_CFLAGS) -c -o $$@ $$<
+	$$(QUIET_CC)$$(TARGET_CC) $$(TOSLIBC_LIB_CFLAGS) -c -o $$@ $$<
 endef
 
-$(foreach f,$(TOSLIBC_SRC),$(eval $(call TOSLIBC_OBJ_target,$(f))))
+$(foreach f,$(TOSLIBC_LIB_SRC),$(eval $(call TOSLIBC_OBJ_target,$(f))))
 
-ALL_OBJ += $(TOSLIBC_OBJ)
+ALL_OBJ += $(TOSLIBC_LIB_OBJ)
 
-$(TOSLIBC): $(TOSLIBC_OBJ)
-	$(QUIET_AR)$(TARGET_AR) rcs $@ $(TOSLIBC_OBJ)
+$(TOSLIBC): $(TOSLIBC_LIB_OBJ)
+	$(QUIET_AR)$(TARGET_AR) rcs $@ $^
