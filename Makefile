@@ -38,7 +38,7 @@ clean:
 	$(QUIET_RM)$(RM) -f $(ALL_OBJ) $(ALL_DEP)			\
 		$(TOSLIBC) $(TOSLIBC_VERSION_SRC)			\
 		$(TOSLINK)						\
-		$(EXAMPLE)						\
+		$(EXAMPLE_PRG)						\
 		GPATH GRTAGS GTAGS
 
 .PHONY: gtags
