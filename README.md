@@ -47,8 +47,9 @@ contains applications of TOS/libc:
 
 # How to build
 
-`make help` lists targets and options. A working GCC/m68k cross-compiler
-is required. Assuming the compiler is `m68k-elf-gcc`, build TOS/libc with
+Review the file [INSTALL](https://github.com/frno7/toslibc/blob/main/INSTALL)
+for installation instructions. A working GCC/m68k cross-compiler is required.
+Assuming the compiler is `m68k-elf-gcc`, build TOS/libc with
 `make CROSS_COMPILE=m68k-elf-` to produce a `toslibc.a`
 [static library](https://en.wikipedia.org/wiki/Static_library),
 and example applications.

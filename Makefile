@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0
 #
-# Do "make help" for targets and options.
+# See the file INSTALL for installation instructions.
 
 CFLAGS += -g -O2 -Wall -fPIC -Iinclude -D_GNU_SOURCE
 
@@ -36,21 +36,6 @@ clean:
 .PHONY: gtags
 gtags:
 	$(QUIET_GEN)gtags
-
-.PHONY: help
-help:
-	@echo "Targets:"
-	@echo "  all            - compile TOS/libc (default)"
-	@echo "  version        - display TOS/libc version"
-	@echo "  clean          - remove generated files"
-	@echo
-	@echo "Options:"
-	@echo "  V              - set to 1 to compile verbosely"
-	@echo "  S              - set to 1 for sanitation checks"
-	@echo "  CROSS_COMPILE  - set m68k cross compiler to use for Atari ST code"
-	@echo
-	@echo "Example:"
-	@echo "  make CROSS_COMPILE=m68k-elf-"
 
 V             = @
 Q             = $(V:1=)
