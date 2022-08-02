@@ -2,7 +2,7 @@
 #
 # See the file INSTALL for installation instructions.
 
-CFLAGS += -g -O2 -Wall -Iinclude -D_GNU_SOURCE
+CFLAGS = -g
 
 ifdef TARGET_COMPILE
 TARGET_CC = $(TARGET_COMPILE)gcc
@@ -13,12 +13,12 @@ endif
 TARGET_CFLAGS = $(CFLAGS)
 
 ifeq "$(S)" "1"
-S_CFLAGS += -fsanitize=address -fsanitize=leak -fsanitize=undefined	\
+S_CFLAGS = -fsanitize=address -fsanitize=leak -fsanitize=undefined	\
 	  -fsanitize-address-use-after-scope -fstack-check
 endif
 
-DEP_CFLAGS += $(BASIC_CFLAGS)
-ALL_CFLAGS += $(DEP_CFLAGS) $(S_CFLAGS)
+DEP_CFLAGS = -Wp,-MD,$(@D)/$(@F).d -MT $(@D)/$(@F)
+BASIC_CFLAGS = -O2 -Wall -Iinclude -D_GNU_SOURCE $(DEP_CFLAGS)
 
 .PHONY: all
 all:
@@ -55,7 +55,5 @@ QUIET_LINK    = $(Q:@=@echo    '  LD      '$@;)
 QUIET_RM      = $(Q:@=@echo    '  RM      '$@;)
 QUIET_CHECK   = $(Q:@=@echo    '  CHECK   '$@;)
 QUIET_TEST    = $(Q:@=@echo    '  TEST    '$@;)
-
-BASIC_CFLAGS += -Wp,-MD,$(@D)/$(@F).d -MT $(@D)/$(@F)
 
 $(eval -include $(ALL_DEP))

@@ -10,12 +10,12 @@ ifdef TARGET_CC
 all: $(EXAMPLE)
 endif
 
-PRG_CFLAGS += $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib		\
+EXAMPLE_CFLAGS += $(BASIC_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
 	-ffunction-sections -fdata-sections -isystem include/toslibc	\
 	-D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
 
-PRG_LDFLAGS += --relocatable --gc-sections --strip-all --entry _start	\
-	--script=script/prg.ld $(TARGET_LDFLAGS)
+EXAMPLE_LDFLAGS += --relocatable --gc-sections --strip-all		\
+	--entry _start --script=script/prg.ld $(TARGET_LDFLAGS)
 
 lowercase = $(shell echo "$(1)" | tr '[:upper:]' '[:lower:]')
 
@@ -25,7 +25,7 @@ EXAMPLE_OBJ += $(EXAMPLE_SRC:%.c=%.o)
 ALL_OBJ += $(EXAMPLE_OBJ) $(EXAMPLE:%=%.o)
 
 $(EXAMPLE_OBJ): %.o : %.c
-	$(QUIET_CC)$(TARGET_CC) $(PRG_CFLAGS) -c -o $@ $<
+	$(QUIET_CC)$(TARGET_CC) $(EXAMPLE_CFLAGS) -c -o $@ $<
 
 define EXAMPLE_OBJ_target
 $(1).o: $(call lowercase,$(basename $(1))).o $$(TOSLIBC)
@@ -34,7 +34,7 @@ endef
 $(foreach e,$(EXAMPLE),$(eval $(call EXAMPLE_OBJ_target,$(e))))
 
 $(EXAMPLE:%=%.o):
-	$(QUIET_LINK)$(TARGET_LD) $(PRG_LDFLAGS) -o $@ $^
+	$(QUIET_LINK)$(TARGET_LD) $(EXAMPLE_LDFLAGS) -o $@ $^
 
 $(EXAMPLE): $(TOSLINK)
 

@@ -4,7 +4,7 @@ TOSLINK := tool/toslink
 
 all: $(TOSLINK)
 
-TOSLINK_CFLAGS += $(ALL_CFLAGS) $(CFLAGS)
+TOSLINK_CFLAGS = $(BASIC_CFLAGS) $(S_CFLAGS) $(CFLAGS)
 
 TOSLINK_VERSION_OBJ := $(dir $(TOSLINK))version.o
 
