@@ -18,7 +18,7 @@ jobs:
       - name: Compile example archive
         env:
           S: 1
-          CROSS_COMPILE: m68k-elf-
+          TARGET_COMPILE: m68k-elf-
         run: |
           JOBS="$(getconf _NPROCESSORS_ONLN)"
           make -j "$JOBS"

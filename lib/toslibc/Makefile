@@ -6,7 +6,7 @@ TOSLIBC_VERSION_SRC := lib/toslibc/version.c
 $(TOSLIBC_VERSION_SRC):
 	$(QUIET_GEN)script/version $@
 
-ifneq "x$(CROSS_COMPILE)" "x"
+ifneq "x$(TARGET_COMPILE)" "x"
 
 TOSLIBC := toslibc.a
 
@@ -85,12 +85,12 @@ lib/toslibc/memcpy.o							\
 lib/toslibc/memset.o: TOSLIBC_CFLAGS += -fno-tree-loop-distribute-patterns
 
 $(TOSLIBC_S_OBJ): %.o : %.S
-	$(QUIET_CC)$(CROSS_COMPILE)gcc $(TOSLIBC_CFLAGS) -c -o $@ $<
+	$(QUIET_CC)$(TARGET_COMPILE)gcc $(TOSLIBC_CFLAGS) -c -o $@ $<
 
 $(TOSLIBC_C_OBJ): %.o : %.c
-	$(QUIET_CC)$(CROSS_COMPILE)gcc $(TOSLIBC_CFLAGS) -c -o $@ $<
+	$(QUIET_CC)$(TARGET_COMPILE)gcc $(TOSLIBC_CFLAGS) -c -o $@ $<
 
 $(TOSLIBC): $(TOSLIBC_OBJ)
-	$(QUIET_AR)$(CROSS_COMPILE)ar rcs $@ $(TOSLIBC_OBJ)
+	$(QUIET_AR)$(TARGET_COMPILE)ar rcs $@ $(TOSLIBC_OBJ)
 
 endif

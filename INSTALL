@@ -8,8 +8,8 @@ Makefile options:
 
   V              - set to 1 to compile verbosely
   S              - set to 1 for sanitation checks
-  CROSS_COMPILE  - set m68k cross compiler to use for Atari ST code
+  TARGET_COMPILE - set the m68k target compiler suite to use for Atari ST code
 
 Example:
 
-	$ make CROSS_COMPILE=m68k-elf-
+	$ make TARGET_COMPILE=m68k-elf-
