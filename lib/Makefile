@@ -1,77 +1,80 @@
 # SPDX-License-Identifier: GPL-2.0
 
-TOSLIBC_VERSION_SRC := lib/version.c
+TOSLIBC_LIB_SUBDIR := $(dir $(lastword $(MAKEFILE_LIST)))
+
+TOSLIBC_VERSION_SRC := $(TOSLIBC_LIB_SUBDIR)version.c
 
 .PHONY: $(shell script/version --check $(TOSLIBC_VERSION_SRC))
 $(TOSLIBC_VERSION_SRC):
 	$(QUIET_GEN)script/version $@
 
-TOSLIBC := lib/toslibc.a
+TOSLIBC := $(TOSLIBC_LIB_SUBDIR)toslibc.a
 
 TOSLIBC_CFLAGS = $(BASIC_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
 	-ffunction-sections -fdata-sections				\
 	-isystem include/toslibc -D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
 
-TOSLIBC_SRC =								\
-	lib/aes.c							\
-	lib/bios.S							\
-	lib/close.c							\
-	lib/crt0.S							\
-	lib/ctype.c							\
-	lib/dprintf.c							\
-	lib/errno.c							\
-	lib/exit.c							\
-	lib/free.c							\
-	lib/gemdos.S							\
-	lib/lseek.c							\
-	lib/malloc.c							\
-	lib/memcpy.c							\
-	lib/memset.c							\
-	lib/open.c							\
-	lib/printf.c							\
-	lib/ptermres.c							\
-	lib/putchar.c							\
-	lib/puts.c							\
-	lib/read.c							\
-	lib/realloc.c							\
-	lib/snprintf.c							\
-	lib/start.c							\
-	lib/strcmp.c							\
-	lib/strerror.c							\
-	lib/strlen.c							\
-	lib/strncmp.c							\
-	lib/strncpy.c							\
-	lib/strntoimax.c						\
-	lib/strntoumax.c						\
-	lib/strsplit.c							\
-	lib/strtoimax.c							\
-	lib/strtol.c							\
-	lib/strtoll.c							\
-	lib/strtoul.c							\
-	lib/strtoull.c							\
-	lib/strtoumax.c							\
-	lib/supexecarg.c						\
-	lib/system-variable.c						\
-	lib/vdi.c							\
-	lib/vdprintf.c							\
-	lib/vprintf.c							\
-	lib/vsnprintf.c							\
-	lib/write.c							\
-	lib/xbios.S							\
-	lib/xbra.c							\
-	lib/xgemdos.S							\
-	lib/__divsi3.c							\
-	lib/__modsi3.c							\
-	lib/__muldi3.c							\
-	lib/__mulsi3.S							\
-	lib/__udivdi3.c							\
-	lib/__udivmoddi4.c						\
-	lib/__udivmodsi4.c						\
-	lib/__udivsi3.c							\
-	lib/__umoddi3.c
+TOSLIBC_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\
+	aes.c								\
+	bios.S								\
+	close.c								\
+	crt0.S								\
+	ctype.c								\
+	dprintf.c							\
+	errno.c								\
+	exit.c								\
+	free.c								\
+	gemdos.S							\
+	lseek.c								\
+	malloc.c							\
+	memcpy.c							\
+	memset.c							\
+	open.c								\
+	printf.c							\
+	ptermres.c							\
+	putchar.c							\
+	puts.c								\
+	read.c								\
+	realloc.c							\
+	snprintf.c							\
+	start.c								\
+	strcmp.c							\
+	strerror.c							\
+	strlen.c							\
+	strncmp.c							\
+	strncpy.c							\
+	strntoimax.c							\
+	strntoumax.c							\
+	strsplit.c							\
+	strtoimax.c							\
+	strtol.c							\
+	strtoll.c							\
+	strtoul.c							\
+	strtoull.c							\
+	strtoumax.c							\
+	supexecarg.c							\
+	system-variable.c						\
+	vdi.c								\
+	vdprintf.c							\
+	vprintf.c							\
+	vsnprintf.c							\
+	write.c								\
+	xbios.S								\
+	xbra.c								\
+	xgemdos.S							\
+	__divsi3.c							\
+	__modsi3.c							\
+	__muldi3.c							\
+	__mulsi3.S							\
+	__udivdi3.c							\
+	__udivmoddi4.c							\
+	__udivmodsi4.c							\
+	__udivsi3.c							\
+	__umoddi3.c)
 
-lib/memcpy.o								\
-lib/memset.o: TOSLIBC_CFLAGS += -fno-tree-loop-distribute-patterns
+$(TOSLIBC_LIB_SUBDIR)memcpy.o						\
+$(TOSLIBC_LIB_SUBDIR)memset.o:						\
+	TOSLIBC_CFLAGS += -fno-tree-loop-distribute-patterns
 
 define TOSLIBC_OBJ_target
 TOSLIBC_OBJ += $(basename $(1)).o
