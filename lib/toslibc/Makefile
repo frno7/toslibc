@@ -6,11 +6,11 @@ TOSLIBC_VERSION_SRC := lib/toslibc/version.c
 $(TOSLIBC_VERSION_SRC):
 	$(QUIET_GEN)script/version $@
 
-ifneq "x$(TARGET_COMPILE)" "x"
-
 TOSLIBC := toslibc.a
 
+ifdef TARGET_CC
 all: $(TOSLIBC)
+endif
 
 TOSLIBC_CFLAGS +=  $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
 	-ffunction-sections -fdata-sections				\
@@ -85,12 +85,10 @@ lib/toslibc/memcpy.o							\
 lib/toslibc/memset.o: TOSLIBC_CFLAGS += -fno-tree-loop-distribute-patterns
 
 $(TOSLIBC_S_OBJ): %.o : %.S
-	$(QUIET_CC)$(TARGET_COMPILE)gcc $(TOSLIBC_CFLAGS) -c -o $@ $<
+	$(QUIET_CC)$(TARGET_CC) $(TOSLIBC_CFLAGS) -c -o $@ $<
 
 $(TOSLIBC_C_OBJ): %.o : %.c
-	$(QUIET_CC)$(TARGET_COMPILE)gcc $(TOSLIBC_CFLAGS) -c -o $@ $<
+	$(QUIET_CC)$(TARGET_CC) $(TOSLIBC_CFLAGS) -c -o $@ $<
 
 $(TOSLIBC): $(TOSLIBC_OBJ)
-	$(QUIET_AR)$(TARGET_COMPILE)ar rcs $@ $(TOSLIBC_OBJ)
-
-endif
+	$(QUIET_AR)$(TARGET_AR) rcs $@ $(TOSLIBC_OBJ)

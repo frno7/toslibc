@@ -1,14 +1,14 @@
 # SPDX-License-Identifier: GPL-2.0
 
-ifneq "x$(TARGET_COMPILE)" "x"
-
 EXAMPLE :=								\
 	example/ALERT.PRG						\
 	example/HELLO.TOS						\
 	example/WINDOW.PRG						\
 	example/XBRA.PRG
 
+ifdef TARGET_CC
 all: $(EXAMPLE)
+endif
 
 PRG_CFLAGS += $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib		\
 	-ffunction-sections -fdata-sections -isystem include/toslibc	\
@@ -23,7 +23,7 @@ EXAMPLE_SRC := $(foreach e,$(EXAMPLE),$(call lowercase,$(basename $(e))).c)
 EXAMPLE_OBJ += $(patsubst %.c, %.o, $(EXAMPLE_SRC))
 
 $(EXAMPLE_OBJ): %.o : %.c
-	$(QUIET_CC)$(TARGET_COMPILE)gcc $(PRG_CFLAGS) -c -o $@ $<
+	$(QUIET_CC)$(TARGET_CC) $(PRG_CFLAGS) -c -o $@ $<
 
 define EXAMPLE_OBJ_target
 $(1).o: $(call lowercase,$(basename $(1))).o $$(TOSLIBC)
@@ -32,11 +32,9 @@ endef
 $(foreach e,$(EXAMPLE),$(eval $(call EXAMPLE_OBJ_target,$(e))))
 
 $(patsubst %, %.o, $(EXAMPLE)):
-	$(QUIET_LINK)$(TARGET_COMPILE)ld $(PRG_LDFLAGS) -o $@ $^
+	$(QUIET_LINK)$(TARGET_LD) $(PRG_LDFLAGS) -o $@ $^
 
 $(EXAMPLE): $(TOSLINK)
 
 $(EXAMPLE): % : %.o
 	$(QUIET_LINK)$(TOSLINK) -o $@ $<
-
-endif

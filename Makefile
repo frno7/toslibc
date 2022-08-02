@@ -4,6 +4,12 @@
 
 CFLAGS += -g -O2 -Wall -fPIC -Iinclude -D_GNU_SOURCE
 
+ifdef TARGET_COMPILE
+TARGET_CC = $(TARGET_COMPILE)gcc
+TARGET_LD = $(TARGET_COMPILE)ld
+TARGET_AR = $(TARGET_COMPILE)ar
+endif
+
 ifeq "$(S)" "1"
 S_CFLAGS += -fsanitize=address -fsanitize=leak -fsanitize=undefined	\
 	  -fsanitize-address-use-after-scope -fstack-check
