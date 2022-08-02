@@ -30,7 +30,7 @@ include example/Makefile
 all: $(TOSLINK)
 
 ifdef TARGET_CC
-all: $(TOSLIBC) $(EXAMPLE_PRG)
+all: $(TOSLIBC) $(TOSLIBC_EXAMPLE_PRG)
 endif
 
 ALL_DEP = $(sort $(ALL_OBJ:%=%.d))
@@ -44,7 +44,7 @@ clean:
 	$(QUIET_RM)$(RM) -f $(ALL_OBJ) $(ALL_DEP)			\
 		$(TOSLIBC) $(TOSLIBC_VERSION_SRC)			\
 		$(TOSLINK)						\
-		$(EXAMPLE_PRG)						\
+		$(TOSLIBC_EXAMPLE_PRG)					\
 		GPATH GRTAGS GTAGS
 
 .PHONY: gtags
