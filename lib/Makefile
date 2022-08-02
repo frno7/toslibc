@@ -6,7 +6,7 @@ TOSLIBC_VERSION_SRC := lib/version.c
 $(TOSLIBC_VERSION_SRC):
 	$(QUIET_GEN)script/version $@
 
-TOSLIBC := toslibc.a
+TOSLIBC := lib/toslibc.a
 
 ifdef TARGET_CC
 all: $(TOSLIBC)

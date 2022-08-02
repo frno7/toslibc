@@ -1,5 +1,4 @@
 /version
-*.a
 *.o
 *.o.d
 *.PRG
