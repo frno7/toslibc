@@ -29,7 +29,8 @@ version:
 
 .PHONY: clean
 clean:
-	$(QUIET_RM)$(RM) -f *.a */*.o* */*/*.o* lib/toslibc/version.c	\
+	$(QUIET_RM)$(RM) -f *.a */*.o* */*/*.o*				\
+		$(TOSLIBC_VERSION_SRC) $(TOSLINK)			\
 		*/*.PRG */*.TOS */*.TTP					\
 		GPATH GRTAGS GTAGS
 
