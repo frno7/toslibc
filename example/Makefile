@@ -12,10 +12,10 @@ endif
 
 PRG_CFLAGS += $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib		\
 	-ffunction-sections -fdata-sections -isystem include/toslibc	\
-	-D_TOSLIBC_SOURCE
+	-D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
 
 PRG_LDFLAGS += --relocatable --gc-sections --strip-all --entry _start	\
-	--script=script/prg.ld
+	--script=script/prg.ld $(TARGET_LDFLAGS)
 
 lowercase = $(shell echo "$(1)" | tr '[:upper:]' '[:lower:]')
 

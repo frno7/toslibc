@@ -2,7 +2,7 @@
 #
 # See the file INSTALL for installation instructions.
 
-CFLAGS += -g -O2 -Wall -fPIC -Iinclude -D_GNU_SOURCE
+CFLAGS += -g -O2 -Wall -Iinclude -D_GNU_SOURCE
 
 ifdef TARGET_COMPILE
 TARGET_CC = $(TARGET_COMPILE)gcc
@@ -10,12 +10,14 @@ TARGET_LD = $(TARGET_COMPILE)ld
 TARGET_AR = $(TARGET_COMPILE)ar
 endif
 
+TARGET_CFLAGS = $(CFLAGS)
+
 ifeq "$(S)" "1"
 S_CFLAGS += -fsanitize=address -fsanitize=leak -fsanitize=undefined	\
 	  -fsanitize-address-use-after-scope -fstack-check
 endif
 
-DEP_CFLAGS += $(CFLAGS) $(BASIC_CFLAGS)
+DEP_CFLAGS += $(BASIC_CFLAGS)
 ALL_CFLAGS += $(DEP_CFLAGS) $(S_CFLAGS)
 
 .PHONY: all

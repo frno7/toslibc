@@ -14,7 +14,7 @@ endif
 
 TOSLIBC_CFLAGS =  $(DEP_CFLAGS) -march=68000 -fno-PIC -nostdlib		\
 	-ffunction-sections -fdata-sections				\
-	-isystem include/toslibc -D_TOSLIBC_SOURCE
+	-isystem include/toslibc -D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
 
 TOSLIBC_S_SRC =								\
 	lib/crt0.S							\
