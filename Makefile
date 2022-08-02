@@ -31,9 +31,9 @@ version:
 
 .PHONY: clean
 clean:
-	$(QUIET_RM)$(RM) -f *.a */*.o* */*/*.o*				\
-		$(TOSLIBC_VERSION_SRC) $(TOSLINK)			\
-		*/*.PRG */*.TOS */*.TTP					\
+	$(QUIET_RM)$(RM) -f */*.o* */*/*.o*				\
+		$(TOSLIBC) $(TOSLIBC_VERSION_SRC) $(TOSLINK)		\
+		$(EXAMPLE)						\
 		GPATH GRTAGS GTAGS
 
 .PHONY: gtags
