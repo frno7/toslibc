@@ -2,9 +2,9 @@
 
 TOSLIBC_VERSION_SRC := lib/toslibc/version.c
 
-.PHONY: $(shell script/version $(TOSLIBC_VERSION_SRC))
+.PHONY: $(shell script/version --check $(TOSLIBC_VERSION_SRC))
 $(TOSLIBC_VERSION_SRC):
-	@script/version $@
+	$(QUIET_GEN)script/version $@
 
 ifneq "x$(CROSS_COMPILE)" "x"
 
