@@ -16,7 +16,7 @@ S_CFLAGS += -fsanitize=address -fsanitize=leak -fsanitize=undefined	\
 endif
 
 DEP_CFLAGS += $(CFLAGS) $(BASIC_CFLAGS)
-ALL_CFLAGS += $(DEP_CFLAGS) $(HAVE_CFLAGS) $(S_CFLAGS)
+ALL_CFLAGS += $(DEP_CFLAGS) $(S_CFLAGS)
 
 .PHONY: all
 all:
