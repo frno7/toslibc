@@ -16,22 +16,17 @@ TOSLIBC_CFLAGS = $(BASIC_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
 	-ffunction-sections -fdata-sections				\
 	-isystem include/toslibc -D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
 
-TOSLIBC_S_SRC =								\
-	lib/crt0.S							\
-	lib/bios.S							\
-	lib/gemdos.S							\
-	lib/xbios.S							\
-	lib/xgemdos.S							\
-	lib/__mulsi3.S
-
-TOSLIBC_C_SRC =								\
+TOSLIBC_SRC =								\
 	lib/aes.c							\
+	lib/bios.S							\
 	lib/close.c							\
+	lib/crt0.S							\
 	lib/ctype.c							\
 	lib/dprintf.c							\
 	lib/errno.c							\
 	lib/exit.c							\
 	lib/free.c							\
+	lib/gemdos.S							\
 	lib/lseek.c							\
 	lib/malloc.c							\
 	lib/memcpy.c							\
@@ -66,31 +61,31 @@ TOSLIBC_C_SRC =								\
 	lib/vprintf.c							\
 	lib/vsnprintf.c							\
 	lib/write.c							\
+	lib/xbios.S							\
 	lib/xbra.c							\
+	lib/xgemdos.S							\
 	lib/__divsi3.c							\
 	lib/__modsi3.c							\
 	lib/__muldi3.c							\
+	lib/__mulsi3.S							\
 	lib/__udivdi3.c							\
 	lib/__udivmoddi4.c						\
 	lib/__udivmodsi4.c						\
 	lib/__udivsi3.c							\
 	lib/__umoddi3.c
 
-TOSLIBC_S_OBJ = $(TOSLIBC_S_SRC:%.S=%.o)
-TOSLIBC_C_OBJ = $(TOSLIBC_C_SRC:%.c=%.o)
-
-TOSLIBC_OBJ = $(TOSLIBC_S_OBJ) $(TOSLIBC_C_OBJ)
-
-ALL_OBJ += $(TOSLIBC_OBJ)
-
 lib/memcpy.o								\
 lib/memset.o: TOSLIBC_CFLAGS += -fno-tree-loop-distribute-patterns
 
-$(TOSLIBC_S_OBJ): %.o : %.S
-	$(QUIET_CC)$(TARGET_CC) $(TOSLIBC_CFLAGS) -c -o $@ $<
+define TOSLIBC_OBJ_target
+TOSLIBC_OBJ += $(basename $(1)).o
+$(basename $(1)).o: $(1)
+	$$(QUIET_CC)$$(TARGET_CC) $$(TOSLIBC_CFLAGS) -c -o $$@ $$<
+endef
 
-$(TOSLIBC_C_OBJ): %.o : %.c
-	$(QUIET_CC)$(TARGET_CC) $(TOSLIBC_CFLAGS) -c -o $@ $<
+$(foreach f,$(TOSLIBC_SRC),$(eval $(call TOSLIBC_OBJ_target,$(f))))
+
+ALL_OBJ += $(TOSLIBC_OBJ)
 
 $(TOSLIBC): $(TOSLIBC_OBJ)
 	$(QUIET_AR)$(TARGET_AR) rcs $@ $(TOSLIBC_OBJ)
