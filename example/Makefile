@@ -20,7 +20,9 @@ PRG_LDFLAGS += --relocatable --gc-sections --strip-all --entry _start	\
 lowercase = $(shell echo "$(1)" | tr '[:upper:]' '[:lower:]')
 
 EXAMPLE_SRC := $(foreach e,$(EXAMPLE),$(call lowercase,$(basename $(e))).c)
-EXAMPLE_OBJ += $(patsubst %.c, %.o, $(EXAMPLE_SRC))
+EXAMPLE_OBJ += $(EXAMPLE_SRC:%.c=%.o)
+
+ALL_OBJ += $(EXAMPLE_OBJ) $(EXAMPLE:%=%.o)
 
 $(EXAMPLE_OBJ): %.o : %.c
 	$(QUIET_CC)$(TARGET_CC) $(PRG_CFLAGS) -c -o $@ $<
@@ -31,7 +33,7 @@ endef
 
 $(foreach e,$(EXAMPLE),$(eval $(call EXAMPLE_OBJ_target,$(e))))
 
-$(patsubst %, %.o, $(EXAMPLE)):
+$(EXAMPLE:%=%.o):
 	$(QUIET_LINK)$(TARGET_LD) $(PRG_LDFLAGS) -o $@ $^
 
 $(EXAMPLE): $(TOSLINK)

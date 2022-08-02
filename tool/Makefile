@@ -14,6 +14,8 @@ TOSLINK_OBJ = $(TOSLINK).o $(addprefix $(dir $(TOSLINK)),		\
 	memory.o							\
 	print.o)
 
+ALL_OBJ += $(TOSLINK_VERSION_OBJ) $(TOSLINK_OBJ)
+
 $(TOSLINK_VERSION_OBJ): $(TOSLIBC_VERSION_SRC)
 	$(QUIET_CC)$(CC) $(TOSLINK_CFLAGS) -c -o $@ $<
 

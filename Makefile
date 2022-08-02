@@ -25,14 +25,17 @@ include lib/Makefile
 include tool/Makefile
 include example/Makefile
 
+ALL_DEP = $(sort $(ALL_OBJ:%=%.d))
+
 .PHONY: version
 version:
 	@script/version
 
 .PHONY: clean
 clean:
-	$(QUIET_RM)$(RM) -f */*.o* */*/*.o*				\
-		$(TOSLIBC) $(TOSLIBC_VERSION_SRC) $(TOSLINK)		\
+	$(QUIET_RM)$(RM) -f $(ALL_OBJ) $(ALL_DEP)			\
+		$(TOSLIBC) $(TOSLIBC_VERSION_SRC)			\
+		$(TOSLINK)						\
 		$(EXAMPLE)						\
 		GPATH GRTAGS GTAGS
 
