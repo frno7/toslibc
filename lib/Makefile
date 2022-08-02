@@ -8,10 +8,6 @@ $(TOSLIBC_VERSION_SRC):
 
 TOSLIBC := lib/toslibc.a
 
-ifdef TARGET_CC
-all: $(TOSLIBC)
-endif
-
 TOSLIBC_CFLAGS = $(BASIC_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
 	-ffunction-sections -fdata-sections				\
 	-isystem include/toslibc -D_TOSLIBC_SOURCE $(TARGET_CFLAGS)

@@ -6,10 +6,6 @@ EXAMPLE_PRG :=								\
 	example/WINDOW.PRG						\
 	example/XBRA.PRG
 
-ifdef TARGET_CC
-all: $(EXAMPLE_PRG)
-endif
-
 EXAMPLE_CFLAGS += $(BASIC_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
 	-ffunction-sections -fdata-sections -isystem include/toslibc	\
 	-D_TOSLIBC_SOURCE $(TARGET_CFLAGS)

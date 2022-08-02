@@ -27,6 +27,12 @@ include lib/Makefile
 include tool/Makefile
 include example/Makefile
 
+all: $(TOSLINK)
+
+ifdef TARGET_CC
+all: $(TOSLIBC) $(EXAMPLE_PRG)
+endif
+
 ALL_DEP = $(sort $(ALL_OBJ:%=%.d))
 
 .PHONY: version
