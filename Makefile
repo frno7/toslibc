@@ -4,10 +4,6 @@
 
 CFLAGS += -g -O2 -Wall -fPIC -Iinclude -D_GNU_SOURCE
 
-LIBS += -lm
-
-SOFLAGS += -shared
-
 ifeq "$(S)" "1"
 S_CFLAGS += -fsanitize=address -fsanitize=leak -fsanitize=undefined	\
 	  -fsanitize-address-use-after-scope -fstack-check
