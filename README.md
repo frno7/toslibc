@@ -50,7 +50,7 @@ contains applications of TOS/libc:
 Review the file [INSTALL](https://github.com/frno7/toslibc/blob/main/INSTALL)
 for installation instructions. A working GCC/m68k cross-compiler is required.
 Assuming the compiler is `m68k-elf-gcc`, build TOS/libc with
-`make TARGET_COMPILE=m68k-elf-` to produce a `toslibc.a`
+`make TARGET_COMPILE=m68k-elf-` to produce a `lib/toslibc.a`
 [static library](https://en.wikipedia.org/wiki/Static_library),
 and example applications.
 
