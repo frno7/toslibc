@@ -18,7 +18,7 @@ S_CFLAGS = -fsanitize=address -fsanitize=leak -fsanitize=undefined	\
 endif
 
 DEP_CFLAGS = -Wp,-MD,$(@D)/$(@F).d -MT $(@D)/$(@F)
-TOSLIBC_CFLAGS = -O2 -Wall -Iinclude -D_GNU_SOURCE $(DEP_CFLAGS)
+TOSLIBC_CFLAGS = -O2 -Wall -D_GNU_SOURCE $(DEP_CFLAGS)
 
 .PHONY: all
 all:

@@ -7,6 +7,7 @@ TOSLIBC := $(TOSLIBC_LIB_SUBDIR)toslibc.a
 TOSLIBC_LIB_CFLAGS = $(TOSLIBC_CFLAGS) -march=68000 -fno-PIC		\
 	-nostdlib -ffunction-sections -fdata-sections			\
 	-isystem $(TOSLIBC_LIB_SUBDIR)../include/toslibc		\
+	-I$(TOSLIBC_LIB_SUBDIR)../include				\
 	-D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
 
 TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\

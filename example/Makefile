@@ -9,8 +9,10 @@ TOSLIBC_EXAMPLE_PRG = $(addprefix $(TOSLIBC_EXAMPLE_SUBDIR),		\
 	XBRA.PRG)
 
 TOSLIBC_EXAMPLE_CFLAGS = $(TOSLIBC_CFLAGS) -march=68000 -fno-PIC	\
-	-nostdlib -ffunction-sections -fdata-sections -isystem		\
-	include/toslibc -D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
+	-nostdlib -ffunction-sections -fdata-sections			\
+	-isystem $(TOSLIBC_LIB_SUBDIR)../include/toslibc		\
+	-I$(TOSLIBC_LIB_SUBDIR)../include				\
+	-D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
 
 TOSLIBC_EXAMPLE_LDFLAGS = --relocatable --gc-sections --strip-all	\
 	--entry _start --script=script/prg.ld $(TARGET_LDFLAGS)
