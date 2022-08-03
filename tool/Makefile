@@ -9,9 +9,9 @@ TOSLINK_CFLAGS = $(TOSLIBC_CFLAGS) $(S_CFLAGS) $(CFLAGS)		\
 
 TOSLIBC_VERSION_SRC := $(TOSLIBC_TOOL_SUBDIR)version.c
 
-.PHONY: $(shell script/version --check $(TOSLIBC_VERSION_SRC))
+.PHONY: $(shell $(TOSLIBC_LIB_SUBDIR)../script/version --check $(TOSLIBC_VERSION_SRC))
 $(TOSLIBC_VERSION_SRC):
-	$(QUIET_GEN)script/version $@
+	$(QUIET_GEN)$(TOSLIBC_LIB_SUBDIR)../script/version $@
 
 TOSLINK_SRC = $(addprefix $(TOSLIBC_TOOL_SUBDIR),			\
 	elf32.c								\
