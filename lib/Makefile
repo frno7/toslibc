@@ -9,16 +9,19 @@ TOSLIBC_LIB_CFLAGS = $(TOSLIBC_CFLAGS) -march=68000 -fno-PIC		\
 	-isystem include/toslibc -D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
 
 TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\
-	aes.c								\
-	bios.S								\
-	close.c								\
 	crt0.S								\
+	bios.S								\
+	gemdos.S							\
+	xbios.S								\
+	xgemdos.S							\
+	__mulsi3.S							\
+	aes.c								\
+	close.c								\
 	ctype.c								\
 	dprintf.c							\
 	errno.c								\
 	exit.c								\
 	free.c								\
-	gemdos.S							\
 	lseek.c								\
 	malloc.c							\
 	memcpy.c							\
@@ -53,13 +56,10 @@ TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\
 	vprintf.c							\
 	vsnprintf.c							\
 	write.c								\
-	xbios.S								\
 	xbra.c								\
-	xgemdos.S							\
 	__divsi3.c							\
 	__modsi3.c							\
 	__muldi3.c							\
-	__mulsi3.S							\
 	__udivdi3.c							\
 	__udivmoddi4.c							\
 	__udivmodsi4.c							\
