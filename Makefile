@@ -39,17 +39,14 @@ ALL_DEP = $(sort $(ALL_OBJ:%=%.d))
 version:
 	@script/version
 
-.PHONY: clean
-clean:
-	$(QUIET_RM)$(RM) -f $(ALL_OBJ) $(ALL_DEP)			\
-		$(TOSLIBC) $(TOSLIBC_VERSION_SRC)			\
-		$(TOSLINK)						\
-		$(TOSLIBC_EXAMPLE_PRG)					\
-		GPATH GRTAGS GTAGS
-
 .PHONY: gtags
 gtags:
 	$(QUIET_GEN)gtags
+OTHER_CLEAN += GPATH GRTAGS GTAGS
+
+.PHONY: clean
+clean:
+	$(QUIET_RM)$(RM) -f $(ALL_OBJ) $(ALL_DEP) $(OTHER_CLEAN)
 
 V             = @
 Q             = $(V:1=)
