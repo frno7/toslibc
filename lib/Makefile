@@ -4,8 +4,8 @@ TOSLIBC_LIB_SUBDIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 TOSLIBC := $(TOSLIBC_LIB_SUBDIR)toslibc.a
 
-TOSLIBC_LIB_CFLAGS = $(BASIC_CFLAGS) -march=68000 -fno-PIC -nostdlib	\
-	-ffunction-sections -fdata-sections				\
+TOSLIBC_LIB_CFLAGS = $(TOSLIBC_CFLAGS) -march=68000 -fno-PIC		\
+	-nostdlib -ffunction-sections -fdata-sections			\
 	-isystem include/toslibc -D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
 
 TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\
