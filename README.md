@@ -61,7 +61,7 @@ automatically built with
 
 # How it works
 
-TOS/libc automatically converts 32-bit integers to 16-bit integers for
+TOS/libc automatically converts between 32-bit and 16-bit integers for
 Atari TOS. The main complication is the `trap` system call with its stack
 arguments, which must handle
 [reentrancy](https://en.wikipedia.org/wiki/Reentrancy_(computing)). This
