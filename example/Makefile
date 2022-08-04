@@ -8,7 +8,7 @@ TOSLIBC_EXAMPLE_PRG = $(addprefix $(TOSLIBC_EXAMPLE_SUBDIR),		\
 	WINDOW.PRG							\
 	XBRA.PRG)
 
-TOSLIBC_EXAMPLE_CFLAGS = $(TOSLIBC_CFLAGS) -march=68000 -fno-PIC	\
+TOSLIBC_EXAMPLE_CFLAGS = $(BASIC_CFLAGS) -march=68000 -fno-PIC		\
 	-nostdlib -ffunction-sections -fdata-sections			\
 	-isystem $(TOSLIBC_LIB_SUBDIR)../include/toslibc		\
 	-I$(TOSLIBC_LIB_SUBDIR)../include				\
