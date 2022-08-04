@@ -1,4 +1,4 @@
-name: Compile and publish TOS/libc examples
+name: Compile TOS/libc
 
 on:
   push:

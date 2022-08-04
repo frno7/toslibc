@@ -1,3 +1,5 @@
+![compilation workflow](https://github.com/frno7/toslibc/actions/workflows/compilation.yml/badge.svg)
+
 TOS/libc is a 32-bit
 [C standard library](https://en.wikipedia.org/wiki/C_standard_library)
 to [cross-compile](https://en.wikipedia.org/wiki/Cross_compiler) programs and
