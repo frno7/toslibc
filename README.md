@@ -2,9 +2,8 @@
 
 TOS/libc is a 32-bit
 [C standard library](https://en.wikipedia.org/wiki/C_standard_library)
-to [cross-compile](https://en.wikipedia.org/wiki/Cross_compiler) programs and
-libraries for [Atari TOS](https://en.wikipedia.org/wiki/Atari_TOS) and the
-[Atari ST](https://en.wikipedia.org/wiki/Atari_ST) family of computers.
+to compile programs for [Atari TOS](https://en.wikipedia.org/wiki/Atari_TOS)
+and the [Atari ST](https://en.wikipedia.org/wiki/Atari_ST) family of computers.
 
 Many, if not most, other libc for Atari TOS are 16-bit. There are two
 significant advantages with a 32-bit libc:
@@ -50,7 +49,7 @@ contains applications of TOS/libc:
 # How to build
 
 Review the file [`INSTALL`](https://github.com/frno7/toslibc/blob/main/INSTALL)
-for installation instructions. A working GCC/m68k cross-compiler is required.
+for installation instructions. A working GCC/m68k compiler is required.
 Assuming the compiler is `m68k-elf-gcc`, build TOS/libc with
 `make TARGET_COMPILE=m68k-elf-` to produce a `lib/toslibc.a`
 [static library](https://en.wikipedia.org/wiki/Static_library),
