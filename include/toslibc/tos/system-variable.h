@@ -23,6 +23,8 @@ struct conterm {
 	uint8_t : 4;
 };
 
+struct cookie;
+
 #define SYSTEM_VARIABLE(v)											\
 	v(0x400, 1, 4, evt_timer,   uint32_t,		"Timer handoff")					\
 	v(0x404, 1, 4, evt_critic,  uint32_t,		"Critical error handoff")				\
@@ -82,7 +84,24 @@ struct conterm {
 	v(0x4F2, 1, 4, _sysbase,    void *,		"Pointer to start of the operating system")		\
 	v(0x4F6, 1, 4, _shell_p,    void *,		"Global shell info pointer")				\
 	v(0x4FA, 1, 4, end_os,      void *,		"Pointer to end of OS in RAM, start of the TPA")	\
-	v(0x4FE, 1, 4, exec_os,     void *,		"Pointer to start of the AES")
+	v(0x4FE, 1, 4, exec_os,     void *,		"Pointer to start of the AES")				\
+	v(0x502, 1, 4, scr_dump,    void *,		"Pointer to routine when ALT+HELP is pressed")		\
+	v(0x506, 1, 4, prv_lsto,    void *,		"Vector called to check PRN: by Prtblk()")		\
+	v(0x50a, 1, 4, prv_lst,     void *,		"Vector called to output byte to PRN: by Prtblk()")	\
+	v(0x50e, 1, 4, prv_auxo,    void *,		"Vector called to check AUX: by Prtblk()")		\
+	v(0x512, 1, 4, prv_aux,     void *,		"Vector called to output byte tp AUX: by Prtblk()")	\
+	v(0x516, 1, 4, pun_ptr,     void *,		"Pointer to AHDI structure")				\
+	v(0x51a, 1, 4, memval3,     uint32_t,		"Set to 0x5555AAAA if coldstart was successful.")	\
+	v(0x51e, 8, 4, xconstat,    void *,		"Pointers to Bconstat() for 8 devices")			\
+	v(0x53e, 8, 4, xconin,      void *,		"Pointers to Bconin() for 8 devices")			\
+	v(0x55e, 8, 4, xcostat,     void *,		"Pointers to Bcostat() for 8 devices")			\
+	v(0x57e, 8, 4, xconout,     void *,		"Pointers to Bconout() for 8 devices")			\
+	v(0x59e, 1, 2, _longframe,  uint16_t,		"0 short stack frames; otherwise long stack frames")	\
+	v(0x5a0, 1, 4, _p_cookies,  struct cookie *,	"Pointer to the system cookie jar")			\
+	v(0x5a4, 1, 4, ramtop,      void *,		"If ramvalid is correct, end of alternative RAM")	\
+	v(0x5a8, 1, 4, ramvalid,    uint32_t,		"Set to 0x1357BD13 to indicate that ramtop is correct")	\
+	v(0x5ac, 1, 4, bell_hook,   void *,		"Vector jumped through to sound the system bell")	\
+	v(0x5b0, 1, 4, kcl_hook,    void *,		"Vector jumped through to sound system key clicks")
 
 #define SYSTEM_VARIABLE_1(count_, type_, label_) volatile type_ label_
 #define SYSTEM_VARIABLE_N(count_, type_, label_) volatile type_ label_[count_]

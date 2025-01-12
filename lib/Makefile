@@ -19,6 +19,7 @@ TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\
 	__mulsi3.S							\
 	aes.c								\
 	close.c								\
+	cookie.c							\
 	ctype.c								\
 	dprintf.c							\
 	errno.c								\
