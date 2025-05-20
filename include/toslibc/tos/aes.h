@@ -304,7 +304,7 @@ DEFINE_AES_WIND_GET_XYWH(full,  FULL)
 DEFINE_AES_WIND_GET_XYWH(first, FIRST)
 DEFINE_AES_WIND_GET_XYWH(next,  NEXT)
 
-static inline aes_last_rectangle(struct aes_rectangle r)
+static inline bool aes_last_rectangle(struct aes_rectangle r)
 {
 	return !r.w && !r.h;
 }
