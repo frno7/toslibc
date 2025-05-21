@@ -55,6 +55,14 @@ Assuming the compiler is `m68k-elf-gcc`, build TOS/libc with
 [static library](https://en.wikipedia.org/wiki/Static_library),
 and example applications.
 
+- [Gentoo Linux](https://en.wikipedia.org/wiki/Gentoo_Linux) has a
+  [`crossdev`](https://wiki.gentoo.org/wiki/Crossdev) package that builds
+  `m68k-elf-gcc` with the command `crossdev -s1 -t m68k-elf`.
+- [Mac OS](https://en.wikipedia.org/wiki/MacOS)
+  [Homebrew](https://en.wikipedia.org/wiki/Homebrew_(package_manager)) has
+  both [`m68k-elf-gcc`](https://formulae.brew.sh/formula/m68k-elf-gcc) and
+  [`toslibc`](https://github.com/kareandersen/homebrew-toslibc) packages.
+
 Precompiled
 [`example`](https://github.com/frno7/toslibc/tree/main/example)
 applications are available for download under the Github
