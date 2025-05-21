@@ -9,6 +9,9 @@ TOSLIBC_EXAMPLE_PRG = $(addprefix $(TOSLIBC_EXAMPLE_SUBDIR),		\
 	WINDOW.PRG							\
 	XBRA.PRG)
 
+.PHONY: example
+example: $(TOSLIBC_EXAMPLE_PRG)
+
 TOSLIBC_EXAMPLE_CFLAGS = $(BASIC_CFLAGS) -march=68000 -fno-PIC		\
 	-nostdlib -ffunction-sections -fdata-sections			\
 	-isystem $(TOSLIBC_LIB_SUBDIR)../include/toslibc		\

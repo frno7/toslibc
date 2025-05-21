@@ -3,6 +3,7 @@ Makefile targets:
   all            - compile TOS/libc and examples (default)
   version        - display TOS/libc version
   clean          - remove generated files
+  example        - compile example programs
 
 Makefile options:
 

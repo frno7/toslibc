@@ -30,7 +30,7 @@ include example/Makefile
 all: $(TOSLINK)
 
 ifdef TARGET_CC
-all: $(TOSLIBC) $(TOSLIBC_EXAMPLE_PRG)
+all: $(TOSLIBC) example
 endif
 
 ALL_DEP = $(sort $(ALL_OBJ:%=%.d))
