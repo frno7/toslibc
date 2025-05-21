@@ -57,7 +57,11 @@ and example applications.
 
 - [Gentoo Linux](https://en.wikipedia.org/wiki/Gentoo_Linux) has a
   [`crossdev`](https://wiki.gentoo.org/wiki/Crossdev) package that builds
-  `m68k-elf-gcc` with the command `crossdev -s1 -t m68k-elf`.
+  `m68k-elf-gcc` with the command `crossdev -s1 -t m68k-elf`. The
+  [`gentoo-m68k`](https://github.com/frno7/gentoo-m68k) repository has
+  installation scripts and a
+  [Docker](https://en.wikipedia.org/wiki/Docker_(software)) configuration for
+  building Atari TOS programs with GitHub workflows (mentioned below).
 - [Mac OS](https://en.wikipedia.org/wiki/MacOS)
   [Homebrew](https://en.wikipedia.org/wiki/Homebrew_(package_manager)) has
   both [`m68k-elf-gcc`](https://formulae.brew.sh/formula/m68k-elf-gcc) and
@@ -65,7 +69,7 @@ and example applications.
 
 Precompiled
 [`example`](https://github.com/frno7/toslibc/tree/main/example)
-applications are available for download under the Github
+applications are available for download under the GitHub
 [actions](https://github.com/frno7/toslibc/actions) tab. These are
 automatically built with
 [`.github/workflows/compilation.yml`](https://github.com/frno7/toslibc/blob/main/.github/workflows/compilation.yml).
