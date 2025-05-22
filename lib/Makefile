@@ -39,6 +39,7 @@ TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\
 	snprintf.c							\
 	start.c								\
 	strcmp.c							\
+	strchr.c							\
 	strerror.c							\
 	strlen.c							\
 	strncmp.c							\
