@@ -21,8 +21,6 @@ TOSLIBC_EXAMPLE_CFLAGS = $(BASIC_CFLAGS) -march=68000 -fno-PIC		\
 TOSLIBC_EXAMPLE_LDFLAGS = --relocatable --gc-sections --strip-all	\
 	--entry _start --script=script/prg.ld $(TARGET_LDFLAGS)
 
-lowercase ?= $(shell echo "$(1)" | tr '[:upper:]' '[:lower:]')
-
 TOSLIBC_EXAMPLE_SRC := $(foreach e,$(TOSLIBC_EXAMPLE_PRG),		\
 	$(call lowercase,$(basename $(e))).c)
 TOSLIBC_EXAMPLE_OBJ = $(TOSLIBC_EXAMPLE_SRC:%.c=%.o)

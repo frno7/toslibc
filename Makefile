@@ -23,6 +23,8 @@ BASIC_CFLAGS = -O2 -Wall -D_GNU_SOURCE $(DEP_CFLAGS)
 .PHONY: all
 all:
 
+lowercase ?= $(shell echo "$(1)" | tr '[:upper:]' '[:lower:]')
+
 include lib/Makefile
 include tool/Makefile
 include example/Makefile
