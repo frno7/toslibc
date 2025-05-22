@@ -11,6 +11,7 @@ test: $(TOSLIBC_TEST_SUITE_PRG)
 
 TOSLIBC_TEST_SRC := $(addprefix $(TOSLIBC_TEST_SUBDIR),			\
 	lseek.c								\
+	open.c								\
 	strchr.c							\
 	strcmp.c)
 TOSLIBC_TEST_OBJ = $(TOSLIBC_TEST_SRC:%.c=%.o)

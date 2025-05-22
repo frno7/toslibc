@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 {
 	size_t failed = 0;
 
-	BUILD_BUG_ON(SUITE_SIZE != 3);
+	BUILD_BUG_ON(SUITE_SIZE != 5);
 
 	printf("TOS/libc %zu test suite\r\n\r\n", SUITE_SIZE);
 

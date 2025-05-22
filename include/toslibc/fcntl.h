@@ -9,6 +9,7 @@
 #define O_WRONLY	S_WRITE
 #define O_RDWR		S_READWRITE
 
+#define O_APPEND	0x8000
 #define O_CREAT		0x4000
 #define O_TRUNC		0x2000
 
