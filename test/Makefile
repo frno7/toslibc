@@ -10,7 +10,8 @@ TOSLIBC_TEST_SUITE_H = $(TOSLIBC_TEST_SUBDIR)../include/test/suite.h
 test: $(TOSLIBC_TEST_SUITE_PRG)
 
 TOSLIBC_TEST_SRC := $(addprefix $(TOSLIBC_TEST_SUBDIR),			\
-	lseek.c)
+	lseek.c								\
+	strcmp.c)
 TOSLIBC_TEST_OBJ = $(TOSLIBC_TEST_SRC:%.c=%.o)
 
 TOSLIBC_TEST_SUITE_SRC := $(foreach e,$(TOSLIBC_TEST_SUITE_PRG),	\
