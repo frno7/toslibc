@@ -1,9 +1,10 @@
 Makefile targets:
 
   all            - compile TOS/libc and examples (default)
+  test           - compile test/SUITE.TOS
+  example        - compile example programs
   version        - display TOS/libc version
   clean          - remove generated files
-  example        - compile example programs
 
 Makefile options:
 
@@ -11,6 +12,12 @@ Makefile options:
   S              - set to 1 for sanitation checks
   TARGET_COMPILE - set the m68k target compiler suite to use for Atari ST code
 
-Example:
+Examples:
+
+Build all:
 
 	$ make TARGET_COMPILE=m68k-elf-
+
+Build only TOS/libc:
+
+	$ make TARGET_COMPILE=m68k-elf- lib/toslibc.a

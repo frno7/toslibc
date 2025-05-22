@@ -38,11 +38,12 @@ TOSLIBC_PROGRAM_LDFLAGS = --relocatable --gc-sections --strip-all	\
 	--entry _start --script=script/prg.ld $(TARGET_LDFLAGS)
 
 include example/Makefile
+include test/Makefile
 
 all: $(TOSLINK)
 
 ifdef TARGET_CC
-all: $(TOSLIBC) example
+all: $(TOSLIBC) test example
 endif
 
 ALL_DEP = $(sort $(ALL_OBJ:%=%.d))

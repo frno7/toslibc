@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -e
+set -o pipefail
+
+if [ x"$1" = x--help ]
+then
+	echo "usage: $(basename "$0") -o <output.h> [input.c]..."
+	echo
+	echo "Generate test suite macro definition file."
+	echo
+	exit
+fi
+
+if [ x"$1" = x-o ]
+then
+	shift
+	out="$1"
+	shift
+else
+	echo "$0: Missing output file" >&2
+	exit 1
+fi
+
+echo "#define TEST_SUITE(t) \\" >"$out".tmp
+for f in $@
+do
+	sed -n 's/^const char \*\(test_[_a-zA-Z0-9]\+\)()$/\tt(\1) \\/p' <$f >>"$out".tmp
+done
+echo "" >>"$out".tmp
+
+mv "$out".tmp "$out"
