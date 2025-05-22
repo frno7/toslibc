@@ -27,6 +27,16 @@ lowercase ?= $(shell echo "$(1)" | tr '[:upper:]' '[:lower:]')
 
 include lib/Makefile
 include tool/Makefile
+
+TOSLIBC_PROGRAM_CFLAGS = $(BASIC_CFLAGS) -march=68000 -fno-PIC		\
+	-nostdlib -ffunction-sections -fdata-sections			\
+	-isystem $(TOSLIBC_LIB_SUBDIR)../include/toslibc		\
+	-I$(TOSLIBC_LIB_SUBDIR)../include				\
+	-D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
+
+TOSLIBC_PROGRAM_LDFLAGS = --relocatable --gc-sections --strip-all	\
+	--entry _start --script=script/prg.ld $(TARGET_LDFLAGS)
+
 include example/Makefile
 
 all: $(TOSLINK)
