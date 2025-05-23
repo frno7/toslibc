@@ -5,10 +5,10 @@
 
 #include <tos/gemdos.h>
 
-#include <internal/build-assert.h>
-#include <internal/macro.h>
+#include "internal/build-assert.h"
+#include "internal/macro.h"
 
-#include <test/suite.h>
+#include "test/suite.h"
 
 #define TEST_DECLARE(identifier)					\
 	const char *identifier();

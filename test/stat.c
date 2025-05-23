@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#include <test/test.h>
+#include "test/test.h"
 
 #define TEST_TEXT_FILE  "test.txt"
 #define TEST_NOENT_FILE "noent.tmp"

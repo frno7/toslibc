@@ -2,8 +2,7 @@
 
 #include <string.h>
 
-#include <test/test.h>
-#include <internal/macro.h>
+#include "test/test.h"
 
 #define TEST_STRCHR(s, c, expect)					\
 ({									\

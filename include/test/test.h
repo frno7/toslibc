@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 
-#include <internal/types.h>
+#include "internal/types.h"
 
 #define test_error(format, ...)						\
 ({									\

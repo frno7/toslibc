@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <test/test.h>
+#include "test/test.h"
 
 #define TEST_TEXT_FILE "test.txt"
 

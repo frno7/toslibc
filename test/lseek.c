@@ -6,8 +6,9 @@
 #include <string.h>
 #include <unistd.h>
 
-#include <test/test.h>
-#include <internal/macro.h>
+#include "internal/macro.h"
+
+#include "test/test.h"
 
 #define TEST_TEXT_FILE "test.txt"
 
