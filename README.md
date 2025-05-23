@@ -53,12 +53,12 @@ for installation instructions. A working GCC/m68k compiler is required.
 Assuming the compiler is `m68k-elf-gcc`, build TOS/libc with
 `make TARGET_COMPILE=m68k-elf-` to produce a `lib/toslibc.a`
 [static library](https://en.wikipedia.org/wiki/Static_library),
-and example applications.
+example applications, and a test suite `test/SUITE.TOS`.
 
 - [Gentoo Linux](https://en.wikipedia.org/wiki/Gentoo_Linux) has a
   [`crossdev`](https://wiki.gentoo.org/wiki/Crossdev) package that builds
-  `m68k-elf-gcc` with the command `crossdev -s1 -t m68k-elf`. The
-  [`gentoo-m68k`](https://github.com/frno7/gentoo-m68k) repository has
+  `m68k-elf-gcc` with the command `crossdev -s1 -t m68k-elf`.
+- The [`gentoo-m68k`](https://github.com/frno7/gentoo-m68k) repository has
   installation scripts and a
   [Docker](https://en.wikipedia.org/wiki/Docker_(software)) configuration for
   building Atari TOS programs with GitHub workflows (mentioned below).
