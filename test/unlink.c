@@ -3,22 +3,12 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <stdio.h>
-#include <sys/stat.h>
 #include <unistd.h>
 
-#include <test/test.h>
+#include "test/file.h"
+#include "test/test.h"
 
 #define TEST_UNLINK_FILE "unlink.tmp"
-
-static bool file_exists(const char *path)
-{
-	struct stat sb;
-
-	if (stat(path, &sb) == -1 && errno == ENOENT)
-		return false;
-
-	return true;
-}
 
 const char *test_unlink()
 {

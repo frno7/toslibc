@@ -28,10 +28,7 @@ static bool file_exists(const char *path)
 {
 	struct stat sb;
 
-	if (stat(path, &sb) == -1 && errno == ENOENT)
-		return false;
-
-	return true;
+	return stat(path, &sb) != -1 || errno != ENOENT;
 }
 
 int open(const char *pathname, int flags, ...)
