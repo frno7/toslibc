@@ -63,4 +63,11 @@ static inline size_t fread(void *ptr, size_t size, size_t n, FILE *stream)
 	return r == -1 ? 0 : r / size;
 }
 
+static inline size_t fwrite(const void *ptr, size_t size, size_t n, FILE *stream)
+{
+	const ssize_t w = write(fileno(stream), ptr, n * size);
+
+	return w == -1 ? 0 : w / size;
+}
+
 #endif /* _TOSLIBC_STDIO_H */

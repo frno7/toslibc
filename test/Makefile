@@ -12,6 +12,7 @@ test: $(TOSLIBC_TEST_SUITE_PRG)
 TOSLIBC_TEST_SRC := $(addprefix $(TOSLIBC_TEST_SUBDIR),			\
 	fopen.c								\
 	fread.c								\
+	fwrite.c							\
 	lseek.c								\
 	open.c								\
 	rmdir.c								\
