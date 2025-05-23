@@ -5,6 +5,9 @@
 
 #include <stdarg.h>
 #include <stddef.h>
+#include <unistd.h>
+
+#include <tos/gemdos.h>
 
 #define EOF (-1)
 
@@ -26,5 +29,31 @@ int vsnprintf(char *str, size_t size, const char *format, va_list ap);
 
 int snprintf(char *str, size_t size, const char *format, ...)
 	__attribute__((format(printf, 3, 4)));
+
+typedef struct { int pseudo_fd; } FILE;
+
+static inline int fileno(FILE *stream)
+{
+	return (int)stream;
+}
+
+int __fopen_mode_flags(const char *mode);
+
+FILE *fopen(const char *pathname, const char *mode);
+
+static inline int fclose(FILE *stream)
+{
+	return close(fileno(stream)) != -1 ? 0 : EOF;
+}
+
+static inline int fseek(FILE *stream, long offset, int whence)
+{
+	return lseek(fileno(stream), offset, whence) != -1 ? 0 : -1;
+}
+
+static inline long ftell(FILE *stream)
+{
+	return lseek(fileno(stream), 0, SEEK_CUR);
+}
 
 #endif /* _TOSLIBC_STDIO_H */
