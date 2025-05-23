@@ -49,7 +49,7 @@ contains applications of TOS/libc:
 # How to build
 
 Review the file [`INSTALL`](https://github.com/frno7/toslibc/blob/main/INSTALL)
-for installation instructions. A working GCC/m68k compiler is required.
+for installation instructions. A working m68k/GCC compiler is required.
 Assuming the compiler is `m68k-elf-gcc`, build TOS/libc with
 `make TARGET_COMPILE=m68k-elf-` to produce a `lib/toslibc.a`
 [static library](https://en.wikipedia.org/wiki/Static_library),
@@ -86,7 +86,7 @@ Integers in structures for Atari TOS are generally defined as `int16_t` or
 `uint16_t`. [Bit fields](https://en.wikipedia.org/wiki/Bit_field) are generally
 used to improve notation with modern C standards.
 
-A standard, unmodified, GCC/m68k compiler is used to obtain
+A standard, unmodified, m68k/GCC compiler is used to obtain
 [ELF](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) object
 files, having a specific structure defined in
 [`script/prg.ld`](https://github.com/frno7/toslibc/blob/main/script/prg.ld).
