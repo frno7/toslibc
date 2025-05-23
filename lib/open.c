@@ -10,12 +10,13 @@
 
 #include <tos/gemdos.h>
 
+#define GEMDOS_FLAG_MASK (0x7)	/* Only bits 2..0 maps to gemdos_fopen. */
+
 int open(const char *pathname, int flags, ...)
 {
-	const int f = flags & ~(O_CREAT | O_TRUNC);
-	const int32_t fd = (f == flags ?
-		gemdos_fopen(pathname, f) :
-		gemdos_fcreate(pathname, 0));
+	const int32_t fd = (flags & O_TRUNC) ?
+		gemdos_fcreate(pathname, 0) :
+		gemdos_fopen(pathname, flags & GEMDOS_FLAG_MASK);
 
 	if (fd < 0) {
 		errno = errno_for_tos_error(-fd);
