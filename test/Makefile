@@ -15,7 +15,8 @@ TOSLIBC_TEST_SRC := $(addprefix $(TOSLIBC_TEST_SUBDIR),			\
 	open.c								\
 	stat.c								\
 	strchr.c							\
-	strcmp.c)
+	strcmp.c							\
+	unlink.c)
 TOSLIBC_TEST_OBJ = $(TOSLIBC_TEST_SRC:%.c=%.o)
 
 TOSLIBC_TEST_SUITE_SRC := $(foreach e,$(TOSLIBC_TEST_SUITE_PRG),	\

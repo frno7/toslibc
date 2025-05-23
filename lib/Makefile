@@ -57,6 +57,7 @@ TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\
 	strtoumax.c							\
 	supexecarg.c							\
 	system-variable.c						\
+	unlink.c							\
 	vdi.c								\
 	vdprintf.c							\
 	vprintf.c							\
