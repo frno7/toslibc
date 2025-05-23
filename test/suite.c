@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	printf("TOS/libc %zu test suite\r\n\r\n", SUITE_SIZE);
 
 	for (size_t i = 0; i < SUITE_SIZE; i++) {
-		printf("%2zu %-30s", 1 + i, suite[i].name);
+		printf("%2zu %-32s", 1 + i, suite[i].name);
 
 		const char *failure = suite[i].test();
 		if (!failure) {
@@ -43,14 +43,14 @@ int main(int argc, char *argv[])
 		}
 
 		failed++;
-		puts("FAILED\r\n");
+		puts("FAIL\r\n");
 		printf(": %s\r\n", failure);
 	}
 
 	if (failed)
 		printf("\r\n%zu of %zu failed\r\n", failed, SUITE_SIZE);
 	else
-		printf("\r\n%zu of %zu succeeded\r\n", SUITE_SIZE, SUITE_SIZE);
+		printf("\r\nAll %zu tests succeeded\r\n", SUITE_SIZE);
 
 	puts("Press enter to exit\r\n");
 	gemdos_cnecin();
