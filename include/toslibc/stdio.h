@@ -56,4 +56,11 @@ static inline long ftell(FILE *stream)
 	return lseek(fileno(stream), 0, SEEK_CUR);
 }
 
+static inline size_t fread(void *ptr, size_t size, size_t n, FILE *stream)
+{
+	const ssize_t r = read(fileno(stream), ptr, n * size);
+
+	return r == -1 ? 0 : r / size;
+}
+
 #endif /* _TOSLIBC_STDIO_H */
