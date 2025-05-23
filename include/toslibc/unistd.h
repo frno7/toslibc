@@ -21,4 +21,6 @@ int close(int fd);
 
 int unlink(const char *pathname);
 
+int rmdir(const char *pathname);
+
 #endif /* _TOSLIBC_UNISTD_H */

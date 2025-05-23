@@ -59,4 +59,6 @@ static inline int lstat(const char *pathname, struct stat *statbuf)
 	return stat(pathname, statbuf);  /* Atari TOS has no symlinks. */
 }
 
+int mkdir(const char *pathname, mode_t mode);
+
 #endif /* _TOSLIBC_SYS_STAT_H */

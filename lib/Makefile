@@ -30,6 +30,7 @@ TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\
 	malloc.c							\
 	memcpy.c							\
 	memset.c							\
+	mkdir.c								\
 	open.c								\
 	printf.c							\
 	ptermres.c							\
@@ -37,6 +38,7 @@ TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\
 	puts.c								\
 	read.c								\
 	realloc.c							\
+	rmdir.c								\
 	snprintf.c							\
 	start.c								\
 	stat.c								\
