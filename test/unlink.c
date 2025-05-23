@@ -23,7 +23,7 @@ static bool file_exists(const char *path)
 const char *test_unlink()
 {
 	if (file_exists(TEST_UNLINK_FILE))
-		return "" TEST_UNLINK_FILE " already exists";
+		return TEST_UNLINK_FILE " already exists";
 
 	int fd = open(TEST_UNLINK_FILE, O_CREAT | O_WRONLY);
 	if (fd == -1)
@@ -34,14 +34,14 @@ const char *test_unlink()
 		return test_error("close(%d) errno %d\n", fd, errno);
 
 	if (!file_exists(TEST_UNLINK_FILE))
-		return "" TEST_UNLINK_FILE " does not exist";
+		return TEST_UNLINK_FILE " does not exist";
 
 	if (unlink(TEST_UNLINK_FILE) == -1)
 		return test_error("unlink(\"%s\") errno %d\n",
 				TEST_UNLINK_FILE, errno);
 
 	if (file_exists(TEST_UNLINK_FILE))
-		return "" TEST_UNLINK_FILE " not unlinked";
+		return TEST_UNLINK_FILE " not unlinked";
 
 	if (unlink(TEST_UNLINK_FILE) != -1 || errno != ENOENT)
 		return test_error("unlink(\"%s\") errno %d\n",

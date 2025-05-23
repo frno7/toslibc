@@ -22,7 +22,7 @@ static bool file_exists(const char *path)
 const char *test_fwrite()
 {
 	if (file_exists(TEST_WRITE_FILE))
-		return "" TEST_WRITE_FILE " already exists";
+		return TEST_WRITE_FILE " already exists";
 
 	FILE *file = fopen(TEST_WRITE_FILE, "w");
 	if (!file)
@@ -56,7 +56,7 @@ const char *test_fwrite()
 				TEST_WRITE_FILE, errno);
 
 	if (file_exists(TEST_WRITE_FILE))
-		return "" TEST_WRITE_FILE " not unlinked";
+		return TEST_WRITE_FILE " not unlinked";
 
 	if (strcmp(buf, "foobar") != 0)
 		return "strcmp(...) != 0";

@@ -23,21 +23,21 @@ static bool file_exists(const char *path)
 const char *test_rmdir()
 {
 	if (file_exists(TEST_RMDIR_DIR))
-		return "" TEST_RMDIR_DIR " already exists";
+		return TEST_RMDIR_DIR " already exists";
 
 	if (mkdir(TEST_RMDIR_DIR, 0777) == -1)
 		return test_error("mkdir(\"%s\", 0777) errno %d\n",
 				TEST_RMDIR_DIR, errno);
 
 	if (!file_exists(TEST_RMDIR_DIR))
-		return "" TEST_RMDIR_DIR " does not exist";
+		return TEST_RMDIR_DIR " does not exist";
 
 	if (rmdir(TEST_RMDIR_DIR) == -1)
 		return test_error("rmdir(\"%s\") errno %d\n",
 				TEST_RMDIR_DIR, errno);
 
 	if (file_exists(TEST_RMDIR_DIR))
-		return "" TEST_RMDIR_DIR " not rmdired";
+		return TEST_RMDIR_DIR " not rmdired";
 
 	if (rmdir(TEST_RMDIR_DIR) != -1 || errno != ENOENT)
 		return test_error("rmdir(\"%s\") errno %d\n",
