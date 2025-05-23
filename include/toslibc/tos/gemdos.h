@@ -65,6 +65,23 @@ struct _datetime {
 #define GSH_MIDIIN	-4
 #define GSH_MIDIOUT	-5
 
+#define FA_INQUIRE	0
+#define FA_SET		1
+
+#define FA_READONLY	0
+#define FA_HIDDEN	1
+#define FA_SYSTEM	2
+#define FA_VOLUME	3
+#define FA_DIR		4
+#define FA_ARCHIVE	5
+
+#define FA_ISREADONLY(attr)	(((attr) & (1 << FA_READONLY)) != 0)
+#define FA_ISHIDDEN(attr)	(((attr) & (1 << FA_HIDDEN))   != 0)
+#define FA_ISSYSTEM(attr)	(((attr) & (1 << FA_SYSTEM))   != 0)
+#define FA_ISVOLUME(attr)	(((attr) & (1 << FA_VOLUME))   != 0)
+#define FA_ISDIR(attr)		(((attr) & (1 << FA_DIR))      != 0)
+#define FA_ISARCHIVE(attr)	(((attr) & (1 << FA_ARCHIVE))  != 0)
+
 #define GEMDOS_DECLARE(opcode_, rtype_, name_, ptypes_, ...)		\
 rtype_ gemdos_##name_(__VA_ARGS__);
 GEMDOS_CALL(GEMDOS_DECLARE)

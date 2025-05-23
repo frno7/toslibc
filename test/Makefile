@@ -13,6 +13,7 @@ TOSLIBC_TEST_SRC := $(addprefix $(TOSLIBC_TEST_SUBDIR),			\
 	fopen.c								\
 	lseek.c								\
 	open.c								\
+	stat.c								\
 	strchr.c							\
 	strcmp.c)
 TOSLIBC_TEST_OBJ = $(TOSLIBC_TEST_SRC:%.c=%.o)
