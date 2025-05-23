@@ -1750,7 +1750,7 @@ typedef struct ENDIAN_STORAGE
 
 /* Entries found in sections of type SHT_MIPS_GPTAB.  */
 
-typedef union
+typedef union ENDIAN_STORAGE
 {
   struct ENDIAN_STORAGE
     {
