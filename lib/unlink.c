@@ -19,5 +19,5 @@ int unlink(const char *pathname)
 		return -1;
 	}
 
-	return r;
+	return 0;
 }

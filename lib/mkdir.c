@@ -19,5 +19,5 @@ int mkdir(const char *pathname, mode_t mode)
 		return -1;
 	}
 
-	return r;
+	return 0;
 }
