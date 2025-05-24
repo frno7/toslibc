@@ -25,7 +25,7 @@ fi
 echo "#define TEST_SUITE(t) \\" >"$out".tmp
 for f in $@
 do
-	sed -n 's/^const char \*\(test_[_a-zA-Z0-9]\+\)()$/\tt(\1) \\/p' <$f >>"$out".tmp
+	sed -En 's/^const char \*(test_[_a-zA-Z0-9]+)\(\)$/	t(\1) \\/p' <$f >>"$out".tmp
 done
 echo "" >>"$out".tmp
 
