@@ -37,7 +37,9 @@ static inline int fileno(FILE *stream)
 	return (int)stream;
 }
 
+#if defined(_TOSLIBC_SOURCE)
 int __fopen_mode_flags(const char *mode);
+#endif /* defined(_TOSLIBC_SOURCE) */
 
 FILE *fopen(const char *pathname, const char *mode);
 
