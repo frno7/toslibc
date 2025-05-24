@@ -2,7 +2,7 @@
 
 TOSLIBC_LIB_SUBDIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
-TOSLIBC := $(TOSLIBC_LIB_SUBDIR)toslibc.a
+TOSLIBC := $(TOSLIBC_LIB_SUBDIR)libc.a
 
 TOSLIBC_LIB_CFLAGS = $(BASIC_CFLAGS) -march=68000 -fno-PIC		\
 	-nostdlib -ffunction-sections -fdata-sections			\
