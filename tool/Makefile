@@ -33,4 +33,9 @@ $(TOSLINK_OBJ): %.o: %.c
 $(TOSLINK): $(TOSLINK_OBJ)
 	$(QUIET_LINK)$(CC) $(TOSLINK_CFLAGS) -o $@ $^
 
+.PHONY: install-toslink
+install-toslink: $(TOSLINK)
+	$(INSTALL) -d $(DESTDIR)$(bindir)
+	$(INSTALL) $(TOSLINK) $(DESTDIR)$(bindir)
+
 OTHER_CLEAN += $(TOSLINK) $(TOSLIBC_VERSION_SRC)

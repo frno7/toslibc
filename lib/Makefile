@@ -92,4 +92,21 @@ ALL_OBJ += $(TOSLIBC_LIB_OBJ)
 $(TOSLIBC): $(TOSLIBC_LIB_OBJ)
 	$(QUIET_AR)$(TARGET_AR) rcs $@ $^
 
+.PHONY: install-lib
+install-lib: install-include install-lib-static
+
+.PHONY: install-include
+install-include:
+	$(INSTALL) -d -m 755 $(DESTDIR)$(includedir)
+	$(INSTALL) -d -m 755 $(DESTDIR)$(includedir)/sys
+	$(INSTALL) -d -m 755 $(DESTDIR)$(includedir)/tos
+	$(INSTALL) -m 644 $(wildcard include/toslibc/*.h) $(DESTDIR)$(includedir)
+	$(INSTALL) -m 644 $(wildcard include/toslibc/sys/*.h) $(DESTDIR)$(includedir)/sys
+	$(INSTALL) -m 644 $(wildcard include/toslibc/tos/*.h) $(DESTDIR)$(includedir)/tos
+
+.PHONY: install-lib-static
+install-lib-static: $(TOSLIBC)
+	$(INSTALL) -d -m 755 $(DESTDIR)$(libdir)
+	$(INSTALL) $(TOSLIBC) $(DESTDIR)$(libdir)
+
 OTHER_CLEAN += $(TOSLIBC)

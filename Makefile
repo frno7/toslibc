@@ -2,6 +2,19 @@
 #
 # See the file INSTALL for installation instructions.
 
+target = m68k-atari-tos-gnu
+prefix = $(HOME)/.local/usr/$(target)
+datarootdir = $(prefix)/share
+exec_prefix = $(prefix)
+bindir = $(exec_prefix)/bin
+mandir = $(datarootdir)/man
+man1dir = $(mandir)/man1
+includedir = $(prefix)/include
+libdir = $(exec_prefix)/lib
+pkgdir = $(libdir)/pkgconfig
+
+export prefix includedir libdir
+
 CFLAGS = -g
 
 ifdef TARGET_COMPILE
@@ -11,6 +24,8 @@ TARGET_AR = $(TARGET_COMPILE)ar
 endif
 
 TARGET_CFLAGS = $(CFLAGS)
+
+INSTALL = install
 
 ifeq (1,$(S))
 S_CFLAGS = -fsanitize=address -fsanitize=leak -fsanitize=undefined	\
@@ -25,6 +40,7 @@ all:
 
 lowercase ?= $(shell echo "$(1)" | tr '[:upper:]' '[:lower:]')
 
+include script/Makefile
 include lib/Makefile
 include tool/Makefile
 
@@ -45,6 +61,9 @@ all: $(TOSLINK)
 ifdef TARGET_CC
 all: $(TOSLIBC) test example
 endif
+
+.PHONY: install
+install: install-lib install-prg.ld install-toslink
 
 ALL_DEP = $(sort $(ALL_OBJ:%=%.d))
 
