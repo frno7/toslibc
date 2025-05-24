@@ -12,8 +12,9 @@ man1dir = $(mandir)/man1
 includedir = $(prefix)/include
 libdir = $(exec_prefix)/lib
 pkgdir = $(libdir)/pkgconfig
+ldscriptdir = $(libdir)/script
 
-export prefix includedir libdir
+export prefix includedir libdir ldscriptdir
 
 CFLAGS = -g
 

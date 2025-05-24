@@ -92,8 +92,13 @@ ALL_OBJ += $(TOSLIBC_LIB_OBJ)
 $(TOSLIBC): $(TOSLIBC_LIB_OBJ)
 	$(QUIET_AR)$(TARGET_AR) rcs $@ $^
 
+TOSLIBC_PC = $(addprefix $(TOSLIBC_LIB_SUBDIR), toslibc.pc)
+
+$(TOSLIBC_PC):
+	$(QUIET_GEN)script/pkg $@
+
 .PHONY: install-lib
-install-lib: install-include install-lib-static
+install-lib: install-include install-lib-static install-pkg
 
 .PHONY: install-include
 install-include:
@@ -109,4 +114,9 @@ install-lib-static: $(TOSLIBC)
 	$(INSTALL) -d -m 755 $(DESTDIR)$(libdir)
 	$(INSTALL) $(TOSLIBC) $(DESTDIR)$(libdir)
 
-OTHER_CLEAN += $(TOSLIBC)
+.PHONY: install-pkg
+install-pkg: $(TOSLIBC_PC)
+	$(INSTALL) -d -m 755 $(DESTDIR)$(pkgdir)
+	$(INSTALL) -m 644 $(TOSLIBC_PC) $(DESTDIR)$(pkgdir)
+
+OTHER_CLEAN += $(TOSLIBC_PC) $(TOSLIBC)
