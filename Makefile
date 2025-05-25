@@ -14,7 +14,7 @@ libdir = $(exec_prefix)/lib
 pkgdir = $(libdir)/pkgconfig
 ldscriptdir = $(libdir)/script
 
-export prefix includedir libdir ldscriptdir
+export prefix bindir includedir libdir ldscriptdir
 
 CFLAGS = -g
 
@@ -25,6 +25,8 @@ TARGET_AR = $(TARGET_COMPILE)ar
 endif
 
 TARGET_CFLAGS = $(CFLAGS)
+
+export TARGET_CC TARGET_LD
 
 INSTALL = install
 
@@ -64,7 +66,10 @@ all: $(TOSLIBC) test example
 endif
 
 .PHONY: install
-install: install-lib install-prg.ld install-toslink
+install: install-lib install-tool
+
+.PHONY: install-tool
+install-tool: install-toslink install-prg.ld install-compiler-script
 
 ALL_DEP = $(sort $(ALL_OBJ:%=%.d))
 
