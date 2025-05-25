@@ -36,4 +36,26 @@ $(TOSLIBC_EXAMPLE_PRG): $(TOSLINK)
 $(TOSLIBC_EXAMPLE_PRG): %: %.o
 	$(QUIET_LINK)$(TOSLINK) -o $@ $<
 
+TOSLIBC_EXAMPLE_MAKEFILE = $(TOSLIBC_EXAMPLE_SUBDIR)Makefile.example
+
+.PHONY: install-example-src
+install-example-src: $(TOSLIBC_EXAMPLE_SRC)
+	$(INSTALL) -d $(DESTDIR)$(exampledir)
+	$(INSTALL) -m 644 $^ $(DESTDIR)$(exampledir)
+
+.PHONY: install-example-makefile
+install-example-makefile: $(TOSLIBC_EXAMPLE_MAKEFILE)
+	mkdir tmp && cp $^ tmp/Makefile
+	$(INSTALL) -d $(DESTDIR)$(exampledir)
+	$(INSTALL) -m 644 tmp/Makefile $(DESTDIR)$(exampledir)
+	rm tmp/Makefile && rmdir tmp
+
+.PHONY: install-example-prg
+install-example-prg: $(TOSLIBC_EXAMPLE_PRG)
+	$(INSTALL) -d $(DESTDIR)$(exampledir)
+	$(INSTALL) $^ $(DESTDIR)$(exampledir)
+
+.PHONY: install-example
+install-example: install-example-src install-example-makefile install-example-prg
+
 OTHER_CLEAN += $(TOSLIBC_EXAMPLE_PRG)

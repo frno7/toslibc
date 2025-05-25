@@ -1,25 +1,26 @@
 Makefile targets:
 
-  all            - compile TOS/libc and examples (default)
-  test           - compile test/SUITE.TOS
-  tool           - compile tool/toslink
-  script         - compile scripts
-  example        - compile example programs
-  version        - display TOS/libc version
-  clean          - remove generated files
+  all             - compile TOS/libc and examples (default)
+  test            - compile test/SUITE.TOS
+  tool            - compile tool/toslink
+  script          - compile scripts
+  example         - compile example programs
+  version         - display TOS/libc version
+  clean           - remove generated files
 
-  install        - compile and install everything
-  install-lib    - compile and install only TOS/libc library in $prefix
-  install-tool   - compile and install only compiler tools in $prefix
-  install-test   - compile and install only test suite in $prefix
+  install         - compile and install everything
+  install-lib     - compile and install only TOS/libc library in $prefix
+  install-tool    - compile and install only compiler tools in $prefix
+  install-test    - compile and install only test suite in $prefix
+  install-example - compile and install only examples in $prefix
 
 Makefile options:
 
-  prefix         - installation prefix (default ~/.local/usr/m68k-atari-tos-gnu)
+  prefix          - installation prefix (default ~/.local/usr/m68k-atari-tos-gnu)
 
-  V              - set to 1 to compile verbosely
-  S              - set to 1 for sanitation checks
-  TARGET_COMPILE - set the m68k target compiler suite to use for Atari ST code
+  V               - set to 1 to compile verbosely
+  S               - set to 1 for sanitation checks
+  TARGET_COMPILE  - set the m68k target compiler suite to use for Atari ST code
 
 Examples:
 

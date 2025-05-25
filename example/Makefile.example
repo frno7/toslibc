@@ -1,0 +1,36 @@
+CFLAGS = -O2 -Wall
+
+TARGET_COMPILE = m68k-atari-tos-gnu-
+TARGET_CC = $(TARGET_COMPILE)cc
+TARGET_LD = $(TARGET_COMPILE)ld
+
+EXAMPLE_PRG =								\
+	ALERT.PRG							\
+	COOKIE.TOS							\
+	HELLO.TOS							\
+	WINDOW.PRG							\
+	XBRA.PRG
+
+.PHONY: all
+all: $(EXAMPLE_PRG)
+
+lowercase ?= $(shell echo "$(1)" | tr '[:upper:]' '[:lower:]')
+
+EXAMPLE_SRC := $(foreach e,$(EXAMPLE_PRG), $(call lowercase,$(basename $(e))).c)
+EXAMPLE_OBJ = $(EXAMPLE_SRC:%.c=%.o)
+
+define EXAMPLE_PRG_target
+$(1): $(call lowercase,$(basename $(1))).o
+	$$(TARGET_LD) -o $$@ $$^
+endef
+
+$(foreach e,$(EXAMPLE_PRG), $(eval $(call EXAMPLE_PRG_target,$(e))))
+
+ALL_OBJ += $(EXAMPLE_OBJ) $(EXAMPLE_PRG:%=%.elf)
+
+$(EXAMPLE_OBJ): %.o: %.c
+	$(TARGET_CC) $(CFLAGS) -c -o $@ $<
+
+.PHONY: clean
+clean:
+	$(RM) $(ALL_OBJ) $(EXAMPLE_PRG)
