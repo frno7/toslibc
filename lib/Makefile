@@ -92,6 +92,9 @@ ALL_OBJ += $(TOSLIBC_LIB_OBJ)
 $(TOSLIBC): $(TOSLIBC_LIB_OBJ)
 	$(QUIET_AR)$(TARGET_AR) rcs $@ $^
 
+.PHONY: lib
+lib: $(TOSLIBC)
+
 .PHONY: install-lib
 install-lib: install-include install-lib-static install-pkg-config
 
