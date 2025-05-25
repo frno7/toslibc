@@ -13,6 +13,7 @@ includedir = $(prefix)/include
 libdir = $(exec_prefix)/lib
 pkgdir = $(libdir)/pkgconfig
 ldscriptdir = $(libdir)/script
+testdir = $(datarootdir)/toslibc/test
 
 export prefix bindir includedir libdir ldscriptdir
 
@@ -71,7 +72,7 @@ all: $(TOSLIBC) test example
 endif
 
 .PHONY: install
-install: install-lib install-tool
+install: install-lib install-tool install-test
 
 .PHONY: install-tool
 install-tool: install-toslink install-prg.ld install-compiler-script

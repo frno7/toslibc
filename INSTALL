@@ -11,6 +11,7 @@ Makefile targets:
   install        - compile and install everything
   install-lib    - compile and install only TOS/libc library in $prefix
   install-tool   - compile and install only compiler tools in $prefix
+  install-test   - compile and install only test suite in $prefix
 
 Makefile options:
 
@@ -28,7 +29,7 @@ Build all:
 
 Build only TOS/libc:
 
-	$ make TARGET_COMPILE=m68k-elf- lib/toslibc.a
+	$ make TARGET_COMPILE=m68k-elf- lib/libc.a
 
 Build and install everything in ~/.local/usr/m68k-atari-tos-gnu:
 

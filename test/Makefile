@@ -54,4 +54,19 @@ $(TOSLIBC_TEST_SUITE_PRG): $(TOSLINK)
 $(TOSLIBC_TEST_SUITE_PRG): %: %.o
 	$(QUIET_LINK)$(TOSLINK) -o $@ $<
 
+TOSLIBC_TEST_SUITE_FILES = test/test.txt
+
+.PHONY: install-test-files
+install-test-files: $(TOSLIBC_TEST_SUITE_FILES)
+	$(INSTALL) -d $(DESTDIR)$(testdir)
+	$(INSTALL) -m 644 $^ $(DESTDIR)$(testdir)
+
+.PHONY: install-test-prg
+install-test-prg: $(TOSLIBC_TEST_SUITE_PRG)
+	$(INSTALL) -d $(DESTDIR)$(testdir)
+	$(INSTALL) $^ $(DESTDIR)$(testdir)
+
+.PHONY: install-test
+install-test: install-test-files install-test-prg
+
 OTHER_CLEAN += $(TOSLIBC_TEST_SUITE_H) $(TOSLIBC_TEST_SUITE_PRG)
