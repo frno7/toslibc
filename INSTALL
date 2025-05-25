@@ -2,6 +2,8 @@ Makefile targets:
 
   all            - compile TOS/libc and examples (default)
   test           - compile test/SUITE.TOS
+  tool           - compile tool/toslink
+  script         - compile scripts
   example        - compile example programs
   version        - display TOS/libc version
   clean          - remove generated files
