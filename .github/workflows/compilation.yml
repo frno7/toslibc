@@ -18,7 +18,7 @@ jobs:
         run: |
           echo "ARCHIVE_TAG=${GITHUB_REF_NAME}-${GITHUB_SHA:0:8}" >> $GITHUB_ENV
 
-      - name: Compile TOS/libc with Linux
+      - name: Compile and install TOS/libc with Linux
         env:
           TARGET_COMPILE: m68k-elf-
         run: |
@@ -27,8 +27,11 @@ jobs:
           # Confer https://github.com/actions/checkout/issues/760
           git config --global --add safe.directory "$PWD"
           make -j"$JOBS" V=1 S=1
+          make -j"$JOBS" V=1 S=1 install
+          export PATH=~/.local/usr/m68k-atari-tos-gnu/bin:"$PATH"
+          (cd ~/.local/usr/m68k-atari-tos-gnu/share/toslibc/example && make clean && make)
 
-      - name: Publish examples
+      - name: Publish examples and test suite
         if: ${{ success() }}
         uses: actions/upload-artifact@v4
         with:
@@ -38,6 +41,8 @@ jobs:
           path: |
             example/*.PRG
             example/*.TOS
+            test/SUITE.TOS
+            test/test.txt
 
   build-mac:
     runs-on: macos-latest
@@ -51,7 +56,7 @@ jobs:
           brew update
           brew install gcc m68k-elf-gcc
 
-      - name: Compile TOS/libc with Mac OS
+      - name: Compile and install TOS/libc with Mac OS
         env:
           TARGET_COMPILE: m68k-elf-
         run: |
@@ -63,3 +68,6 @@ jobs:
           # Confer https://github.com/actions/checkout/issues/760
           git config --global --add safe.directory "*"
           make -j"$JOBS" V=1 CC="$brew_gcc"
+          make -j"$JOBS" V=1 CC="$brew_gcc" install
+          export PATH=~/.local/usr/m68k-atari-tos-gnu/bin:"$PATH"
+          (cd ~/.local/usr/m68k-atari-tos-gnu/share/toslibc/example && make clean && make)
