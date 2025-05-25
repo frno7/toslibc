@@ -17,7 +17,13 @@ $(TOSLIBC_SCRIPT_TARGET_CC): $(TOSLIBC_SCRIPT_SUBDIR)target-cc
 $(TOSLIBC_SCRIPT_TARGET_LD): $(TOSLIBC_SCRIPT_SUBDIR)target-ld
 	$(QUIET_GEN)$< $@
 
-OTHER_CLEAN += $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD)
+TOSLIBC_PC = $(addprefix $(TOSLIBC_SCRIPT_SUBDIR), toslibc.pc)
+
+$(TOSLIBC_PC):
+	$(QUIET_GEN)script/pkg $@
+
+OTHER_CLEAN += $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD) \
+	       $(TOSLIBC_PC)
 
 .PHONY: install-prg.ld
 install-prg.ld:
@@ -28,3 +34,8 @@ install-prg.ld:
 install-compiler-script: $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD)
 	$(INSTALL) -d $(DESTDIR)$(bindir)
 	$(INSTALL) $^ $(DESTDIR)$(bindir)
+
+.PHONY: install-pkg-config
+install-pkg-config: $(TOSLIBC_PC)
+	$(INSTALL) -d -m 755 $(DESTDIR)$(pkgdir)
+	$(INSTALL) -m 644 $^ $(DESTDIR)$(pkgdir)
