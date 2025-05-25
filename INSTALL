@@ -6,7 +6,13 @@ Makefile targets:
   version        - display TOS/libc version
   clean          - remove generated files
 
+  install        - compile and install everything
+  install-lib    - compile and install only TOS/libc library in $prefix
+  install-tool   - compile and install only compiler tools in $prefix
+
 Makefile options:
+
+  prefix         - installation prefix (default ~/.local/usr/m68k-atari-tos-gnu)
 
   V              - set to 1 to compile verbosely
   S              - set to 1 for sanitation checks
@@ -21,3 +27,11 @@ Build all:
 Build only TOS/libc:
 
 	$ make TARGET_COMPILE=m68k-elf- lib/toslibc.a
+
+Build and install everything in ~/.local/usr/m68k-atari-tos-gnu:
+
+	$ make TARGET_COMPILE=m68k-elf- install
+
+Build and install only TOS/libc library in ~/my-atari-libc:
+
+	$ make TARGET_COMPILE=m68k-elf- prefix="$HOME/my-atari-libc" install-lib
