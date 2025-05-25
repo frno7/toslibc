@@ -13,8 +13,8 @@ Name: toslibc
 Description: 32-bit C standard library for Atari TOS
 Version: ${TOSLIBC_VERSION_MINOR}"'
 
-Libs: -L${libdir} -lc --relocatable --gc-sections --strip-all --entry _start --script=${libdir}/script/prg.ld
-Cflags: -isystem ${includedir} -march=68000 -fno-PIC -nostdlib'
+Libs: -L${libdir} -lc '"${TOSLIBC_PROGRAM_BASIC_LDFLAGS}"' --script=${libdir}/script/prg.ld
+Cflags: -isystem ${includedir} '"${TOSLIBC_PROGRAM_BASIC_CFLAGS}"
 }
 
 if [ $# = 1 ]

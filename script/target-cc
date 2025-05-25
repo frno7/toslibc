@@ -7,7 +7,7 @@ gen_cc()
 {
 	echo '#!/bin/bash
 
-exec "'"$TARGET_CC"'" -isystem "'"$includedir"'" -march=68000 -fno-PIC -nostdlib "$@"'
+exec "'"$TARGET_CC"'" -isystem "'"$includedir"'" '"$TOSLIBC_PROGRAM_BASIC_CFLAGS"' "$@"'
 }
 
 if [ $# = 1 ]

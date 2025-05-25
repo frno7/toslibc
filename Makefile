@@ -47,14 +47,19 @@ include script/Makefile
 include lib/Makefile
 include tool/Makefile
 
-TOSLIBC_PROGRAM_CFLAGS = $(BASIC_CFLAGS) -march=68000 -fno-PIC		\
-	-nostdlib -ffunction-sections -fdata-sections			\
+TOSLIBC_PROGRAM_BASIC_CFLAGS = -march=68000 -fno-PIC -nostdlib
+TOSLIBC_PROGRAM_BASIC_LDFLAGS = --relocatable --gc-sections --strip-all --entry _start
+
+export TOSLIBC_PROGRAM_BASIC_CFLAGS TOSLIBC_PROGRAM_BASIC_LDFLAGS
+
+TOSLIBC_PROGRAM_CFLAGS = $(BASIC_CFLAGS) $(TOSLIBC_PROGRAM_BASIC_CFLAGS)\
+	-ffunction-sections -fdata-sections				\
 	-isystem $(TOSLIBC_LIB_SUBDIR)../include/toslibc		\
 	-I$(TOSLIBC_LIB_SUBDIR)../include				\
 	-D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
 
-TOSLIBC_PROGRAM_LDFLAGS = --relocatable --gc-sections --strip-all	\
-	--entry _start --script=script/prg.ld $(TARGET_LDFLAGS)
+TOSLIBC_PROGRAM_LDFLAGS = $(TOSLIBC_PROGRAM_BASIC_LDFLAGS)		\
+	--script=script/prg.ld $(TARGET_LDFLAGS)
 
 include example/Makefile
 include test/Makefile
