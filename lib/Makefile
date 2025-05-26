@@ -96,10 +96,10 @@ $(TOSLIBC): $(TOSLIBC_LIB_OBJ)
 lib: $(TOSLIBC)
 
 .PHONY: install-lib
-install-lib: install-include install-lib-static install-pkg-config
+install-lib: install-lib-include install-lib-static install-pkg-config
 
-.PHONY: install-include
-install-include:
+.PHONY: install-lib-include
+install-lib-include:
 	$(INSTALL) -d -m 755 $(DESTDIR)$(includedir)
 	$(INSTALL) -d -m 755 $(DESTDIR)$(includedir)/sys
 	$(INSTALL) -d -m 755 $(DESTDIR)$(includedir)/tos
