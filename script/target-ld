@@ -24,7 +24,7 @@ done
 "'"$TARGET_LD"'" "${args[@]}" -L"'"$libdir"'" -lc \
 	'"$TOSLIBC_PROGRAM_BASIC_LDFLAGS"' \
 	--script="'"$ldscriptdir"'"/prg.ld
-"'"$bindir/toslink"'" -o "$out" "$elf"'
+"'"$bindir/$target-toslink"'" -o "$out" "$elf"'
 }
 
 if [ $# = 1 ]
