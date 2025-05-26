@@ -28,8 +28,8 @@ script: $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD) $(TOSLIBC_PC)
 OTHER_CLEAN += $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD) \
 	       $(TOSLIBC_PC)
 
-.PHONY: install-prg.ld
-install-prg.ld:
+.PHONY: install-linker-script
+install-linker-script:
 	$(INSTALL) -d -m 755 $(DESTDIR)$(ldscriptdir)
 	$(INSTALL) -m 644 script/prg.ld $(DESTDIR)$(ldscriptdir)
 
