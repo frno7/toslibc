@@ -73,10 +73,10 @@ all: $(TOSLIBC) test example
 endif
 
 .PHONY: install
-install: install-lib install-tool install-test install-example
+install: install-lib install-compiler install-test install-example
 
-.PHONY: install-tool
-install-tool: install-toslink install-linker-script install-compiler-script
+.PHONY: install-compiler
+install-compiler: install-toslink install-linker-script install-compiler-script
 
 ALL_DEP = $(sort $(ALL_OBJ:%=%.d))
 
