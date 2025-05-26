@@ -46,18 +46,13 @@ contains applications of TOS/libc:
 ![WINDOW.PRG](https://raw.githubusercontent.com/frno7/toslibc/main/example/window.png)
 ![XBRA.PRG](https://raw.githubusercontent.com/frno7/toslibc/main/example/xbra.png)
 
-# How to build
-
-Review the file [`INSTALL`](https://github.com/frno7/toslibc/blob/main/INSTALL)
-for installation instructions. A working m68k/GCC compiler is required.
-Assuming the compiler is `m68k-elf-gcc`, build TOS/libc with
-`make TARGET_COMPILE=m68k-elf-` to produce a `lib/toslibc.a`
-[static library](https://en.wikipedia.org/wiki/Static_library),
-example applications, and a test suite `test/SUITE.TOS`.
+# How to download
 
 - [Gentoo Linux](https://en.wikipedia.org/wiki/Gentoo_Linux) has a
-  [`crossdev`](https://wiki.gentoo.org/wiki/Crossdev) package that builds
-  `m68k-elf-gcc` with the command `crossdev -s1 -t m68k-elf`.
+  [`crossdev`](https://wiki.gentoo.org/wiki/Crossdev) package that installs
+  `m68k-elf-gcc` with the command `crossdev -s1 -t m68k-elf`. After that, a
+  compiler with TOS/libc can be installed with the
+  [`sys-devel/m68k-atari-tos-gcc`](https://github.com/frno7/gentoo.overlay/tree/main/sys-devel/m68k-atari-tos-gcc) package.
 - The [`gentoo-m68k`](https://github.com/frno7/gentoo-m68k) repository has
   installation scripts and a
   [Docker](https://en.wikipedia.org/wiki/Docker_(software)) configuration for
@@ -73,6 +68,64 @@ applications are available for download under the GitHub
 [actions](https://github.com/frno7/toslibc/actions) tab. These are
 automatically built with
 [`.github/workflows/compilation.yml`](https://github.com/frno7/toslibc/blob/main/.github/workflows/compilation.yml).
+
+# How to build
+
+Review the file [`INSTALL`](https://github.com/frno7/toslibc/blob/main/INSTALL)
+for installation instructions. A working m68k/GCC compiler is required.
+Assuming the compiler is `m68k-elf-gcc`, build TOS/libc with
+`make TARGET_COMPILE=m68k-elf-` to produce a `lib/toslibc.a`
+[static library](https://en.wikipedia.org/wiki/Static_library),
+an `m68k-atari-tos-gnu-gcc` compiler, example applications,
+and a test suite `test/SUITE.TOS`.
+
+Type `make TARGET_COMPILE=m68k-elf- install` to install everything, by
+default in `~/.local/usr/m68k-atari-tos-gnu`. Set `prefix` to change the
+directory, for example
+`make TARGET_COMPILE=m68k-elf- prefix=$HOME/some/place/else install`.
+
+Add `$prefix/bin` to your `PATH`. It normally has a combination of scripts
+and symlinks to the `m68k-elf-gcc` compiler, similar to
+
+```
+lrwxrwxrwx    20 m68k-atari-tos-gnu-ar -> /usr/bin/m68k-elf-ar
+lrwxrwxrwx    20 m68k-atari-tos-gnu-as -> /usr/bin/m68k-elf-as
+-rwxr-xr-x   132 m68k-atari-tos-gnu-cc
+lrwxrwxrwx    21 m68k-atari-tos-gnu-gcc -> m68k-atari-tos-gnu-cc
+-rwxr-xr-x   467 m68k-atari-tos-gnu-ld
+lrwxrwxrwx    20 m68k-atari-tos-gnu-nm -> /usr/bin/m68k-elf-nm
+lrwxrwxrwx    25 m68k-atari-tos-gnu-objcopy -> /usr/bin/m68k-elf-objcopy
+lrwxrwxrwx    25 m68k-atari-tos-gnu-objdump -> /usr/bin/m68k-elf-objdump
+lrwxrwxrwx    28 m68k-atari-tos-gnu-pkg-config -> /usr/bin/m68k-elf-pkg-config
+lrwxrwxrwx    24 m68k-atari-tos-gnu-ranlib -> /usr/bin/m68k-elf-ranlib
+lrwxrwxrwx    25 m68k-atari-tos-gnu-readelf -> /usr/bin/m68k-elf-readelf
+lrwxrwxrwx    22 m68k-atari-tos-gnu-size -> /usr/bin/m68k-elf-size
+lrwxrwxrwx    25 m68k-atari-tos-gnu-strings -> /usr/bin/m68k-elf-strings
+lrwxrwxrwx    23 m68k-atari-tos-gnu-strip -> /usr/bin/m68k-elf-strip
+-rwxr-xr-x 84104 m68k-atari-tos-gnu-toslink
+```
+
+Atari TOS example applications and a `Makefile` are installed in
+`$prefix/share/toslibc/example`. Go to that directory and type
+`make clean && make`, as in
+
+```
+$ make clean && make
+rm -f alert.o cookie.o hello.o window.o xbra.o ALERT.PRG.elf COOKIE.TOS.elf HELLO.TOS.elf WINDOW.PRG.elf XBRA.PRG.elf ALERT.PRG COOKIE.TOS HELLO.TOS WINDOW.PRG XBRA.PRG
+m68k-atari-tos-gnu-cc -O2 -Wall -c -o alert.o alert.c
+m68k-atari-tos-gnu-ld -o ALERT.PRG alert.o
+m68k-atari-tos-gnu-cc -O2 -Wall -c -o cookie.o cookie.c
+m68k-atari-tos-gnu-ld -o COOKIE.TOS cookie.o
+m68k-atari-tos-gnu-cc -O2 -Wall -c -o hello.o hello.c
+m68k-atari-tos-gnu-ld -o HELLO.TOS hello.o
+m68k-atari-tos-gnu-cc -O2 -Wall -c -o window.o window.c
+m68k-atari-tos-gnu-ld -o WINDOW.PRG window.o
+m68k-atari-tos-gnu-cc -O2 -Wall -c -o xbra.o xbra.c
+m68k-atari-tos-gnu-ld -o XBRA.PRG xbra.o
+```
+
+A test suite for TOS/libc is installed in `$prefix/share/toslibc/test`.
+Go to that directory and run `SUITE.TOS` on Atari ST hardware or an emulator.
 
 # How it works
 
@@ -90,4 +143,5 @@ A standard, unmodified, m68k/GCC compiler is used to obtain
 [ELF](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) object
 files, having a specific structure defined in
 [`script/prg.ld`](https://github.com/frno7/toslibc/blob/main/script/prg.ld).
-The `tool/toslink` linker is used to produce the final Atari TOS program files.
+The `tool/m68k-atari-tos-gnu-toslink` linker is used to produce the final
+Atari TOS program files.
