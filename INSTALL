@@ -4,6 +4,7 @@ Makefile targets:
   test             - compile test/SUITE.TOS
   tool             - compile tool/toslink
   script           - compile scripts
+  compiler         - compile compiler tools and scripts
   example          - compile example programs
   version          - display TOS/libc version
   clean            - remove generated files

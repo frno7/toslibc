@@ -72,6 +72,9 @@ ifdef TARGET_CC
 all: $(TOSLIBC) test example
 endif
 
+.PHONY: compiler
+compiler: tool script
+
 .PHONY: install
 install: install-lib install-compiler install-test install-example
 
