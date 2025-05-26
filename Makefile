@@ -16,7 +16,7 @@ ldscriptdir = $(libdir)/script
 testdir = $(datarootdir)/toslibc/test
 exampledir = $(datarootdir)/toslibc/example
 
-export prefix bindir includedir libdir ldscriptdir
+export target prefix bindir includedir libdir ldscriptdir
 
 CFLAGS = -g
 
@@ -79,7 +79,22 @@ compiler: tool script
 install: install-lib install-compiler install-test install-example
 
 .PHONY: install-compiler
-install-compiler: install-toslink install-linker-script install-compiler-script
+install-compiler: install-toslink install-linker-script			\
+	install-compiler-script install-compiler-alias install-compiler-symlink
+
+COMPILER_ALIASES = cc:gcc
+COMPILER_SYMLINKS = ar as nm objcopy objdump pkg-config			\
+		    ranlib readelf foo size strings strip
+
+.PHONY: install-compiler-alias
+install-compiler-alias: install-compiler-script
+	$(INSTALL) -d $(DESTDIR)$(bindir)
+	@script/install-compiler-symlink -v -a $(COMPILER_ALIASES)
+
+.PHONY: install-compiler-symlink
+install-compiler-symlink:
+	$(INSTALL) -d $(DESTDIR)$(bindir)
+	@script/install-compiler-symlink -v $(COMPILER_SYMLINKS)
 
 ALL_DEP = $(sort $(ALL_OBJ:%=%.d))
 

@@ -28,6 +28,7 @@ jobs:
           git config --global --add safe.directory "$PWD"
           make -j"$JOBS" V=1 S=1
           make -j"$JOBS" V=1 S=1 install
+          ls -l ~/.local/usr/m68k-atari-tos-gnu/bin
           export PATH=~/.local/usr/m68k-atari-tos-gnu/bin:"$PATH"
           (cd ~/.local/usr/m68k-atari-tos-gnu/share/toslibc/example && make clean && make)
 
@@ -69,5 +70,6 @@ jobs:
           git config --global --add safe.directory "*"
           make -j"$JOBS" V=1 CC="$brew_gcc"
           make -j"$JOBS" V=1 CC="$brew_gcc" install
+          ls -l ~/.local/usr/m68k-atari-tos-gnu/bin
           export PATH=~/.local/usr/m68k-atari-tos-gnu/bin:"$PATH"
           (cd ~/.local/usr/m68k-atari-tos-gnu/share/toslibc/example && make clean && make)
