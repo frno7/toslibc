@@ -65,7 +65,7 @@ TOSLIBC_PROGRAM_CFLAGS = $(BASIC_CFLAGS) $(TOSLIBC_PROGRAM_BASIC_CFLAGS)\
 	-D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
 
 TOSLIBC_PROGRAM_LDFLAGS = $(TOSLIBC_PROGRAM_BASIC_LDFLAGS)		\
-	-nostdlib -Llib --script=script/prg.ld $(TARGET_LDFLAGS)
+	-nostdlib -Llib --script=$(TOSLIBC_SCRIPT_PRG_LD) $(TARGET_LDFLAGS)
 
 include example/Makefile
 include test/Makefile
