@@ -30,6 +30,10 @@ TARGET_CFLAGS = $(CFLAGS)
 
 export TARGET_CC TARGET_LD
 
+COMPILER_ALIASES = cc:gcc
+COMPILER_SYMLINKS = ar as nm objcopy objdump pkg-config			\
+		    ranlib readelf size strings strip
+
 INSTALL = install
 
 ifeq (1,$(S))
@@ -72,29 +76,8 @@ ifdef TARGET_CC
 all: $(TOSLIBC) test example
 endif
 
-.PHONY: compiler
-compiler: tool script
-
 .PHONY: install
 install: install-lib install-compiler install-test install-example
-
-.PHONY: install-compiler
-install-compiler: install-toslink install-linker-script			\
-	install-compiler-script install-compiler-alias install-compiler-symlink
-
-COMPILER_ALIASES = cc:gcc
-COMPILER_SYMLINKS = ar as nm objcopy objdump pkg-config			\
-		    ranlib readelf foo size strings strip
-
-.PHONY: install-compiler-alias
-install-compiler-alias: install-compiler-script
-	$(INSTALL) -d $(DESTDIR)$(bindir)
-	@script/install-compiler-symlink -v -a $(COMPILER_ALIASES)
-
-.PHONY: install-compiler-symlink
-install-compiler-symlink:
-	$(INSTALL) -d $(DESTDIR)$(bindir)
-	@script/install-compiler-symlink -v $(COMPILER_SYMLINKS)
 
 ALL_DEP = $(sort $(ALL_OBJ:%=%.d))
 
