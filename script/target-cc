@@ -7,7 +7,40 @@ gen_cc()
 {
 	echo '#!/bin/bash
 
-exec "'"$TARGET_CC"'" -isystem "'"$includedir"'" '"$TOSLIBC_PROGRAM_BASIC_CFLAGS"' "$@"'
+set -e
+set -o pipefail
+shopt -s nocasematch
+
+tos_prg()
+{
+	[[ "$1" =~ \.(APP|GEM|GTP|PRG|TOS|TTP)$ ]]
+}
+
+args=("$@")
+args+=(-isystem)
+args+=("'"$includedir"'")
+args+=('"$TOSLIBC_PROGRAM_BASIC_CFLAGS"')
+
+for (( i=1; i<$#; i++ ))
+do
+	# Match -o FILE.APP, -o FILE.PRG, etc. for implicit linking
+	if [[ ${args[(( i-1 ))]} = -o ]] && tos_prg ${args[i]}
+	then
+		out=${args[$i]}
+		obj="$out".o
+		args[$i]="$obj"
+		args+=(-c)
+	fi
+done
+
+if [[ x"$obj" != x ]]
+then
+	"'"$TARGET_CC"'" "${args[@]}"
+	"'"$bindir/$target-ld"'" -o "$out" "$obj"
+	exec rm "$obj"
+else
+	exec "'"$TARGET_CC"'" "${args[@]}"
+fi'
 }
 
 if [ $# = 1 ]
