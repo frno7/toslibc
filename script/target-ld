@@ -21,7 +21,7 @@ do
 	fi
 done
 
-"'"$TARGET_LD"'" "${args[@]}" -L"'"$libdir"'" -lc \
+"'"$TARGET_LD"'" "${args[@]}" \
 	'"$TOSLIBC_PROGRAM_BASIC_LDFLAGS"' \
 	--script="'"$ldscriptdir"'"/prg.ld
 "'"$bindir/$target-toslink"'" -o "$out" "$elf"'

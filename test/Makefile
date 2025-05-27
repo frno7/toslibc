@@ -39,7 +39,7 @@ $(TOSLIBC_TEST_OBJ) $(TOSLIBC_TEST_SUITE_OBJ): %.o: %.c
 	$(QUIET_CC)$(TARGET_CC) $(TOSLIBC_PROGRAM_CFLAGS) -c -o $@ $<
 
 define TOSLIBC_TEST_OBJ_target
-$(1).o: $(call lowercase,$(basename $(1))).o $$(TOSLIBC)
+$(1).o: $(call lowercase,$(basename $(1))).o $$(TOSLIBC) $(TOSLIBC_SCRIPT_PRG_LD)
 endef
 
 $(TOSLIBC_TEST_SUITE_PRG:%=%.o): $(TOSLIBC_TEST_OBJ)
@@ -47,7 +47,7 @@ $(foreach e,$(TOSLIBC_TEST_SUITE_PRG),					\
 	$(eval $(call TOSLIBC_TEST_OBJ_target,$(e))))
 
 $(TOSLIBC_TEST_SUITE_PRG:%=%.o):
-	$(QUIET_LINK)$(TARGET_LD) $(TOSLIBC_PROGRAM_LDFLAGS) -o $@ $^
+	$(QUIET_LINK)$(TARGET_LD) $(TOSLIBC_PROGRAM_LDFLAGS) -o $@ $<
 
 $(TOSLIBC_TEST_SUITE_PRG): $(TOSLINK)
 

@@ -1,2 +1,3 @@
 /m68k-atari-tos-gnu-*
+/prg.ld
 /toslibc.pc
