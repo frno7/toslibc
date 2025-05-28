@@ -18,8 +18,12 @@ Makefile targets:
 
 Makefile options:
 
+  -j [n]           - n simultaneous jobs for speed; unlimited with no argument
+
   prefix           - installation prefix (default ~/.local/usr/m68k-atari-tos-gnu)
   ...              - review main Makefile for more dirs (bindir, libdir, etc.)
+  DESTDIR          - directory for staged installs, review
+                     <https://www.gnu.org/prep/standards/html_node/DESTDIR.html>.
 
   V                - set to 1 to compile verbosely
   S                - set to 1 for sanitation checks
