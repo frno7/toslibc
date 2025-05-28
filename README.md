@@ -83,6 +83,9 @@ Type `make TARGET_COMPILE=m68k-elf- install` to install everything, by
 default in `~/.local/usr/m68k-atari-tos-gnu`. Set `prefix` to change the
 directory, for example
 `make TARGET_COMPILE=m68k-elf- prefix=$HOME/some/place/else install`.
+More specific subtargets than `install` are also available, for instance
+`install-lib`, `install-compiler`, `install-test`, `install-example`, and so on.
+Set `DESTDIR` for [staged installs](https://www.gnu.org/prep/standards/html_node/DESTDIR.html).
 
 Add `$prefix/bin` to your `PATH`. It normally has a combination of scripts
 and symlinks to the `m68k-elf-gcc` compiler, similar to
