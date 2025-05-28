@@ -52,7 +52,7 @@ contains applications of TOS/libc:
   [`crossdev`](https://wiki.gentoo.org/wiki/Crossdev) package that installs
   `m68k-elf-gcc` with the command `crossdev -s1 -t m68k-elf`. After that, a
   compiler with TOS/libc can be installed with the
-  [`sys-devel/m68k-atari-tos-gcc`](https://github.com/frno7/gentoo.overlay/tree/main/sys-devel/m68k-atari-tos-gcc) package.
+  [`sys-devel/m68k-atari-tos-gnu-gcc`](https://github.com/frno7/gentoo.overlay/tree/main/sys-devel/m68k-atari-tos-gnu-gcc) package.
 - The [`gentoo-m68k`](https://github.com/frno7/gentoo-m68k) repository has
   installation scripts and a
   [Docker](https://en.wikipedia.org/wiki/Docker_(software)) configuration for
@@ -105,27 +105,25 @@ lrwxrwxrwx    23 m68k-atari-tos-gnu-strip -> /usr/bin/m68k-elf-strip
 -rwxr-xr-x 84104 m68k-atari-tos-gnu-toslink
 ```
 
+# How to verify
+
 Atari TOS example applications and a `Makefile` are installed in
 `$prefix/share/toslibc/example`. Go to that directory and type
 `make clean && make`, as in
 
 ```
 $ make clean && make
-rm -f alert.o cookie.o hello.o window.o xbra.o ALERT.PRG.elf COOKIE.TOS.elf HELLO.TOS.elf WINDOW.PRG.elf XBRA.PRG.elf ALERT.PRG COOKIE.TOS HELLO.TOS WINDOW.PRG XBRA.PRG
-m68k-atari-tos-gnu-cc -O2 -Wall -c -o alert.o alert.c
-m68k-atari-tos-gnu-ld -o ALERT.PRG alert.o
-m68k-atari-tos-gnu-cc -O2 -Wall -c -o cookie.o cookie.c
-m68k-atari-tos-gnu-ld -o COOKIE.TOS cookie.o
-m68k-atari-tos-gnu-cc -O2 -Wall -c -o hello.o hello.c
-m68k-atari-tos-gnu-ld -o HELLO.TOS hello.o
-m68k-atari-tos-gnu-cc -O2 -Wall -c -o window.o window.c
-m68k-atari-tos-gnu-ld -o WINDOW.PRG window.o
-m68k-atari-tos-gnu-cc -O2 -Wall -c -o xbra.o xbra.c
-m68k-atari-tos-gnu-ld -o XBRA.PRG xbra.o
+rm -f ALERT.PRG COOKIE.TOS HELLO.TOS WINDOW.PRG XBRA.PRG
+m68k-atari-tos-gnu-gcc -O2 -Wall -o ALERT.PRG alert.c
+m68k-atari-tos-gnu-gcc -O2 -Wall -o COOKIE.TOS cookie.c
+m68k-atari-tos-gnu-gcc -O2 -Wall -o HELLO.TOS hello.c
+m68k-atari-tos-gnu-gcc -O2 -Wall -o WINDOW.PRG window.c
+m68k-atari-tos-gnu-gcc -O2 -Wall -o XBRA.PRG xbra.c
 ```
 
 A test suite for TOS/libc is installed in `$prefix/share/toslibc/test`.
-Go to that directory and run `SUITE.TOS` on Atari ST hardware or an emulator.
+
+The examples and the test suite can run on Atari ST hardware or an emulator.
 
 # How it works
 
