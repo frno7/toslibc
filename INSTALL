@@ -1,6 +1,6 @@
 Makefile targets:
 
-  all              - compile TOS/libc and examples (default)
+  all              - compile TOS/libc, test suite, tools, and examples (default)
   test             - compile test/SUITE.TOS
   tool             - compile tool/toslink
   script           - compile scripts
@@ -9,12 +9,12 @@ Makefile targets:
   version          - display TOS/libc version
   clean            - remove generated files
 
-  install          - compile and install everything
+  install          - compile and install everything in $prefix
   install-lib      - compile and install only TOS/libc library in $prefix
   install-compiler - compile and install only compiler in $prefix
-  install-toslink  - compile and install only toslink in $prefix
-  install-test     - compile and install only test suite in $prefix
-  install-example  - compile and install only examples in $prefix
+  install-toslink  - compile and install only toslink in $bindir
+  install-test     - compile and install only test suite in $testdir
+  install-example  - compile and install only examples in $exampledir
 
 Makefile options:
 
@@ -22,8 +22,8 @@ Makefile options:
 
   prefix           - installation prefix (default ~/.local/usr/m68k-atari-tos-gnu)
   ...              - review main Makefile for more dirs (bindir, libdir, etc.)
-  DESTDIR          - directory for staged installs, review
-                     <https://www.gnu.org/prep/standards/html_node/DESTDIR.html>.
+  DESTDIR          - directory for staged installs, confer
+                     <https://www.gnu.org/prep/standards/html_node/DESTDIR.html>
 
   V                - set to 1 to compile verbosely
   S                - set to 1 for sanitation checks
