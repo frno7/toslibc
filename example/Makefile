@@ -22,14 +22,14 @@ $(TOSLIBC_EXAMPLE_OBJ): %.o: %.c
 	$(QUIET_CC)$(TARGET_CC) $(TOSLIBC_PROGRAM_CFLAGS) -c -o $@ $<
 
 define TOSLIBC_EXAMPLE_OBJ_target
-$(1).o: $(call lowercase,$(basename $(1))).o $$(TOSLIBC) $(TOSLIBC_SCRIPT_PRG_LD)
+$(1).o: $(call lowercase,$(basename $(1))).o $$(TOSLIBC) $$(TOSLIBC_SCRIPT_PRG_LD)
 endef
 
 $(foreach e,$(TOSLIBC_EXAMPLE_PRG),					\
 	$(eval $(call TOSLIBC_EXAMPLE_OBJ_target,$(e))))
 
 $(TOSLIBC_EXAMPLE_PRG:%=%.o):
-	$(QUIET_LINK)$(TARGET_LD) $(TOSLIBC_PROGRAM_LDFLAGS) -o $@ $<
+	$(QUIET_LINK)$(TARGET_LD) $(TOSLIBC_PROGRAM_LDFLAGS) -o $@ $< $(TOSLIBC)
 
 $(TOSLIBC_EXAMPLE_PRG): $(TOSLINK)
 

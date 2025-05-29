@@ -31,6 +31,7 @@ jobs:
           ls -lR ~/.local/usr/m68k-atari-tos-gnu
           export PATH=~/.local/usr/m68k-atari-tos-gnu/bin:"$PATH"
           (cd ~/.local/usr/m68k-atari-tos-gnu/share/toslibc/example && make clean && make)
+          mkdir local && cp -ra ~/.local/usr/m68k-atari-tos-gnu/share/toslibc/example local
 
       - name: Publish examples and test suite
         if: ${{ success() }}
@@ -42,6 +43,8 @@ jobs:
           path: |
             example/*.PRG
             example/*.TOS
+            local/example/*.PRG
+            local/example/*.TOS
             test/SUITE.TOS
             test/test.txt
 
