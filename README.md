@@ -72,7 +72,7 @@ automatically built with
 # How to build
 
 Review the file [`INSTALL`](https://github.com/frno7/toslibc/blob/main/INSTALL)
-for installation instructions. A working m68k/GCC compiler is required.
+for installation instructions. A preinstalled m68k/GCC compiler is required.
 Assuming the compiler is `m68k-elf-gcc`, build TOS/libc with
 `make TARGET_COMPILE=m68k-elf-` to produce a `lib/toslibc.a`
 [static library](https://en.wikipedia.org/wiki/Static_library),
@@ -84,8 +84,9 @@ default in `~/.local/usr/m68k-atari-tos-gnu`. Set `prefix` to change the
 directory, for example
 `make TARGET_COMPILE=m68k-elf- prefix=$HOME/some/place/else install`.
 More specific subtargets than `install` are also available, for instance
-`install-lib`, `install-compiler`, `install-test`, `install-example`, and so on.
-Set `DESTDIR` for [staged installs](https://www.gnu.org/prep/standards/html_node/DESTDIR.html).
+`install-lib`, `install-binutils`, `install-compiler`, `install-test`,
+`install-example`, and so on. Set `DESTDIR` for
+[staged installs](https://www.gnu.org/prep/standards/html_node/DESTDIR.html).
 
 Add `$prefix/bin` to your `PATH`. It normally has a combination of scripts
 and symlinks to the `m68k-elf-gcc` compiler, similar to
@@ -114,7 +115,7 @@ Atari TOS example applications and a `Makefile` are installed in
 `$prefix/share/toslibc/example`. Go to that directory and type
 `make clean && make`, as in
 
-```
+```bash
 $ make clean && make
 rm -f ALERT.PRG COOKIE.TOS HELLO.TOS WINDOW.PRG XBRA.PRG
 m68k-atari-tos-gnu-gcc -O2 -Wall -o ALERT.PRG alert.c

@@ -31,7 +31,7 @@ TARGET_CFLAGS = $(CFLAGS)
 export TARGET_CC TARGET_LD
 
 COMPILER_ALIASES = cc:gcc
-COMPILER_SYMLINKS = ar as nm objcopy objdump pkg-config			\
+BINUTILS_SYMLINKS = ar as nm objcopy objdump pkg-config			\
 		    ranlib readelf size strings strip
 
 INSTALL = install
@@ -77,7 +77,8 @@ all: $(TOSLIBC) test example
 endif
 
 .PHONY: install
-install: install-lib install-compiler install-test install-example
+install: install-lib install-binutils install-compiler			\
+	 install-test install-example
 
 ALL_DEP = $(sort $(ALL_OBJ:%=%.d))
 

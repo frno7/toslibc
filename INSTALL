@@ -5,13 +5,15 @@ Makefile targets:
   test             - compile test/SUITE.TOS
   tool             - compile tool/toslink
   script           - compile scripts
-  compiler         - compile compiler tools and scripts
+  binutils         - compile binutils scripts
+  compiler         - compile compiler scripts
   example          - compile example programs
   version          - display TOS/libc version
   clean            - remove generated files
 
   install          - compile and install everything in $prefix
   install-lib      - compile and install only TOS/libc library in $prefix
+  install-binutils - compile and install only binutils in $prefix
   install-compiler - compile and install only compiler in $prefix
   install-toslink  - compile and install only toslink in $bindir
   install-test     - compile and install only test suite in $testdir
@@ -39,6 +41,10 @@ Build all:
 Build only lib/libc.a:
 
 	$ make TARGET_COMPILE=m68k-elf- lib
+
+Build and install binutils and compiler:
+
+	$ make TARGET_COMPILE=m68k-elf- install-binutils install-compiler
 
 Build and install everything in ~/.local/usr/m68k-atari-tos-gnu:
 
