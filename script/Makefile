@@ -39,7 +39,7 @@ install-linker-script: $(TOSLIBC_SCRIPT_PRG_LD)
 	$(INSTALL) -m 644 $< $(DESTDIR)$(ldscriptdir)
 
 .PHONY: install-compiler-script
-install-compiler-script: $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD)
+install-compiler-script: $(TOSLIBC_SCRIPT_TARGET_CC)
 	$(INSTALL) -d $(DESTDIR)$(bindir)
 	$(INSTALL) $^ $(DESTDIR)$(bindir)
 
