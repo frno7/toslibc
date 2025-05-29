@@ -22,28 +22,34 @@ TOSLIBC_PC = $(addprefix $(TOSLIBC_SCRIPT_SUBDIR), toslibc.pc)
 $(TOSLIBC_PC):
 	$(QUIET_GEN)script/pkg $@
 
-.PHONY: script
-script: $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD) $(TOSLIBC_PC)
-
 TOSLIBC_SCRIPT_PRG_LD = $(TOSLIBC_SCRIPT_SUBDIR)prg.ld
 
 $(TOSLIBC_SCRIPT_PRG_LD): $(TOSLIBC_SCRIPT_SUBDIR)target-prg.ld
 	$(QUIET_GEN)$< $@
 
+.PHONY: script
+script: $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD)		\
+	$(TOSLIBC_PC) $(TOSLIBC_SCRIPT_PRG_LD)
+
 OTHER_CLEAN += $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD) \
 	       $(TOSLIBC_PC) $(TOSLIBC_SCRIPT_PRG_LD)
 
 .PHONY: install-linker-script
-install-linker-script: $(TOSLIBC_SCRIPT_PRG_LD)
-	$(INSTALL) -d -m 755 $(DESTDIR)$(ldscriptdir)
-	$(INSTALL) -m 644 $< $(DESTDIR)$(ldscriptdir)
+install-linker-script: $(TOSLIBC_SCRIPT_TARGET_LD)
+	$(INSTALL) -d -m 755 $(DESTDIR)$(bindir)
+	$(INSTALL) $< $(DESTDIR)$(bindir)
 
 .PHONY: install-compiler-script
-install-compiler-script: $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD)
+install-compiler-script: $(TOSLIBC_SCRIPT_TARGET_CC)
 	$(INSTALL) -d $(DESTDIR)$(bindir)
-	$(INSTALL) $^ $(DESTDIR)$(bindir)
+	$(INSTALL) $< $(DESTDIR)$(bindir)
 
 .PHONY: install-pkg-config
 install-pkg-config: $(TOSLIBC_PC)
 	$(INSTALL) -d -m 755 $(DESTDIR)$(pkgdir)
 	$(INSTALL) -m 644 $^ $(DESTDIR)$(pkgdir)
+
+.PHONY: install-prg.ld-script
+install-prg.ld-script: $(TOSLIBC_SCRIPT_PRG_LD)
+	$(INSTALL) -d -m 755 $(DESTDIR)$(ldscriptdir)
+	$(INSTALL) -m 644 $< $(DESTDIR)$(ldscriptdir)
