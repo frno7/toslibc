@@ -44,6 +44,15 @@ void pr_warn(const char *fmt, ...)
 	va_end(ap);
 }
 
+void pr_error(const char *fmt, ...)
+{
+	va_list ap;
+
+	va_start(ap, fmt);
+	report("error", "", fmt, ap);
+	va_end(ap);
+}
+
 void NORETURN pr_fatal_error(const char *fmt, ...)
 {
 	va_list ap;
