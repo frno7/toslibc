@@ -30,13 +30,19 @@ do
 	fi
 done
 
+cmd()
+{
+	[ "x$V" != x1 ] || echo "$@"
+	"$@"
+}
+
 if [[ x"$elf" != x ]]
 then
-	"'"$TARGET_LD"'" "${args[@]}"
-	"'"$bindir/$target-toslink"'" -o "$out" "$elf"
+	cmd "'"$TARGET_LD"'" "${args[@]}"
+	cmd "'"$bindir/$target-toslink"'" -o "$out" "$elf"
 	exec rm "$elf"
 else
-	exec "'"$TARGET_LD"'" "$@"
+	exec cmd "'"$TARGET_LD"'" "$@"
 fi'
 }
 

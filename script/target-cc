@@ -33,13 +33,19 @@ do
 	fi
 done
 
+cmd()
+{
+	[ "x$V" != x1 ] || echo "$@"
+	"$@"
+}
+
 if [[ x"$obj" != x ]]
 then
-	"'"$TARGET_CC"'" "${args[@]}"
-	"'"$bindir/$target-ld"'" -o "$out" "$obj"
+	cmd "'"$TARGET_CC"'" "${args[@]}"
+	cmd "'"$bindir/$target-ld"'" -o "$out" "$obj"
 	exec rm "$obj"
 else
-	exec "'"$TARGET_CC"'" "${args[@]}"
+	exec cmd "'"$TARGET_CC"'" "${args[@]}"
 fi'
 }
 

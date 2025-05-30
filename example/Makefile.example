@@ -9,6 +9,9 @@ EXAMPLE_PRG =								\
 	WINDOW.PRG							\
 	XBRA.PRG
 
+# Set V=1 for verbosity
+export V
+
 .PHONY: all
 all: $(EXAMPLE_PRG)
 
