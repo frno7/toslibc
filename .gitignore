@@ -1,6 +1,7 @@
 /version
 *.o
 *.o.d
+*.elf
 *.tmp
 *.PRG
 *.TOS

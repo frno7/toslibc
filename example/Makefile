@@ -15,25 +15,26 @@ example: $(TOSLIBC_EXAMPLE_PRG)
 TOSLIBC_EXAMPLE_SRC := $(foreach e,$(TOSLIBC_EXAMPLE_PRG),		\
 	$(call lowercase,$(basename $(e))).c)
 TOSLIBC_EXAMPLE_OBJ = $(TOSLIBC_EXAMPLE_SRC:%.c=%.o)
+TOSLIBC_EXAMPLE_ELF = $(TOSLIBC_EXAMPLE_PRG:%=%.elf)
 
-ALL_OBJ += $(TOSLIBC_EXAMPLE_OBJ) $(TOSLIBC_EXAMPLE_PRG:%=%.o)
+ALL_OBJ += $(TOSLIBC_EXAMPLE_OBJ) $(TOSLIBC_EXAMPLE_ELF)
 
 $(TOSLIBC_EXAMPLE_OBJ): %.o: %.c
 	$(QUIET_CC)$(TARGET_CC) $(TOSLIBC_PROGRAM_CFLAGS) -c -o $@ $<
 
 define TOSLIBC_EXAMPLE_OBJ_target
-$(1).o: $(call lowercase,$(basename $(1))).o $$(TOSLIBC) $$(TOSLIBC_SCRIPT_PRG_LD)
+$(1).elf: $(call lowercase,$(basename $(1))).o $$(TOSLIBC) $$(TOSLIBC_SCRIPT_PRG_LD)
 endef
 
 $(foreach e,$(TOSLIBC_EXAMPLE_PRG),					\
 	$(eval $(call TOSLIBC_EXAMPLE_OBJ_target,$(e))))
 
-$(TOSLIBC_EXAMPLE_PRG:%=%.o):
+$(TOSLIBC_EXAMPLE_ELF):
 	$(QUIET_LINK)$(TARGET_LD) $(TOSLIBC_PROGRAM_LDFLAGS) -o $@ $< $(TOSLIBC)
 
 $(TOSLIBC_EXAMPLE_PRG): $(TOSLINK)
 
-$(TOSLIBC_EXAMPLE_PRG): %: %.o
+$(TOSLIBC_EXAMPLE_PRG): %: %.elf
 	$(QUIET_LINK)$(TOSLINK) -o $@ $<
 
 TOSLIBC_EXAMPLE_MAKEFILE = $(TOSLIBC_EXAMPLE_SUBDIR)Makefile.example
