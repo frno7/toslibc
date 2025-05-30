@@ -64,7 +64,9 @@ contains applications of TOS/libc:
 
 Precompiled
 [`example`](https://github.com/frno7/toslibc/tree/main/example)
-applications are available for download under the GitHub
+applications and a
+[`test`](https://github.com/frno7/toslibc/tree/main/test)
+suite are available for download under the GitHub
 [actions](https://github.com/frno7/toslibc/actions) tab. These are
 automatically built with
 [`.github/workflows/compilation.yml`](https://github.com/frno7/toslibc/blob/main/.github/workflows/compilation.yml).
@@ -127,7 +129,7 @@ m68k-atari-tos-gnu-gcc -O2 -Wall -o XBRA.PRG xbra.c
 
 A test suite for TOS/libc is installed in `$prefix/share/toslibc/test`.
 
-The examples and the test suite can run on Atari ST hardware or an emulator.
+The examples and test suite can run on Atari ST hardware or an emulator.
 
 # How it works
 
