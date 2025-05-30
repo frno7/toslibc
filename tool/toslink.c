@@ -238,6 +238,27 @@ static uint32_t symbol_size(const struct file *f,
 	return size;
 }
 
+static void check_symtab(struct file *f)
+{
+	Elf_Ehdr *ehdr = (Elf_Ehdr *)f->data;
+	Elf_Shdr *shdr;
+	Elf_Sym *sym;
+	size_t errs = 0;
+
+	elf_for_each_sym (sym, shdr, ehdr) {
+		const char *name = elf_symbol(sym, shdr, ehdr);
+
+		if (sym->st_shndx == SHN_UNDEF && *name) {
+			pr_error("%s: undefined reference to `%s'",
+				f->path, name);
+			errs++;
+		}
+	}
+
+	if (errs > 0)
+		exit(EXIT_FAILURE);
+}
+
 static void check_program(struct file *f)
 {
 	struct {
@@ -302,6 +323,8 @@ next:
 		pr_fatal_error("%s: unexpected section count %d name \"%s\", min %d, max %d",
 			f->path, sections[i].n, sections[i].name,
 			sections[i].min, sections[i].max);
+
+	check_symtab(f);
 }
 
 static size_t append_header(struct file *tf, struct file *ef)
