@@ -40,9 +40,9 @@ if [[ x"$elf" != x ]]
 then
 	cmd "'"$TARGET_LD"'" "${args[@]}"
 	cmd "'"$bindir/$target-toslink"'" -o "$out" "$elf"
-	exec rm "$elf"
+	rm "$elf"
 else
-	exec cmd "'"$TARGET_LD"'" "$@"
+	cmd "'"$TARGET_LD"'" "$@"
 fi'
 }
 

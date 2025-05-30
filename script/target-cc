@@ -43,9 +43,9 @@ if [[ x"$obj" != x ]]
 then
 	cmd "'"$TARGET_CC"'" "${args[@]}"
 	cmd "'"$bindir/$target-ld"'" -o "$out" "$obj"
-	exec rm "$obj"
+	rm "$obj"
 else
-	exec cmd "'"$TARGET_CC"'" "${args[@]}"
+	cmd "'"$TARGET_CC"'" "${args[@]}"
 fi'
 }
 
