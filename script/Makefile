@@ -36,13 +36,13 @@ OTHER_CLEAN += $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD)	\
 
 .PHONY: install-linker-script
 install-linker-script: $(TOSLIBC_SCRIPT_TARGET_LD)
-	$(INSTALL) -d -m 755 $(DESTDIR)$(bindir)
-	$(INSTALL) $< $(DESTDIR)$(bindir)
+	$(INSTALL) -d -m 755 $(DESTDIR)$(binutilsbindir)
+	$(INSTALL) $< $(DESTDIR)$(binutilsbindir)
 
 .PHONY: install-compiler-script
 install-compiler-script: $(TOSLIBC_SCRIPT_TARGET_CC)
-	$(INSTALL) -d $(DESTDIR)$(bindir)
-	$(INSTALL) $< $(DESTDIR)$(bindir)
+	$(INSTALL) -d $(DESTDIR)$(compilerbindir)
+	$(INSTALL) $< $(DESTDIR)$(compilerbindir)
 
 .PHONY: install-pkg-config
 install-pkg-config: $(TOSLIBC_PC)

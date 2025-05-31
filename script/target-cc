@@ -42,7 +42,7 @@ cmd()
 if [[ x"$obj" != x ]]
 then
 	cmd "'"$TARGET_CC"'" "${args[@]}"
-	cmd "'"$bindir/$target-ld"'" -o "$out" "$obj"
+	cmd "'"$binutilsbindir/$target-ld"'" -o "$out" "$obj"
 	rm "$obj"
 else
 	cmd "'"$TARGET_CC"'" "${args[@]}"

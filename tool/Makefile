@@ -38,8 +38,8 @@ tool: $(TOSLINK)
 
 .PHONY: install-toslink
 install-toslink: $(TOSLINK)
-	$(INSTALL) -d $(DESTDIR)$(bindir)
-	$(INSTALL) $(TOSLINK) $(DESTDIR)$(bindir)
+	$(INSTALL) -d $(DESTDIR)$(binutilsbindir)
+	$(INSTALL) $(TOSLINK) $(DESTDIR)$(binutilsbindir)
 
 .PHONY: binutils
 binutils: $(TOSLIBC_SCRIPT_TARGET_LD) $(TOSLINK)
@@ -56,12 +56,12 @@ install-compiler: install-compiler-script install-compiler-alias
 
 .PHONY: install-binutils-symlink
 install-binutils-symlink:
-	$(INSTALL) -d $(DESTDIR)$(bindir)
-	@script/install-compiler-symlink -v $(BINUTILS_SYMLINKS)
+	$(INSTALL) -d $(DESTDIR)$(binutilsbindir)
+	@script/install-compiler-symlink -v $(binutilsbindir) $(BINUTILS_SYMLINKS)
 
 .PHONY: install-compiler-alias
 install-compiler-alias: install-compiler-script
-	$(INSTALL) -d $(DESTDIR)$(bindir)
-	@script/install-compiler-symlink -v -a $(COMPILER_ALIASES)
+	$(INSTALL) -d $(DESTDIR)$(compilerbindir)
+	@script/install-compiler-symlink -v -a $(compilerbindir) $(COMPILER_ALIASES)
 
 OTHER_CLEAN += $(TOSLINK) $(TOSLIBC_VERSION_SRC)

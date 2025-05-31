@@ -60,7 +60,11 @@ install_target_symlink()
 if [ "x$1" = x-a ]
 then
 	shift
+	bindir="$1"
+	shift
 	install_alias_symlink "$@"
 else
+	bindir="$1"
+	shift
 	install_target_symlink "$@"
 fi

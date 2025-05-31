@@ -7,6 +7,8 @@ prefix = $(HOME)/.local/usr/$(target)
 datarootdir = $(prefix)/share
 exec_prefix = $(prefix)
 bindir = $(exec_prefix)/bin
+binutilsbindir = $(bindir)
+compilerbindir = $(bindir)
 mandir = $(datarootdir)/man
 man1dir = $(mandir)/man1
 includedir = $(prefix)/include
@@ -16,7 +18,8 @@ ldscriptdir = $(libdir)/script
 testdir = $(datarootdir)/toslibc/test
 exampledir = $(datarootdir)/toslibc/example
 
-export target prefix bindir includedir libdir ldscriptdir
+export target prefix binutilsbindir compilerbindir			\
+	includedir libdir ldscriptdir
 
 CFLAGS = -g
 
