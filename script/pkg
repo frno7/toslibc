@@ -8,12 +8,13 @@ gen_pkg()
 	echo "prefix=$prefix
 libdir=$libdir
 includedir=$includedir
+ldscriptdir=$ldscriptdir
 
 Name: toslibc
 Description: 32-bit C standard library for Atari TOS
 Version: ${TOSLIBC_VERSION_MINOR}"'
 
-Libs: -L${libdir} -lc '"${TOSLIBC_PROGRAM_BASIC_LDFLAGS}"' --script=${libdir}/script/prg.ld
+Libs: -L${libdir} -lc '"${TOSLIBC_PROGRAM_BASIC_LDFLAGS}"' --script=${ldscriptdir}/prg.ld
 Cflags: -isystem ${includedir} '"${TOSLIBC_PROGRAM_BASIC_CFLAGS}"
 }
 
