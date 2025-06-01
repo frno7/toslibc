@@ -46,8 +46,8 @@ install-compiler-script: $(TOSLIBC_SCRIPT_TARGET_CC)
 
 .PHONY: install-pkg-config
 install-pkg-config: $(TOSLIBC_PC)
-	$(INSTALL) -d -m 755 $(DESTDIR)$(pkgdir)
-	$(INSTALL) -m 644 $^ $(DESTDIR)$(pkgdir)
+	$(INSTALL) -d -m 755 $(DESTDIR)$(pkgconfigdir)
+	$(INSTALL) -m 644 $^ $(DESTDIR)$(pkgconfigdir)
 
 .PHONY: install-prg.ld-script
 install-prg.ld-script: $(TOSLIBC_SCRIPT_PRG_LD)
