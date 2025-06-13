@@ -27,11 +27,13 @@ TOSLIBC_SCRIPT_PRG_LD = $(TOSLIBC_script_dir)prg.ld
 $(TOSLIBC_SCRIPT_PRG_LD): $(TOSLIBC_script_dir)target-prg.ld
 	$(QUIET_GEN)$< $@
 
-.PHONY: script
-script: $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD)		\
+OTHER_CLEAN += $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD)	\
 	$(TOSLIBC_PC) $(TOSLIBC_SCRIPT_PRG_LD)
 
-OTHER_CLEAN += $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD)	\
+ifeq (script/,$(TOSLIBC_script_dir))
+
+.PHONY: script
+script: $(TOSLIBC_SCRIPT_TARGET_CC) $(TOSLIBC_SCRIPT_TARGET_LD)		\
 	$(TOSLIBC_PC) $(TOSLIBC_SCRIPT_PRG_LD)
 
 .PHONY: install-linker-script
@@ -53,3 +55,5 @@ install-pkg-config: $(TOSLIBC_PC)
 install-prg.ld-script: $(TOSLIBC_SCRIPT_PRG_LD)
 	$(INSTALL) -d -m 755 $(DESTDIR)$(ldscriptdir)
 	$(INSTALL) -m 644 $< $(DESTDIR)$(ldscriptdir)
+
+endif

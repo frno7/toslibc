@@ -33,6 +33,10 @@ $(TOSLINK_OBJ): %.o: %.c
 $(TOSLINK): $(TOSLINK_OBJ)
 	$(QUIET_LINK)$(CC) $(TOSLINK_CFLAGS) -o $@ $^
 
+OTHER_CLEAN += $(TOSLINK) $(TOSLIBC_VERSION_SRC)
+
+ifeq (tool/,$(TOSLIBC_tool_dir))
+
 .PHONY: tool
 tool: $(TOSLINK)
 
@@ -64,4 +68,4 @@ install-compiler-alias: install-compiler-script
 	$(INSTALL) -d $(DESTDIR)$(compilerbindir)
 	@script/install-compiler-symlink -v -a $(compilerbindir) $(COMPILER_ALIASES)
 
-OTHER_CLEAN += $(TOSLINK) $(TOSLIBC_VERSION_SRC)
+endif

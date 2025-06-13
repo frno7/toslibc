@@ -92,6 +92,10 @@ ALL_OBJ += $(TOSLIBC_LIB_OBJ)
 $(TOSLIBC): $(TOSLIBC_LIB_OBJ)
 	$(QUIET_AR)$(TARGET_AR) rcs $@ $^
 
+OTHER_CLEAN += $(TOSLIBC)
+
+ifeq (lib/,$(TOSLIBC_lib_dir))
+
 .PHONY: lib
 lib: $(TOSLIBC)
 
@@ -112,4 +116,4 @@ install-lib-static: $(TOSLIBC)
 	$(INSTALL) -d -m 755 $(DESTDIR)$(libdir)
 	$(INSTALL) $(TOSLIBC) $(DESTDIR)$(libdir)
 
-OTHER_CLEAN += $(TOSLIBC)
+endif
