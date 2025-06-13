@@ -1,21 +1,21 @@
 # SPDX-License-Identifier: GPL-2.0
 
-TOSLIBC_TOOL_SUBDIR := $(dir $(lastword $(MAKEFILE_LIST)))
+TOSLIBC_tool_dir := $(dir $(lastword $(MAKEFILE_LIST)))
 
-TOSLINK = $(TOSLIBC_TOOL_SUBDIR)$(target)-toslink
+TOSLINK = $(TOSLIBC_tool_dir)$(target)-toslink
 
 TOSLINK_CFLAGS = $(BASIC_CFLAGS) $(S_CFLAGS) $(CFLAGS)			\
-	-I$(TOSLIBC_TOOL_SUBDIR)../include
+	-I$(TOSLIBC_tool_dir)../include
 
-TOSLIBC_VERSION_SRC = $(TOSLIBC_TOOL_SUBDIR)version.c
-TOSLIBC_VERSION_SCRIPT = $(TOSLIBC_TOOL_SUBDIR)../script/version	\
-	--directory $(TOSLIBC_TOOL_SUBDIR)..
+TOSLIBC_VERSION_SRC = $(TOSLIBC_tool_dir)version.c
+TOSLIBC_VERSION_SCRIPT = $(TOSLIBC_tool_dir)../script/version		\
+	--directory $(TOSLIBC_tool_dir)..
 
 .PHONY: $(shell $(TOSLIBC_VERSION_SCRIPT) --check $(TOSLIBC_VERSION_SRC))
 $(TOSLIBC_VERSION_SRC):
 	$(QUIET_GEN)$(TOSLIBC_VERSION_SCRIPT) $@
 
-TOSLINK_SRC = $(addprefix $(TOSLIBC_TOOL_SUBDIR),			\
+TOSLINK_SRC = $(addprefix $(TOSLIBC_tool_dir),				\
 	elf32.c								\
 	file.c								\
 	memory.c							\

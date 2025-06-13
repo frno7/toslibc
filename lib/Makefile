@@ -1,16 +1,16 @@
 # SPDX-License-Identifier: GPL-2.0
 
-TOSLIBC_LIB_SUBDIR := $(dir $(lastword $(MAKEFILE_LIST)))
+TOSLIBC_lib_dir := $(dir $(lastword $(MAKEFILE_LIST)))
 
-TOSLIBC := $(TOSLIBC_LIB_SUBDIR)libc.a
+TOSLIBC := $(TOSLIBC_lib_dir)libc.a
 
 TOSLIBC_LIB_CFLAGS = $(BASIC_CFLAGS) -march=68000 -fno-PIC		\
 	-nostdlib -ffunction-sections -fdata-sections			\
-	-isystem $(TOSLIBC_LIB_SUBDIR)../include/toslibc		\
-	-I$(TOSLIBC_LIB_SUBDIR)../include				\
+	-isystem $(TOSLIBC_lib_dir)../include/toslibc			\
+	-I$(TOSLIBC_lib_dir)../include					\
 	-D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
 
-TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\
+TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_lib_dir),			\
 	crt0.S								\
 	bios.S								\
 	gemdos.S							\
@@ -75,8 +75,8 @@ TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_LIB_SUBDIR),			\
 	__udivsi3.c							\
 	__umoddi3.c)
 
-$(TOSLIBC_LIB_SUBDIR)memcpy.o						\
-$(TOSLIBC_LIB_SUBDIR)memset.o:						\
+$(TOSLIBC_lib_dir)memcpy.o						\
+$(TOSLIBC_lib_dir)memset.o:						\
 	TOSLIBC_LIB_CFLAGS += -fno-tree-loop-distribute-patterns
 
 define TOSLIBC_OBJ_target

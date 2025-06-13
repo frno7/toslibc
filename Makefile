@@ -63,8 +63,8 @@ export TOSLIBC_PROGRAM_BASIC_CFLAGS TOSLIBC_PROGRAM_BASIC_LDFLAGS
 
 TOSLIBC_PROGRAM_CFLAGS = $(BASIC_CFLAGS) $(TOSLIBC_PROGRAM_BASIC_CFLAGS)\
 	-ffunction-sections -fdata-sections				\
-	-isystem $(TOSLIBC_LIB_SUBDIR)../include/toslibc		\
-	-I$(TOSLIBC_LIB_SUBDIR)../include				\
+	-isystem $(TOSLIBC_lib_dir)../include/toslibc			\
+	-I$(TOSLIBC_lib_dir)../include					\
 	-D_TOSLIBC_SOURCE $(TARGET_CFLAGS)
 
 TOSLIBC_PROGRAM_LDFLAGS = $(TOSLIBC_PROGRAM_BASIC_LDFLAGS)		\

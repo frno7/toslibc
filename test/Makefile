@@ -1,15 +1,15 @@
 # SPDX-License-Identifier: GPL-2.0
 
-TOSLIBC_TEST_SUBDIR := $(dir $(lastword $(MAKEFILE_LIST)))
+TOSLIBC_test_dir := $(dir $(lastword $(MAKEFILE_LIST)))
 
-TOSLIBC_TEST_SUITE_PRG = $(addprefix $(TOSLIBC_TEST_SUBDIR), SUITE.TOS)
+TOSLIBC_TEST_SUITE_PRG = $(addprefix $(TOSLIBC_test_dir), SUITE.TOS)
 
-TOSLIBC_TEST_SUITE_H = $(TOSLIBC_TEST_SUBDIR)../include/test/suite.h
+TOSLIBC_TEST_SUITE_H = $(TOSLIBC_test_dir)../include/test/suite.h
 
 .PHONY: test
 test: $(TOSLIBC_TEST_SUITE_PRG)
 
-TOSLIBC_TEST_SRC := $(addprefix $(TOSLIBC_TEST_SUBDIR),			\
+TOSLIBC_TEST_SRC := $(addprefix $(TOSLIBC_test_dir),			\
 	fopen.c								\
 	fread.c								\
 	fwrite.c							\
@@ -32,7 +32,7 @@ ALL_OBJ += $(TOSLIBC_TEST_OBJ)						\
 	   $(TOSLIBC_TEST_SUITE_ELF)
 
 $(TOSLIBC_TEST_SUITE_H): $(TOSLIBC_TEST_SRC)
-	$(QUIET_GEN)$(TOSLIBC_TEST_SUBDIR)../script/test-suite -o $@ $^
+	$(QUIET_GEN)$(TOSLIBC_test_dir)../script/test-suite -o $@ $^
 
 $(TOSLIBC_TEST_SUITE_OBJ): $(TOSLIBC_TEST_SUITE_H)
 

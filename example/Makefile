@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: GPL-2.0
 
-TOSLIBC_EXAMPLE_SUBDIR := $(dir $(lastword $(MAKEFILE_LIST)))
+TOSLIBC_example_dir := $(dir $(lastword $(MAKEFILE_LIST)))
 
-TOSLIBC_EXAMPLE_PRG = $(addprefix $(TOSLIBC_EXAMPLE_SUBDIR),		\
+TOSLIBC_EXAMPLE_PRG = $(addprefix $(TOSLIBC_example_dir),		\
 	ALERT.PRG							\
 	COOKIE.TOS							\
 	HELLO.TOS							\
@@ -37,7 +37,7 @@ $(TOSLIBC_EXAMPLE_PRG): $(TOSLINK)
 $(TOSLIBC_EXAMPLE_PRG): %: %.elf
 	$(QUIET_LINK)$(TOSLINK) -o $@ $<
 
-TOSLIBC_EXAMPLE_MAKEFILE = $(TOSLIBC_EXAMPLE_SUBDIR)Makefile.example
+TOSLIBC_EXAMPLE_MAKEFILE = $(TOSLIBC_example_dir)Makefile.example
 
 .PHONY: install-example-src
 install-example-src: $(TOSLIBC_EXAMPLE_SRC)
