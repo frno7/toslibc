@@ -39,6 +39,10 @@ $(TOSLIBC_EXAMPLE_PRG): %: %.elf
 
 TOSLIBC_EXAMPLE_MAKEFILE = $(TOSLIBC_example_dir)Makefile.example
 
+OTHER_CLEAN += $(TOSLIBC_EXAMPLE_PRG)
+
+ifeq (example/,$(TOSLIBC_example_dir))
+
 .PHONY: install-example-src
 install-example-src: $(TOSLIBC_EXAMPLE_SRC)
 	$(INSTALL) -d $(DESTDIR)$(exampledir)
@@ -59,4 +63,4 @@ install-example-prg: $(TOSLIBC_EXAMPLE_PRG)
 .PHONY: install-example
 install-example: install-example-src install-example-makefile install-example-prg
 
-OTHER_CLEAN += $(TOSLIBC_EXAMPLE_PRG)
+endif

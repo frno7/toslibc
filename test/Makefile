@@ -58,6 +58,10 @@ $(TOSLIBC_TEST_SUITE_PRG): %: %.elf
 
 TOSLIBC_TEST_SUITE_DATA = test/test.txt
 
+OTHER_CLEAN += $(TOSLIBC_TEST_SUITE_H) $(TOSLIBC_TEST_SUITE_PRG)
+
+ifeq (test/,$(TOSLIBC_test_dir))
+
 .PHONY: install-test-data
 install-test-data: $(TOSLIBC_TEST_SUITE_DATA)
 	$(INSTALL) -d $(DESTDIR)$(testdir)
@@ -71,4 +75,4 @@ install-test-prg: $(TOSLIBC_TEST_SUITE_PRG)
 .PHONY: install-test
 install-test: install-test-data install-test-prg
 
-OTHER_CLEAN += $(TOSLIBC_TEST_SUITE_H) $(TOSLIBC_TEST_SUITE_PRG)
+endif
