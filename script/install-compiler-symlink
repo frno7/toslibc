@@ -18,8 +18,8 @@ install_alias_symlink()
 	do
 		local c="${ca%%:*}"
 		local a="${ca##*:}"
-		local s="${DESTDIR}${bindir}/${target}-${c}"
-		local d="${DESTDIR}${bindir}/${target}-${a}"
+		local s="${DESTDIR}${bindir}/${target_prefix}${c}"
+		local d="${DESTDIR}${bindir}/${target_prefix}${a}"
 
 		# Don't install symlink if command doesn't exist.
 		[   -e "$s" ] || continue
@@ -28,10 +28,10 @@ install_alias_symlink()
 
 		if [ $verbose = 1 ]
 		then
-			echo "${DESTDIR}${bindir}: ln -sf ${target}-${c} ${target}-${a}"
+			echo "${DESTDIR}${bindir}: ln -sf ${target_prefix}${c} ${target_prefix}${a}"
 		fi
 
-		(cd "${DESTDIR}${bindir}" && ln -sf "${target}-${c}" "${target}-${a}")
+		(cd "${DESTDIR}${bindir}" && ln -sf "${target_prefix}${c}" "${target_prefix}${a}")
 	done
 }
 
@@ -41,7 +41,7 @@ install_target_symlink()
 	for c in "$@"
 	do
 		local s="$(command -v ${TARGET_COMPILE}${c} || :)"
-		local d="${DESTDIR}${bindir}/${target}-${c}"
+		local d="${DESTDIR}${bindir}/${target_prefix}${c}"
 
 		# Don't install symlink if command doesn't exist.
 		[   -e "$s" ] || continue

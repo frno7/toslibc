@@ -2,7 +2,7 @@
 
 TOSLIBC_tool_dir := $(dir $(lastword $(MAKEFILE_LIST)))
 
-TOSLINK = $(TOSLIBC_tool_dir)$(target)-toslink
+TOSLINK = $(TOSLIBC_tool_dir)$(target_prefix)toslink
 
 TOSLINK_CFLAGS = $(BASIC_CFLAGS) $(S_CFLAGS) $(CFLAGS)			\
 	-I$(TOSLIBC_tool_dir)../include

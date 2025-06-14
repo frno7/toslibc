@@ -39,7 +39,7 @@ cmd()
 if [[ x"$elf" != x ]]
 then
 	cmd "'"$TARGET_LD"'" "${args[@]}"
-	cmd "'"$binutilsbindir/$target-toslink"'" -o "$out" "$elf"
+	cmd "'"$binutilsbindir/${target_prefix}toslink"'" -o "$out" "$elf"
 	rm "$elf"
 else
 	cmd "'"$TARGET_LD"'" "$@"

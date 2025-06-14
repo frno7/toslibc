@@ -8,8 +8,8 @@ TOSLIBC_VERSION_MAJOR := $(shell echo '$(TOSLIBC_VERSION)' | sed 's/\..*$$//')
 
 export TOSLIBC_VERSION_MINOR TOSLIBC_VERSION_MAJOR
 
-TOSLIBC_SCRIPT_TARGET_CC = $(TOSLIBC_script_dir)$(target)-cc
-TOSLIBC_SCRIPT_TARGET_LD = $(TOSLIBC_script_dir)$(target)-ld
+TOSLIBC_SCRIPT_TARGET_CC = $(TOSLIBC_script_dir)$(target_prefix)cc
+TOSLIBC_SCRIPT_TARGET_LD = $(TOSLIBC_script_dir)$(target_prefix)ld
 
 $(TOSLIBC_SCRIPT_TARGET_CC): $(TOSLIBC_script_dir)target-cc
 	$(QUIET_GEN)$< $@

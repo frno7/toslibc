@@ -18,8 +18,10 @@ ldscriptdir = $(libdir)/script
 testdir = $(datarootdir)/toslibc/test
 exampledir = $(datarootdir)/toslibc/example
 
-export target prefix binutilsbindir compilerbindir			\
-	includedir libdir ldscriptdir
+target_prefix = $(target)-
+
+export prefix binutilsbindir compilerbindir				\
+	includedir libdir ldscriptdir target_prefix
 
 CFLAGS = -g
 
