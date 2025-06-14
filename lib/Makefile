@@ -29,6 +29,7 @@ TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_lib_dir),			\
 	lseek.c								\
 	malloc.c							\
 	memcpy.c							\
+	memmove.c							\
 	memset.c							\
 	mkdir.c								\
 	open.c								\
