@@ -25,6 +25,7 @@ TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_lib_dir),			\
 	errno.c								\
 	exit.c								\
 	fopen.c								\
+	fpgnulib.c							\
 	free.c								\
 	lseek.c								\
 	malloc.c							\
