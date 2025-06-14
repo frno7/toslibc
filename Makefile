@@ -50,6 +50,7 @@ BASIC_CFLAGS = -O2 -Wall -D_GNU_SOURCE $(DEP_CFLAGS)
 .PHONY: all
 all:
 
+parentdir ?= $(dir ${1:/=})
 lowercase ?= $(shell echo "$(1)" | tr '[:upper:]' '[:lower:]')
 
 include script/Makefile

@@ -4,7 +4,7 @@ TOSLIBC_test_dir := $(dir $(lastword $(MAKEFILE_LIST)))
 
 TOSLIBC_TEST_SUITE_PRG = $(addprefix $(TOSLIBC_test_dir), SUITE.TOS)
 
-TOSLIBC_TEST_SUITE_H = $(TOSLIBC_test_dir)../include/test/suite.h
+TOSLIBC_TEST_SUITE_H = $(call parentdir, $(TOSLIBC_test_dir))include/test/suite.h
 
 .PHONY: test
 test: $(TOSLIBC_TEST_SUITE_PRG)
@@ -22,8 +22,11 @@ ALL_OBJ += $(TOSLIBC_TEST_OBJ)						\
 	   $(TOSLIBC_TEST_SUITE_OBJ)					\
 	   $(TOSLIBC_TEST_SUITE_ELF)
 
+TOSLIBC_TEST_SUITE_SCRIPT :=						\
+	$(call parentdir, $(TOSLIBC_test_dir))script/test-suite
+
 $(TOSLIBC_TEST_SUITE_H): $(TOSLIBC_TEST_SRC)
-	$(QUIET_GEN)$(TOSLIBC_test_dir)../script/test-suite -o $@ $^
+	$(QUIET_GEN)$(TOSLIBC_TEST_SUITE_SCRIPT) -o $@ $^
 
 $(TOSLIBC_TEST_SUITE_OBJ): $(TOSLIBC_TEST_SUITE_H)
 
