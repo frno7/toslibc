@@ -9,23 +9,14 @@ TOSLIBC_TEST_SUITE_H = $(TOSLIBC_test_dir)../include/test/suite.h
 .PHONY: test
 test: $(TOSLIBC_TEST_SUITE_PRG)
 
-TOSLIBC_TEST_SRC := $(addprefix $(TOSLIBC_test_dir),			\
-	fopen.c								\
-	fread.c								\
-	fwrite.c							\
-	lseek.c								\
-	open.c								\
-	rmdir.c								\
-	stat.c								\
-	strchr.c							\
-	strcmp.c							\
-	unlink.c)
-TOSLIBC_TEST_OBJ = $(TOSLIBC_TEST_SRC:%.c=%.o)
-
-TOSLIBC_TEST_SUITE_SRC := $(foreach e,$(TOSLIBC_TEST_SUITE_PRG),	\
-	$(call lowercase,$(basename $(e))).c)
+TOSLIBC_TEST_SUITE_SRC :=						\
+	$(call lowercase, $(basename $(TOSLIBC_TEST_SUITE_PRG))).c
 TOSLIBC_TEST_SUITE_OBJ = $(TOSLIBC_TEST_SUITE_SRC:%.c=%.o)
 TOSLIBC_TEST_SUITE_ELF = $(TOSLIBC_TEST_SUITE_PRG:%=%.elf)
+
+TOSLIBC_TEST_SRC := $(filter-out $(TOSLIBC_TEST_SUITE_SRC),		\
+	$(wildcard $(TOSLIBC_test_dir)*.c))
+TOSLIBC_TEST_OBJ = $(TOSLIBC_TEST_SRC:%.c=%.o)
 
 ALL_OBJ += $(TOSLIBC_TEST_OBJ)						\
 	   $(TOSLIBC_TEST_SUITE_OBJ)					\
