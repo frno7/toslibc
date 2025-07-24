@@ -24,6 +24,7 @@
 #include "tool/file.h"
 #include "tool/prg.h"
 #include "tool/print.h"
+#include "tool/section.h"
 #include "tool/tool.h"
 
 char progname[] = "toslink";
@@ -129,78 +130,6 @@ static void parse_options(int argc, char **argv)
 	}
 
 #undef OPT
-}
-
-static bool null_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr)
-{
-	return shdr->sh_type == SHT_NULL;
-}
-
-static bool text_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr)
-{
-	return (shdr->sh_type == SHT_PROGBITS) &&
-	       (shdr->sh_flags & SHF_EXECINSTR) &&
-	       (shdr->sh_flags & SHF_ALLOC);
-}
-
-static bool data_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr)
-{
-	return (shdr->sh_type == SHT_PROGBITS) &&
-	       (shdr->sh_flags & SHF_ALLOC) &&
-	      !(shdr->sh_flags & SHF_EXECINSTR);
-}
-
-static bool bss_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr)
-{
-	return (shdr->sh_type == SHT_NOBITS) &&
-	       (shdr->sh_flags & SHF_ALLOC) &&
-	       (shdr->sh_flags & SHF_WRITE) &&
-	      !(shdr->sh_flags & SHF_EXECINSTR);
-}
-
-static bool rela_text_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr)
-{
-	return (shdr->sh_type == SHT_RELA) &&
-	       (shdr->sh_flags & SHF_INFO_LINK) &&
-	       text_section(&elf_first_section(ehdr)[shdr->sh_info], ehdr);
-}
-
-static bool rela_data_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr)
-{
-	return (shdr->sh_type == SHT_RELA) &&
-	       (shdr->sh_flags & SHF_INFO_LINK) &&
-	       data_section(&elf_first_section(ehdr)[shdr->sh_info], ehdr);
-}
-
-static bool symtab_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr)
-{
-	return shdr->sh_type == SHT_SYMTAB;
-}
-
-static bool strtab_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr)
-{
-	return (shdr->sh_type == SHT_STRTAB) &&
-	       strcmp(elf_section_name(shdr, ehdr), ".strtab") == 0;
-}
-
-static bool shstrtab_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr)
-{
-	return (shdr->sh_type == SHT_STRTAB) &&
-	       strcmp(elf_section_name(shdr, ehdr), ".shstrtab") == 0;
-}
-
-static uint32_t section_size(const struct file *f,
-	bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr))
-{
-	Elf_Ehdr *ehdr = (Elf_Ehdr *)f->data;
-	Elf_Shdr *shdr;
-	uint32_t size = 0;
-
-	elf_for_each_section (shdr, ehdr)
-		if (section(shdr ,ehdr))
-			size += shdr->sh_size;
-
-	return size;
 }
 
 static bool gst_symbol(Elf_Sym *sym, Elf_Shdr *shdr, Elf_Ehdr *ehdr)
@@ -345,18 +274,6 @@ static size_t append_header(struct file *tf, struct file *ef)
 	       prg_header.text_size +
 	       prg_header.data_size +
 	       prg_header.symbol_size;
-}
-
-static void append_section(struct file *tf, struct file *ef,
-	bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr))
-{
-	Elf_Ehdr *ehdr = (Elf_Ehdr *)ef->data;
-	Elf_Shdr *shdr;
-	const uint8_t *b = ef->data;
-
-	elf_for_each_section (shdr, ehdr)
-		if (section(shdr ,ehdr))
-			file_append(tf, &b[shdr->sh_offset], shdr->sh_size);
 }
 
 static void append_symbols(struct file *tf, struct file *ef)
@@ -520,8 +437,7 @@ static void link_program(struct file *tf, struct file *ef)
 	size_t size = append_header(tf, ef);
 	uint32_t reloc = 0;
 
-	append_section(tf, ef, text_section);
-	append_section(tf, ef, data_section);
+	append_sections_text_data(tf, ef);
 
 	append_symbols(tf, ef);
 
