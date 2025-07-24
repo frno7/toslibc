@@ -146,6 +146,6 @@ used to improve notation with modern C standards.
 A standard, unmodified, m68k/GCC compiler is used to obtain
 [ELF](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) object
 files, having a specific structure defined in
-[`script/prg.ld`](https://github.com/frno7/toslibc/blob/main/script/prg.ld).
+[`script/target-prg.ld`](https://github.com/frno7/toslibc/blob/main/script/target-prg.ld).
 The `tool/m68k-atari-tos-gnu-toslink` linker is used to produce the final
 Atari TOS program files.
