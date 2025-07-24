@@ -19,6 +19,7 @@ TOSLINK_SRC = $(addprefix $(TOSLIBC_tool_dir),				\
 	elf32.c								\
 	file.c								\
 	memory.c							\
+	option.c							\
 	print.c								\
 	section.c							\
 	toslink.c)							\
