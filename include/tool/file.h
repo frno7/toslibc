@@ -3,8 +3,8 @@
  * Copyright (C) 2019 Fredrik Noring
  */
 
-#ifndef TOOL_FILE_H
-#define TOOL_FILE_H
+#ifndef TOSLIBC_TOOL_FILE_H
+#define TOSLIBC_TOOL_FILE_H
 
 #include "internal/types.h"
 
@@ -46,4 +46,4 @@ size_t basename_index(const char *filepath);
 
 size_t baseextension_index(const char *filepath);
 
-#endif /* TOOL_FILE_H */
+#endif /* TOSLIBC_TOOL_FILE_H */

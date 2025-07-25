@@ -3,8 +3,8 @@
  * Copyright (C) 2019 Fredrik Noring
  */
 
-#ifndef TOOL_PRG_H
-#define TOOL_PRG_H
+#ifndef TOSLIBC_TOOL_PRG_H
+#define TOSLIBC_TOOL_PRG_H
 
 #include <stdint.h>
 
@@ -55,4 +55,4 @@ struct prg_header {
 	uint16_t absflag;
 } BE_STORAGE __attribute__((__packed__));
 
-#endif /* TOOL_PRG_H */
+#endif /* TOSLIBC_TOOL_PRG_H */

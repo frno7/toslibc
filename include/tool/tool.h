@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#ifndef TOOL_TOOL_H
-#define TOOL_TOOL_H
+#ifndef TOSLIBC_TOOL_TOOL_H
+#define TOSLIBC_TOOL_TOOL_H
 
 extern char progname[];
 
@@ -9,4 +9,4 @@ extern char progname[];
 
 #define NORETURN __attribute__((__noreturn__))
 
-#endif /* TOOL_TOOL_H */
+#endif /* TOSLIBC_TOOL_TOOL_H */

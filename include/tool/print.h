@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#ifndef TOOL_PRINT_H
-#define TOOL_PRINT_H
+#ifndef TOSLIBC_TOOL_PRINT_H
+#define TOSLIBC_TOOL_PRINT_H
 
 #include <stdarg.h>
 
@@ -17,4 +17,4 @@ void NORETURN pr_fatal_error(const char *fmt, ...);
 
 void NORETURN pr_fatal_errno(const char *fmt, ...);
 
-#endif /* TOOL_PRINT_H */
+#endif /* TOSLIBC_TOOL_PRINT_H */
