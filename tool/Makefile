@@ -22,6 +22,7 @@ TOSLINK_SRC = $(addprefix $(TOSLIBC_tool_dir),				\
 	option.c							\
 	print.c								\
 	section.c							\
+	symbol.c							\
 	toslink.c)							\
 	$(TOSLIBC_VERSION_SRC)
 
