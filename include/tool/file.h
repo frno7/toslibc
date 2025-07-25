@@ -26,7 +26,7 @@ bool file_write(struct file f, int mode);
 
 void file_free(struct file f);
 
-bool file_valid(struct file f);
+bool file_valid(const struct file *f);
 
 bool file_rename(const char *path, struct file *f);
 

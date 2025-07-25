@@ -119,9 +119,9 @@ void file_free(struct file f)
 	free(f.data);
 }
 
-bool file_valid(struct file f)
+bool file_valid(const struct file *f)
 {
-	return f.path != NULL;
+	return f->path != NULL;
 }
 
 struct file file_copy(const char *path, struct file f)
