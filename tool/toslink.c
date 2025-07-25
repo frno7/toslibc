@@ -27,7 +27,8 @@ static size_t append_header(struct file *tf, struct file *ef)
 		.text_size   = section_size(ef, text_section),
 		.data_size   = section_size(ef, data_section),
 		.bss_size    = section_size(ef, bss_section),
-		.symbol_size = symbol_size(ef, symtab_section)
+		.symbol_size = option_symbols() ?
+					symbol_size(ef, symtab_section) : 0,
 	};
 
 	BUILD_BUG_ON(sizeof(struct prg_header) != PRG_HEADER_SIZE);
@@ -46,7 +47,10 @@ static void link_program(struct file *tf, struct file *ef)
 	const size_t size = append_header(tf, ef);
 
 	append_sections_text_data(tf, ef);
-	append_symbols(tf, ef);
+
+	if (option_symbols())
+		append_symbols(tf, ef);
+
 	append_relocations_text_data(tf, ef);
 
 	if (tf->size != size)

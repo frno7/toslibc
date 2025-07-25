@@ -19,13 +19,16 @@ struct option_ option;
 static void help(FILE *file)
 {
 	fprintf(file,
-"usage: %s [-h | --help] <-o <outfile>> <infile>\n"
+"usage: %s [arguments] <-o <outfile> <infile>\n"
 "\n"
-"options:\n"
+"arguments:\n"
+"\n"
 "    -h, --help              display this help and exit\n"
 "    --version               display version and exit\n"
 "\n"
 "    -o, --output <outfile>  name of the program produced by %s\n"
+"\n"
+"    -s, --strip-all         omit all symbol information\n"
 "\n",
 		progname, progname);
 }
@@ -51,6 +54,7 @@ void parse_options(int argc, char **argv)
 		{ "help",    no_argument,       NULL, 0 },
 		{ "version", no_argument,       NULL, 0 },
 		{ "output",  required_argument, NULL, 0 },
+		{ "strip",   no_argument,       NULL, 0 },
 		{ NULL, 0, NULL, 0 }
 	};
 
@@ -59,7 +63,7 @@ void parse_options(int argc, char **argv)
 	for (;;) {
 		int index = 0;
 
-		switch (getopt_long(argc, argv, "ho:", options, &index)) {
+		switch (getopt_long(argc, argv, "ho:s", options, &index)) {
 		case -1:
 			if (argc < optind + 1)
 				pr_fatal_error("no input file");
@@ -75,6 +79,8 @@ void parse_options(int argc, char **argv)
 				version_exit();
 			else if (OPT("output"))
 				option.output = optarg;
+			else if (OPT("strip"))
+				option.strip = true;
 			break;
 
 		case 'h':
@@ -82,6 +88,10 @@ void parse_options(int argc, char **argv)
 
 		case 'o':
 			option.output = optarg;
+			break;
+
+		case 's':
+			option.strip = true;
 			break;
 
 		case '?':
