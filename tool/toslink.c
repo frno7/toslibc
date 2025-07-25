@@ -37,16 +37,17 @@ static size_t append_header(struct file *tf, struct file *ef)
 	return sizeof(prg_header) +
 	       prg_header.text_size +
 	       prg_header.data_size +
-	       prg_header.symbol_size;
+	       prg_header.symbol_size +
+	       relocation_size(ef);
 }
 
 static void link_program(struct file *tf, struct file *ef)
 {
-	size_t size = append_header(tf, ef);
+	const size_t size = append_header(tf, ef);
 
 	append_sections_text_data(tf, ef);
 	append_symbols(tf, ef);
-	size += append_relocations_text_data(tf, ef);
+	append_relocations_text_data(tf, ef);
 
 	if (tf->size != size)
 		pr_fatal_error("%s: size mismatch %zu != %zu",

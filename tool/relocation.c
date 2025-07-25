@@ -61,14 +61,16 @@ static uint32_t reloc_entry(uint32_t *reloc,
 
 		BUILD_BUG_ON(sizeof(first) != 4);
 
-		file_append(tf, (const void *)&first, sizeof(first));
+		if (tf)
+			file_append(tf, (const void *)&first, sizeof(first));
 
 		size += 4;
 	} else
 		for (uint32_t d = addr - *reloc; d > 0;) {
 			const uint8_t r = d <= 254 ? d : 1;
 
-			file_append(tf, &r, sizeof(r));
+			if (tf)
+				file_append(tf, &r, sizeof(r));
 
 			d -= min(d, 254u);
 			size++;
@@ -86,7 +88,8 @@ static size_t append_relocations(struct file *tf, struct file *ef,
 		const uint32_t z = 0;
 		const size_t s = *reloc ? 1 : 4;
 
-		file_append(tf, &z, s);
+		if (tf)
+			file_append(tf, &z, s);
 
 		return s;
 	}
@@ -114,7 +117,8 @@ static size_t append_relocations(struct file *tf, struct file *ef,
 			const uint32_t r = rela->r_addend + sym->st_value +
 				elf_first_section(ehdr)[sym->st_shndx].sh_addr;
 
-			reloc_code(addr, r, type, ef, tf);
+			if (tf)
+				reloc_code(addr, r, type, ef, tf);
 
 			if (type == R_68K_PC8  ||
 			    type == R_68K_PC16 ||
@@ -138,4 +142,9 @@ size_t append_relocations_text_data(struct file *tf, struct file *ef)
 	size += append_relocations(tf, ef, &reloc, NULL);
 
 	return size;
+}
+
+size_t relocation_size(struct file *ef)
+{
+	return append_relocations_text_data(NULL, ef);
 }

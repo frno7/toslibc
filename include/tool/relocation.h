@@ -10,4 +10,6 @@
 
 size_t append_relocations_text_data(struct file *tf, struct file *ef);
 
+size_t relocation_size(struct file *ef);
+
 #endif /* TOSLIBC_TOOL_RELOCATION_H */
