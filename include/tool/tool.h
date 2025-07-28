@@ -9,6 +9,4 @@ extern char progname[];
 
 #define NORETURN __attribute__((__noreturn__))
 
-#define PRG_HEADER_SIZE 28
-
 #endif /* TOSLIBC_TOOL_TOOL_H */

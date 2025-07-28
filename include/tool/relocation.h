@@ -7,9 +7,12 @@
 #define TOSLIBC_TOOL_RELOCATION_H
 
 #include "file.h"
+#include "program.h"
 
-size_t append_relocations_text_data(struct file *tf, struct file *ef);
+size_t append_relocations_text_data(struct file *tf, struct file *ef,
+	const struct program_header *program_header);
 
-size_t relocation_size(struct file *ef);
+size_t relocation_size(struct file *ef,
+	const struct program_header *program_header);
 
 #endif /* TOSLIBC_TOOL_RELOCATION_H */

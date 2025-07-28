@@ -13,7 +13,9 @@
 #include "tool/symbol.h"
 #include "tool/tool.h"
 
-static size_t append_header(struct file *tf, struct file *ef)
+#define PRG_HEADER_SIZE 28
+
+static struct program append_prg_header(struct file *tf, struct file *ef)
 {
 	const struct prg_header prg_header = {
 		.magic       = prg_header_magic,
@@ -23,30 +25,37 @@ static size_t append_header(struct file *tf, struct file *ef)
 		.symbol_size = option_symbols() ?
 					symbol_size(ef, symtab_section) : 0,
 	};
+	const struct program_header program_header = {
+		.size = sizeof(struct prg_header)
+	};
+	const struct program program = {
+		.header = program_header,
+		.size = sizeof(prg_header) +
+			prg_header.text_size +
+			prg_header.data_size +
+			prg_header.symbol_size +
+			relocation_size(ef, &program_header)
+	};
 
 	BUILD_BUG_ON(sizeof(struct prg_header) != PRG_HEADER_SIZE);
 
 	file_append(tf, (const void *)&prg_header, sizeof(prg_header));
 
-	return sizeof(prg_header) +
-	       prg_header.text_size +
-	       prg_header.data_size +
-	       prg_header.symbol_size +
-	       relocation_size(ef);
+	return program;
 }
 
 void link_program(struct file *tf, struct file *ef)
 {
-	const size_t size = append_header(tf, ef);
+	const struct program program = append_prg_header(tf, ef);
 
 	append_sections_text_data(tf, ef);
 
 	if (option_symbols())
 		append_symbols(tf, ef);
 
-	append_relocations_text_data(tf, ef);
+	append_relocations_text_data(tf, ef, &program.header);
 
-	if (tf->size != size)
+	if (tf->size != program.size)
 		pr_fatal_error("%s: size mismatch %zu != %zu",
-			ef->path, tf->size, size);
+			ef->path, tf->size, program.size);
 }
