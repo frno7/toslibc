@@ -23,7 +23,7 @@ static Elf_Sym *sym_for_rela(Elf_Rela *rela, Elf_Shdr *shdr, Elf_Ehdr *ehdr)
 
 static void reloc_code(const uint32_t addr, const uint32_t r,
 	const int type, struct file *ef, struct file *tf,
-	const struct program_header *program_header)
+	const struct link_header *link_header)
 {
 	const size_t size =
 		type == R_68K_PC8  ? 1 :
@@ -42,7 +42,7 @@ static void reloc_code(const uint32_t addr, const uint32_t r,
 		pr_fatal_error("%s: unknown relocation type %d", ef->path, type);
 
 	for (size_t i = 0; i < size; i++) {
-		const size_t k = program_header->size + addr + i;
+		const size_t k = link_header->size + addr + i;
 
 		if (b[k])
 			pr_fatal_error("%s: nonzero code at %x", ef->path, k);
@@ -83,7 +83,7 @@ static uint32_t reloc_entry(uint32_t *reloc,
 }
 
 static size_t append_relocations(struct file *tf, struct file *ef,
-	const struct program_header *program_header, uint32_t *reloc,
+	const struct link_header *link_header, uint32_t *reloc,
 	bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr))
 {
 	if (!section) {
@@ -120,7 +120,7 @@ static size_t append_relocations(struct file *tf, struct file *ef,
 				elf_first_section(ehdr)[sym->st_shndx].sh_addr;
 
 			if (tf)
-				reloc_code(addr, r, type, ef, tf, program_header);
+				reloc_code(addr, r, type, ef, tf, link_header);
 
 			if (type == R_68K_PC8  ||
 			    type == R_68K_PC16 ||
@@ -135,20 +135,20 @@ static size_t append_relocations(struct file *tf, struct file *ef,
 }
 
 size_t append_relocations_text_data(struct file *tf, struct file *ef,
-	const struct program_header *program_header)
+	const struct link_header *link_header)
 {
 	uint32_t reloc = 0;
 	size_t size = 0;
 
-	size += append_relocations(tf, ef, program_header, &reloc, text_section);
-	size += append_relocations(tf, ef, program_header, &reloc, data_section);
-	size += append_relocations(tf, ef, program_header, &reloc, NULL);
+	size += append_relocations(tf, ef, link_header, &reloc, text_section);
+	size += append_relocations(tf, ef, link_header, &reloc, data_section);
+	size += append_relocations(tf, ef, link_header, &reloc, NULL);
 
 	return size;
 }
 
 size_t relocation_size(struct file *ef,
-	const struct program_header *program_header)
+	const struct link_header *link_header)
 {
-	return append_relocations_text_data(NULL, ef, program_header);
+	return append_relocations_text_data(NULL, ef, link_header);
 }

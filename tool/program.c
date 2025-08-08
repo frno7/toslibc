@@ -15,6 +15,12 @@
 
 #define PRG_HEADER_SIZE 28
 
+struct program {
+	struct link_header header;
+
+	size_t size;
+};
+
 static struct program append_prg_header(struct file *tf, struct file *ef)
 {
 	const struct prg_header prg_header = {
@@ -25,16 +31,16 @@ static struct program append_prg_header(struct file *tf, struct file *ef)
 		.symbol_size = option_symbols() ?
 					symbol_size(ef, symtab_section) : 0,
 	};
-	const struct program_header program_header = {
+	const struct link_header link_header = {
 		.size = sizeof(struct prg_header)
 	};
 	const struct program program = {
-		.header = program_header,
+		.header = link_header,
 		.size = sizeof(prg_header) +
 			prg_header.text_size +
 			prg_header.data_size +
 			prg_header.symbol_size +
-			relocation_size(ef, &program_header)
+			relocation_size(ef, &link_header)
 	};
 
 	BUILD_BUG_ON(sizeof(struct prg_header) != PRG_HEADER_SIZE);
