@@ -65,32 +65,36 @@ bool shstrtab_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr)
 	       strcmp(elf_section_name(shdr, ehdr), ".shstrtab") == 0;
 }
 
-uint32_t section_size(const struct file *f,
+struct section section_data(const struct file *f,
 	const char *name, bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr))
 {
 	Elf_Ehdr *ehdr = (Elf_Ehdr *)f->data;
 	Elf_Shdr *shdr;
-	uint32_t size = 0;
+	const uint8_t *b = f->data;
 
 	elf_for_each_section (shdr, ehdr)
 		if (strcmp(elf_section_name(shdr, ehdr), name) == 0 &&
 		    section(shdr ,ehdr))
-			size += shdr->sh_size;
+			return (struct section) {
+				.size = shdr->sh_size,
+				.data = &b[shdr->sh_offset]
+			};
 
-	return size;
+	return (struct section) { };
+}
+
+uint32_t section_size(const struct file *f,
+	const char *name, bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr))
+{
+	return section_data(f, name, section).size;
 }
 
 void append_section(struct file *tf, struct file *ef,
 	const char *name, bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr))
 {
-	Elf_Ehdr *ehdr = (Elf_Ehdr *)ef->data;
-	Elf_Shdr *shdr;
-	const uint8_t *b = ef->data;
+	const struct section s = section_data(ef, name, section);
 
-	elf_for_each_section (shdr, ehdr)
-		if (strcmp(elf_section_name(shdr, ehdr), name) == 0 &&
-		    section(shdr ,ehdr))
-			file_append(tf, &b[shdr->sh_offset], shdr->sh_size);
+	file_append(tf, s.data, s.size);
 }
 
 void append_sections_text_data(struct file *tf, struct file *ef)

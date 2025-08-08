@@ -8,6 +8,11 @@
 #include "tool/elf32.h"
 #include "tool/file.h"
 
+struct section {
+	size_t size;
+	const void *data;
+};
+
 bool null_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr);
 
 bool text_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr);
@@ -25,6 +30,9 @@ bool symtab_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr);
 bool strtab_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr);
 
 bool shstrtab_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr);
+
+struct section section_data(const struct file *f,
+	const char *name, bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr));
 
 uint32_t section_size(const struct file *f,
 	const char *name, bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr));
