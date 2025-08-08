@@ -80,19 +80,20 @@ uint32_t section_size(const struct file *f,
 }
 
 static void append_section(struct file *tf, struct file *ef,
-	bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr))
+	const char *name, bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr))
 {
 	Elf_Ehdr *ehdr = (Elf_Ehdr *)ef->data;
 	Elf_Shdr *shdr;
 	const uint8_t *b = ef->data;
 
 	elf_for_each_section (shdr, ehdr)
-		if (section(shdr ,ehdr))
+		if (strcmp(elf_section_name(shdr, ehdr), name) == 0 &&
+		    section(shdr ,ehdr))
 			file_append(tf, &b[shdr->sh_offset], shdr->sh_size);
 }
 
 void append_sections_text_data(struct file *tf, struct file *ef)
 {
-	append_section(tf, ef, text_section);
-	append_section(tf, ef, data_section);
+	append_section(tf, ef, ".text", text_section);
+	append_section(tf, ef, ".data", data_section);
 }
