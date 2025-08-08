@@ -80,7 +80,7 @@ uint32_t section_size(const struct file *f,
 	return size;
 }
 
-static void append_section(struct file *tf, struct file *ef,
+void append_section(struct file *tf, struct file *ef,
 	const char *name, bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr))
 {
 	Elf_Ehdr *ehdr = (Elf_Ehdr *)ef->data;

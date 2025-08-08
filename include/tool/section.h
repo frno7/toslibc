@@ -29,6 +29,9 @@ bool shstrtab_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr);
 uint32_t section_size(const struct file *f,
 	const char *name, bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr));
 
+void append_section(struct file *tf, struct file *ef,
+	const char *name, bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr));
+
 void append_sections_text_data(struct file *tf, struct file *ef);
 
 #endif /* TOSLIBC_TOOL_SECTION_H */
