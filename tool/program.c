@@ -25,9 +25,9 @@ static struct program append_prg_header(struct file *tf, struct file *ef)
 {
 	const struct prg_header prg_header = {
 		.magic       = prg_header_magic,
-		.text_size   = section_size(ef, text_section),
-		.data_size   = section_size(ef, data_section),
-		.bss_size    = section_size(ef, bss_section),
+		.text_size   = section_size(ef, ".text", text_section),
+		.data_size   = section_size(ef, ".data", data_section),
+		.bss_size    = section_size(ef, ".bss",  bss_section),
 		.symbol_size = option_symbols() ?
 					symbol_size(ef, symtab_section) : 0,
 	};

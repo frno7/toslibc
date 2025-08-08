@@ -27,7 +27,7 @@ bool strtab_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr);
 bool shstrtab_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr);
 
 uint32_t section_size(const struct file *f,
-	bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr));
+	const char *name, bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr));
 
 void append_sections_text_data(struct file *tf, struct file *ef);
 

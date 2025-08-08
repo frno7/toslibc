@@ -66,14 +66,15 @@ bool shstrtab_section(Elf_Shdr *shdr, Elf_Ehdr *ehdr)
 }
 
 uint32_t section_size(const struct file *f,
-	bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr))
+	const char *name, bool (*section)(Elf_Shdr *shdr, Elf_Ehdr *ehdr))
 {
 	Elf_Ehdr *ehdr = (Elf_Ehdr *)f->data;
 	Elf_Shdr *shdr;
 	uint32_t size = 0;
 
 	elf_for_each_section (shdr, ehdr)
-		if (section(shdr ,ehdr))
+		if (strcmp(elf_section_name(shdr, ehdr), name) == 0 &&
+		    section(shdr ,ehdr))
 			size += shdr->sh_size;
 
 	return size;
