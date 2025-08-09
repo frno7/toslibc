@@ -11,9 +11,36 @@ set -e
 set -o pipefail
 shopt -s nocasematch
 
-tos_prg()
+file_type()
 {
-	[[ "$1" =~ \.(APP|GEM|GTP|PRG|TOS|TTP)$ ]]
+	case "$(echo "$1" | tr '[:lower:]' '[:upper:]')" in
+		*.APP | *.GEM | *.GTP | *.PRG | *.TOS | *.TTP)
+			echo "PRG"
+			;;
+		*.SNDH)
+			echo "SNDH"
+			;;
+		*)
+			echo "default"
+	esac
+}
+
+args_PRG()
+{
+	out=${args[$i]}
+	obj="$out".o
+	args[$i]="$obj"
+	args+=(-c)
+}
+
+args_SNDH()
+{
+	args_PRG "$@"
+}
+
+args_default()
+{
+	:
 }
 
 args=("$@")
@@ -23,13 +50,10 @@ args+=('"$TOSLIBC_PROGRAM_BASIC_CFLAGS"')
 
 for (( i=1; i<$#; i++ ))
 do
-	# Match -o FILE.APP, -o FILE.PRG, etc. for implicit linking
-	if [[ ${args[(( i-1 ))]} = -o ]] && tos_prg ${args[i]}
+	# Match -o FILE.APP, -o FILE.PRG, etc.
+	if [[ ${args[(( i-1 ))]} = -o ]]
 	then
-		out=${args[$i]}
-		obj="$out".o
-		args[$i]="$obj"
-		args+=(-c)
+		args_$(file_type "${args[i]}")
 	fi
 done
 
