@@ -59,7 +59,7 @@ compiler: $(TOSLIBC_SCRIPT_TARGET_CC)
 
 .PHONY: install-binutils
 install-binutils: install-toslink install-linker-script			\
-	install-binutils-symlink install-prg.ld-script
+	install-binutils-symlink install-prg.ld-script install-sndh.ld-script
 
 .PHONY: install-compiler
 install-compiler: install-compiler-script install-compiler-alias
