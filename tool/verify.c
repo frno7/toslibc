@@ -42,15 +42,19 @@ static void verify_sections(struct file *f)
 		const int max;
 		int n;
 	} sections[] = {
-		{ "",           null_section,      0, 0, 1 },
-		{ ".text",      text_section,      4, 1, 1 },
-		{ ".rela.text", rela_text_section, 0, 0, 1 },
-		{ ".rela.data", rela_data_section, 0, 0, 1 },
-		{ ".data",      data_section,      4, 0, 1 },
-		{ ".bss",       bss_section,       4, 0, 1 },
-		{ ".symtab",    symtab_section,    0, 0, 1 },
-		{ ".strtab",    strtab_section,    0, 0, 1 },
-		{ ".shstrtab",  shstrtab_section,  0, 0, 1 },
+		{ "",			null_section,      0, 0, 1 },
+		{ ".text",		text_section,      4, 1, 1 },
+		{ ".rela.text",		rela_text_section, 0, 0, 1 },
+		{ ".rela.data",		rela_data_section, 0, 0, 1 },
+		{ ".data",		data_section,      4, 0, 1 },
+		{ ".bss",		bss_section,       4, 0, 1 },
+		{ ".symtab",		symtab_section,    0, 0, 1 },
+		{ ".strtab",		strtab_section,    0, 0, 1 },
+		{ ".shstrtab",		shstrtab_section,  0, 0, 1 },
+
+		{ ".sndh.title",	data_section,      0, 0, 1 },
+		{ ".sndh.tune.count",	data_section,      0, 0, 1 },
+		{ ".sndh.tune.names",	data_section,      0, 0, 1 },
 	};
 	Elf_Ehdr *ehdr = (Elf_Ehdr *)f->data;
 	Elf_Shdr *shdr;
@@ -65,9 +69,7 @@ static void verify_sections(struct file *f)
 				continue;
 
 			if (strcmp(elf_section_name(shdr, ehdr), sections[i].name) != 0)
-				pr_warn("%s: unexpected section name \"%s\", expected \"%s\"",
-					f->path, elf_section_name(shdr, ehdr),
-					sections[i].name);
+				continue;
 
 			if (sections[i].align) {
 				if (shdr->sh_offset % sections[i].align)
