@@ -24,6 +24,7 @@ TOSLINK_SRC = $(addprefix $(TOSLIBC_tool_dir),				\
 	program.c							\
 	relocation.c							\
 	section.c							\
+	sndh.c								\
 	symbol.c							\
 	toslink.c							\
 	verify.c)							\

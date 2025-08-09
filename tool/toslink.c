@@ -12,6 +12,7 @@
 #include "tool/option.h"
 #include "tool/print.h"
 #include "tool/program.h"
+#include "tool/sndh.h"
 #include "tool/tool.h"
 #include "tool/verify.h"
 
@@ -25,7 +26,11 @@ int main(int argc, char **argv)
 	struct file tf = { };
 
 	verify_elf(&ef);
-	link_program(&tf, &ef);
+
+	if (has_sndh_extension(option.output))
+		link_sndh(&tf, &ef);
+	else
+		link_program(&tf, &ef);
 
 	if (!file_rename(option.output, &tf))
 		pr_fatal_errno(option.output);
