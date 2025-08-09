@@ -23,14 +23,21 @@ $(TOSLIBC_EXAMPLE_OBJ): %.o: %.c
 	$(QUIET_CC)$(TARGET_CC) $(TOSLIBC_PROGRAM_CFLAGS) -c -o $@ $<
 
 define TOSLIBC_EXAMPLE_OBJ_target
-$(1).elf: $(call lowercase,$(basename $(1))).o $$(TOSLIBC) $$(TOSLIBC_SCRIPT_PRG_LD)
+$(1).elf: $(call lowercase,$(basename $(1))).o				\
+	$$(TOSLIBC) $$(TOSLIBC_SCRIPT_PRG_LD) $$(TOSLIBC_SCRIPT_SNDH_LD)
 endef
 
 $(foreach e,$(TOSLIBC_EXAMPLE_PRG),					\
 	$(eval $(call TOSLIBC_EXAMPLE_OBJ_target,$(e))))
 
+$(filter-out %.SNDH.elf,$(TOSLIBC_EXAMPLE_ELF)):			\
+	TOSLIBC_EXAMPLE_LDFLAGS += $(TOSLIBC_PROGRAM_LDFLAGS)
+
+$(filter %.SNDH.elf,$(TOSLIBC_EXAMPLE_ELF)):				\
+	TOSLIBC_EXAMPLE_LDFLAGS += $(TOSLIBC_SNDH_LDFLAGS)
+
 $(TOSLIBC_EXAMPLE_ELF):
-	$(QUIET_LINK)$(TARGET_LD) $(TOSLIBC_PROGRAM_LDFLAGS) -o $@ $< $(TOSLIBC)
+	$(QUIET_LINK)$(TARGET_LD) $(TOSLIBC_EXAMPLE_LDFLAGS) -o $@ $< $(TOSLIBC)
 
 $(TOSLIBC_EXAMPLE_PRG): $(TOSLINK)
 

@@ -6,6 +6,7 @@
 *.PRG
 *.TOS
 *.TTP
+*.SNDH
 /GPATH
 /GRTAGS
 /GTAGS

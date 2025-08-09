@@ -73,6 +73,13 @@ TOSLIBC_PROGRAM_CFLAGS = $(BASIC_CFLAGS) $(TOSLIBC_PROGRAM_BASIC_CFLAGS)\
 TOSLIBC_PROGRAM_LDFLAGS = $(TOSLIBC_PROGRAM_BASIC_LDFLAGS)		\
 	-nostdlib -Llib --script=$(TOSLIBC_SCRIPT_PRG_LD) $(TARGET_LDFLAGS)
 
+TOSLIBC_SNDH_BASIC_LDFLAGS = --relocatable --gc-sections --strip-all --entry _sndh
+
+export TOSLIBC_SNDH_BASIC_LDFLAGS
+
+TOSLIBC_SNDH_LDFLAGS = $(TOSLIBC_SNDH_BASIC_LDFLAGS)			\
+	-nostdlib -Llib --script=$(TOSLIBC_SCRIPT_SNDH_LD) $(TARGET_LDFLAGS)
+
 include example/Makefile
 include test/Makefile
 
