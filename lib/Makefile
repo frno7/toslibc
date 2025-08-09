@@ -107,9 +107,11 @@ install-lib: install-lib-include install-lib-static install-pkg-config
 .PHONY: install-lib-include
 install-lib-include:
 	$(INSTALL) -d -m 755 $(DESTDIR)$(includedir)
+	$(INSTALL) -d -m 755 $(DESTDIR)$(includedir)/asm
 	$(INSTALL) -d -m 755 $(DESTDIR)$(includedir)/sys
 	$(INSTALL) -d -m 755 $(DESTDIR)$(includedir)/tos
 	$(INSTALL) -m 644 $(wildcard include/toslibc/*.h) $(DESTDIR)$(includedir)
+	$(INSTALL) -m 644 $(wildcard include/toslibc/asm/*.h) $(DESTDIR)$(includedir)/asm
 	$(INSTALL) -m 644 $(wildcard include/toslibc/sys/*.h) $(DESTDIR)$(includedir)/sys
 	$(INSTALL) -m 644 $(wildcard include/toslibc/tos/*.h) $(DESTDIR)$(includedir)/tos
 
