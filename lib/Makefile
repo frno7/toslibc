@@ -12,6 +12,7 @@ TOSLIBC_LIB_CFLAGS = $(BASIC_CFLAGS) -march=68000 -fno-PIC		\
 
 TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_lib_dir),			\
 	crt0.S								\
+	sndhrt0.S							\
 	bios.S								\
 	gemdos.S							\
 	xbios.S								\
