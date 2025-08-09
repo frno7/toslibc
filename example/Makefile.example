@@ -2,10 +2,11 @@ CFLAGS = -O2 -Wall
 
 TARGET_CC = m68k-atari-tos-gnu-gcc
 
-EXAMPLE_PRG =								\
+EXAMPLES =								\
 	ALERT.PRG							\
 	COOKIE.TOS							\
 	HELLO.TOS							\
+	PITCH.SNDH							\
 	WINDOW.PRG							\
 	XBRA.PRG
 
@@ -13,17 +14,17 @@ EXAMPLE_PRG =								\
 export V
 
 .PHONY: all
-all: $(EXAMPLE_PRG)
+all: $(EXAMPLES)
 
 lowercase ?= $(shell echo "$(1)" | tr '[:upper:]' '[:lower:]')
 
-define EXAMPLE_PRG_target
+define EXAMPLE_target
 $(1): $(call lowercase,$(basename $(1))).c
 	$$(TARGET_CC) $$(CFLAGS) -o $$@ $$^
 endef
 
-$(foreach e,$(EXAMPLE_PRG), $(eval $(call EXAMPLE_PRG_target,$(e))))
+$(foreach e,$(EXAMPLES), $(eval $(call EXAMPLE_target,$(e))))
 
 .PHONY: clean
 clean:
-	$(RM) $(EXAMPLE_PRG)
+	$(RM) $(EXAMPLES)

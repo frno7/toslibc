@@ -43,8 +43,10 @@ jobs:
           path: |
             example/*.PRG
             example/*.TOS
+            example/*.SNDH
             local/example/*.PRG
             local/example/*.TOS
+            local/example/*.SNDH
             test/SUITE.TOS
             test/test.txt
 
