@@ -27,15 +27,17 @@ int main(int argc, char **argv)
 
 	verify_elf(&ef);
 
-	if (has_sndh_extension(option.output))
+	int mode = 0755;
+	if (has_sndh_extension(option.output)) {
 		link_sndh(&tf, &ef);
-	else
+		mode = 0644;
+	} else
 		link_program(&tf, &ef);
 
 	if (!file_rename(option.output, &tf))
 		pr_fatal_errno(option.output);
 
-	if (!file_write(tf, 0755))
+	if (!file_write(tf, mode))
 		pr_fatal_errno(tf.path);
 
 	file_free(tf);
