@@ -36,6 +36,9 @@ TOS/libc includes interfaces for the following Atari TOS specific libraries:
 The AES and VDI interfaces are part of the
 [GEM desktop environment](https://en.wikipedia.org/wiki/GEM_(desktop_environment)).
 
+In addition to `APP`, `GEM`, `GTP`, `PRG`, `TOS` and `TTP` programs,
+TOS/libc can link [`SNDH`](https://sndh.atari.org/) (music) programs.
+
 # Examples
 
 The [`example`](https://github.com/frno7/toslibc/tree/main/example) directory
@@ -119,10 +122,11 @@ Atari TOS example applications and a `Makefile` are installed in
 
 ```bash
 $ make clean && make
-rm -f ALERT.PRG COOKIE.TOS HELLO.TOS WINDOW.PRG XBRA.PRG
+rm -f ALERT.PRG COOKIE.TOS HELLO.TOS PITCH.SNDH WINDOW.PRG XBRA.PRG
 m68k-atari-tos-gnu-gcc -O2 -Wall -o ALERT.PRG alert.c
 m68k-atari-tos-gnu-gcc -O2 -Wall -o COOKIE.TOS cookie.c
 m68k-atari-tos-gnu-gcc -O2 -Wall -o HELLO.TOS hello.c
+m68k-atari-tos-gnu-gcc -O2 -Wall -o PITCH.SNDH pitch.c
 m68k-atari-tos-gnu-gcc -O2 -Wall -o WINDOW.PRG window.c
 m68k-atari-tos-gnu-gcc -O2 -Wall -o XBRA.PRG xbra.c
 ```
