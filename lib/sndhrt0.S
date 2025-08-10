@@ -19,12 +19,12 @@ _sndh:
 	.globl	_sndh_play
 	.type	_sndh_play,@function
 _sndh_play:
-	jmp sndh_play
+	jmp	sndh_play
 
 	.globl	_sndh_exit
 	.type	_sndh_exit,@function
 _sndh_exit:
-	jmp sndh_exit
+	jmp	sndh_exit
 
 	.globl	_sndh_init
 	.type	_sndh_init,@function
