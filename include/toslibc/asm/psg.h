@@ -4,9 +4,9 @@
 #define TOSLIBC_ASM_PSG_H
 
 #include <asm/io.h>
+#include <asm/machine.h>
 #include <asm/math.h>
 
-#define PSG_CLOCK_FREQ		2000000
 #define PSG_ADDR_RD_SELECT	0xff8800
 #define PSG_ADDR_WR		0xff8802
 
@@ -59,7 +59,7 @@ static inline void psg_wr(uint8_t value, uint8_t reg)
 
 static inline uint16_t psg_tone_period_freq(uint32_t freq)
 {
-	return DIV_ROUND_CLOSEST_U32(PSG_CLOCK_FREQ, 16 * freq);
+	return DIV_ROUND_CLOSEST_U32(ATARI_STE_PSG_CLK, 16 * freq);
 }
 
 #define PSG_DEFINE_CHANNEL_F(ch, CH)					\

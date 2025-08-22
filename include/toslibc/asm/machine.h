@@ -3,6 +3,8 @@
 #ifndef TOSLIBC_ASM_MACHINE_H
 #define TOSLIBC_ASM_MACHINE_H
 
+/* Main clock frequencies */
+
 #define ATARI_STF_PAL_MCLK		32084988 /* CPU 8.021247 MHz */
 #define ATARI_STF_NTSC_MCLK		32042400 /* CPU 8.010600 MHz */
 #define ATARI_STF_CYCLES_PER_VBL_PAL	  160256 /* 512 cycles * 313 lines */
@@ -29,5 +31,9 @@
 
 #define ATARI_MFP_XTAL			 2457600 /* External clock for the MFP */
 #define ATARI_IKBD_CLK			 1000000 /* Clock of the HD6301 IKBD CPU */
+
+/* Derived clock frequencies */
+
+#define ATARI_STE_PSG_CLK	(ATARI_STE_EXT_OSC / 4)	/* PSG 2.00265 MHz */
 
 #endif /* TOSLIBC_ASM_MACHINE_H */
