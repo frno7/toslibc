@@ -100,6 +100,8 @@ static inline void snd_dma_wr_ctrl(struct snd_dma_ctrl ctrl)
 	snd_dma_wr16_ctrl(ctrl.u16);
 }
 
+#define snd_dma_wrs_ctrl(...) snd_dma_wr_ctrl((struct snd_dma_ctrl) __VA_ARGS__)
+
 static inline uint32_t snd_dma_rd32_start()
 {
 	return (snd_dma_rd8_starthi() << 16) |
@@ -169,5 +171,7 @@ static inline void snd_dma_wr_mode(struct snd_dma_mode mode)
 {
 	snd_dma_wr16_mode(mode.u16);
 }
+
+#define snd_dma_wrs_mode(...) snd_dma_wr_mode((struct snd_dma_mode) __VA_ARGS__)
 
 #endif /* TOSLIBC_ASM_SND_DMA_H */
