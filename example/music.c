@@ -9,7 +9,7 @@
 
 sndh_title("Music");
 sndh_tune_value_names(int, tune_value_names);
-sndh_timer(SNDH_TIMER_VBL, 50);
+sndh_timer(SNDH_TIMER_C, 200);
 
 void sndh_init(int tune)
 {
@@ -17,7 +17,7 @@ void sndh_init(int tune)
 
 	snd_psg_wr_iomix(SND_PSG_IOMIX_OFF);
 	snd_psg_wr_freq_a(pitch);
-	snd_psg_wr_level_a(15);
+	snd_psg_wr_level_a(SND_PSG_LEVEL_MAX);
 }
 
 void sndh_play()
