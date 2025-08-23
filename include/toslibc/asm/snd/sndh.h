@@ -6,7 +6,7 @@
 #define sndh_title(title) const char _sndh_title[]			\
 	__attribute__((section(".sndh.title")))	= title
 
-#define sndh_tune_count(count) const uint8_t _sndh_tune_count[2]	\
+#define sndh_tune_count(count) const unsigned char _sndh_tune_count[2]	\
 	__attribute__((section(".sndh.tune.count"))) = {		\
 		((count) >> 8) & 0xff,					\
 		((count) >> 0) & 0xff					\
@@ -44,7 +44,7 @@ enum {
 	SNDH_TIMER_D   = ('T' << 8) | 'D',
 };
 
-#define sndh_timer(timer, frequency) const uint8_t _sndh_timer[4]	\
+#define sndh_timer(timer, frequency) const unsigned char _sndh_timer[4]	\
 	__attribute__((section(".sndh.timer"))) = {			\
 		((timer)     >> 8) & 0xff,				\
 		((timer)     >> 0) & 0xff,				\
