@@ -28,8 +28,8 @@ struct snd_dma_ctrl {
 	union {
 		struct {
 			uint16_t : 14;
-			uint16_t loop : 1;
-			uint16_t dma : 1;
+			uint16_t play_repeat : 1;
+			uint16_t play : 1;
 		};
 		uint16_t u16;
 	};
