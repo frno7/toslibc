@@ -39,12 +39,23 @@ struct snd_dma_mode {
 	union {
 		struct {
 			uint16_t : 8;
-			uint16_t mono : 1;
-			uint16_t : 5;
+			uint16_t mode : 2;
+			uint16_t : 4;
 			uint16_t frequency : 2;
 		};
 		uint16_t u16;
 	};
+};
+
+#define SND_DMA_MODE(m)							\
+	m(0, STEREO8)							\
+	m(1, STEREO16)							\
+	m(2, MONO8)
+
+enum {
+#define SND_DMA_MODE_ENUM(value, mode)					\
+	SND_DMA_MODE_##mode = value,
+SND_DMA_MODE(SND_DMA_MODE_ENUM)
 };
 
 #define SND_DMA_FREQUENCY(f)						\
@@ -53,7 +64,7 @@ struct snd_dma_mode {
 	f(2, 25033)							\
 	f(3, 50066)
 
-enum snd_dma_frequency {
+enum {
 #define SND_DMA_FREQUENCY_ENUM(value, frequency)			\
 	SND_DMA_FREQUENCY_##frequency = value,
 SND_DMA_FREQUENCY(SND_DMA_FREQUENCY_ENUM)
