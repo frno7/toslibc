@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 
 #include <asm/snd/psg.h>
-#include <asm/sndh.h>
+#include <asm/snd/sndh.h>
 
 #define tune_value_names(t)						\
 	t(440, "A4 pitch standard A440 440 Hz")				\
