@@ -122,11 +122,11 @@ Atari TOS example applications and a `Makefile` are installed in
 
 ```bash
 $ make clean && make
-rm -f ALERT.PRG COOKIE.TOS HELLO.TOS PITCH.SNDH WINDOW.PRG XBRA.PRG
+rm -f ALERT.PRG COOKIE.TOS HELLO.TOS MUSIC.SNDH WINDOW.PRG XBRA.PRG
 m68k-atari-tos-gnu-gcc -O2 -Wall -o ALERT.PRG alert.c
 m68k-atari-tos-gnu-gcc -O2 -Wall -o COOKIE.TOS cookie.c
 m68k-atari-tos-gnu-gcc -O2 -Wall -o HELLO.TOS hello.c
-m68k-atari-tos-gnu-gcc -O2 -Wall -o PITCH.SNDH pitch.c
+m68k-atari-tos-gnu-gcc -O2 -Wall -o MUSIC.SNDH music.c
 m68k-atari-tos-gnu-gcc -O2 -Wall -o WINDOW.PRG window.c
 m68k-atari-tos-gnu-gcc -O2 -Wall -o XBRA.PRG xbra.c
 ```

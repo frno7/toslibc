@@ -6,7 +6,7 @@ EXAMPLES =								\
 	ALERT.PRG							\
 	COOKIE.TOS							\
 	HELLO.TOS							\
-	PITCH.SNDH							\
+	MUSIC.SNDH							\
 	WINDOW.PRG							\
 	XBRA.PRG
 

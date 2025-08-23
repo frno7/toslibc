@@ -6,7 +6,7 @@ TOSLIBC_EXAMPLE_PRG = $(addprefix $(TOSLIBC_example_dir),		\
 	ALERT.PRG							\
 	COOKIE.TOS							\
 	HELLO.TOS							\
-	PITCH.SNDH							\
+	MUSIC.SNDH							\
 	WINDOW.PRG							\
 	XBRA.PRG)
 
