@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: LGPL-2.1
 
-#ifndef TOSLIBC_ASM_PSG_H
-#define TOSLIBC_ASM_PSG_H
+#ifndef TOSLIBC_ASM_SND_PSG_H
+#define TOSLIBC_ASM_SND_PSG_H
 
 #include <asm/io.h>
 #include <asm/machine.h>
@@ -88,4 +88,4 @@ static inline void psg_wr_iomix(uint8_t iomix)
 	psg_wr(iomix, PSG_REG_IOMIX);
 }
 
-#endif /* TOSLIBC_ASM_PSG_H */
+#endif /* TOSLIBC_ASM_SND_PSG_H */

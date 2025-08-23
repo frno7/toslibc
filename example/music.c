@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <asm/psg.h>
+#include <asm/snd/psg.h>
 #include <asm/sndh.h>
 
 #define tune_value_names(t)						\
