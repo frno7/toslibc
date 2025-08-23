@@ -9,6 +9,7 @@
 
 sndh_title("Music");
 sndh_tune_value_names(int, tune_value_names);
+sndh_timer(SNDH_TIMER_VBL, 50);
 
 void sndh_init(int tune)
 {

@@ -54,6 +54,10 @@ SECTIONS
 		KEEP (*(.sndh.tune.names));
 	}
 
+	.sndh.timer : {
+		KEEP (*(.sndh.timer));
+	}
+
 	/DISCARD/ : {
 		*(.comment)
 		*(.note.*)

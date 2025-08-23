@@ -36,6 +36,22 @@
 #define sndh_tune_select_value(tune)					\
 	(_sndh_tune_values[(tune) - 1])
 
+enum {
+	SNDH_TIMER_VBL = ('!' << 8) | 'V',
+	SNDH_TIMER_A   = ('T' << 8) | 'A',
+	SNDH_TIMER_B   = ('T' << 8) | 'B',
+	SNDH_TIMER_C   = ('T' << 8) | 'C',
+	SNDH_TIMER_D   = ('T' << 8) | 'D',
+};
+
+#define sndh_timer(timer, frequency) const uint8_t _sndh_timer[4]	\
+	__attribute__((section(".sndh.timer"))) = {			\
+		((timer)     >> 8) & 0xff,				\
+		((timer)     >> 0) & 0xff,				\
+		((frequency) >> 8) & 0xff,				\
+		((frequency) >> 0) & 0xff				\
+	}
+
 void sndh_init(int tune);
 void sndh_exit();
 void sndh_play();

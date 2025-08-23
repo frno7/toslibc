@@ -189,6 +189,34 @@ static size_t append_sndh_tune_names(struct file *tf, struct file *ef)
 	return size + append_even(tf, size);
 }
 
+static size_t append_sndh_timer(struct file *tf, struct file *ef)
+{
+	const struct section s =
+		section_data(ef, ".sndh.timer", data_section);
+	const uint8_t *b = s.data;
+
+	if (!s.size)
+		return 0;
+	if (s.size != 4)
+		pr_fatal_error("%s: .sndh.timer size mismatch %zu != 4",
+			ef->path, s.size);
+
+	char timer[6] = { b[0], b[1] };
+	const int n = (b[2] << 8) | b[3];
+	int i = 2;
+
+	if (b[0] != '!' || b[1] != 'V')
+		timer[i++] = ((n / 100) % 10) + '0';
+
+	timer[i++] = ((n /  10) % 10) + '0';
+	timer[i++] = ((n /   1) % 10) + '0';
+
+	if (tf)
+		file_append(tf, timer, sizeof(timer));
+
+	return sizeof(timer);
+}
+
 static size_t append_sndh_metadata(struct file *tf, struct file *ef)
 {
 	if (tf)
@@ -197,11 +225,16 @@ static size_t append_sndh_metadata(struct file *tf, struct file *ef)
 	const size_t title_length = append_sndh_title(tf, ef);
 	const size_t count_length = append_sndh_tune_count(tf, ef);
 	const size_t names_length = append_sndh_tune_names(tf, ef);
+	const size_t timer_length = append_sndh_timer(tf, ef);
 
 	if (tf)
 		append_text(tf, "HDNS");
 
-	return 4 + count_length + title_length + names_length + 4;
+	return 4 + count_length
+		 + title_length
+		 + names_length
+		 + timer_length
+		 + 4;
 }
 
 static size_t sndh_metadata_size(struct file *ef)
