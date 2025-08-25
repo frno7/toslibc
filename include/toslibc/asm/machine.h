@@ -34,6 +34,6 @@
 
 /* Derived clock frequencies */
 
-#define ATARI_STE_PSG_CLK	(ATARI_STE_EXT_OSC / 4)	/* PSG 2.00265 MHz */
+#define ATARI_STE_SND_PSG_DIV	4		/* Relative ATARI_STE_EXT_OSC */
 
 #endif /* TOSLIBC_ASM_MACHINE_H */

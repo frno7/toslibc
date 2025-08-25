@@ -132,7 +132,7 @@ static inline void snd_dma_wr32_start(uint32_t addr)
 	snd_dma_wr8_startlo(addr);
 }
 
-static inline void snd_dma_wr_start(void *buffer)
+static inline void snd_dma_wr_start(const void *buffer)
 {
 	snd_dma_wr32_start((uint32_t)buffer);
 }
@@ -168,7 +168,7 @@ static inline void snd_dma_wr32_end(uint32_t addr)
 	snd_dma_wr8_endlo(addr);
 }
 
-static inline void snd_dma_wr_end(void *buffer)
+static inline void snd_dma_wr_end(const void *buffer)
 {
 	snd_dma_wr32_end((uint32_t)buffer);
 }

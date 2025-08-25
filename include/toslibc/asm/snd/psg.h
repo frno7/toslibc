@@ -61,7 +61,8 @@ static inline void snd_psg_wr(uint8_t value, uint8_t reg)
 
 static inline uint16_t snd_psg_tone_period_freq(uint32_t freq)
 {
-	return DIV_ROUND_CLOSEST_U32(ATARI_STE_PSG_CLK, 16 * freq);
+	return DIV_ROUND_CLOSEST_U32(ATARI_STE_EXT_OSC,
+		ATARI_STE_SND_PSG_DIV * 16 * freq);
 }
 
 #define SND_PSG_DEFINE_CHANNEL_F(ch, CH)				\
