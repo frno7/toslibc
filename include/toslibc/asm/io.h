@@ -37,4 +37,20 @@ DEFINE_IOWR(uint8_t,  iowr8);
 DEFINE_IOWR(uint16_t, iowr16);
 DEFINE_IOWR(uint32_t, iowr32);
 
+static inline void ioor8(uint8_t val, uint32_t addr)
+{
+	barrier();
+	__asm__ __volatile__
+		("orb %0,%1" :: "di" (val), "m" (*(uint8_t *)addr) : "memory");
+	barrier();
+}
+
+static inline void ioand8(uint8_t val, uint32_t addr)
+{
+	barrier();
+	__asm__ __volatile__
+		("andb %0,%1" :: "di" (val), "m" (*(uint8_t *)addr) : "memory");
+	barrier();
+}
+
 #endif /* TOSLIBC_ASM_IO_H */
