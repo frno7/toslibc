@@ -211,7 +211,17 @@ MFP_DEFINE_TDR(tbdr);
 MFP_DEFINE_TDR(tcdr);
 MFP_DEFINE_TDR(tddr);
 
-#define MFP_DEFINE_SET_IEMRAB(symbol, label)				\
+#define MFP_DEFINE_RDWR_IEMRAB(symbol, label)				\
+static inline uint8_t mfp_rd8_##symbol()				\
+{									\
+	return iord8(MFP_ADDR_##label);					\
+}									\
+									\
+static inline struct mfp_##symbol mfp_rd_##symbol()			\
+{									\
+	return (struct mfp_##symbol) { .u8 = mfp_rd8_##symbol() };	\
+}									\
+									\
 static inline void mfp_set8_##symbol(uint8_t mask)			\
 {									\
 	ioor8(mask, MFP_ADDR_##label);					\
@@ -220,19 +230,43 @@ static inline void mfp_set8_##symbol(uint8_t mask)			\
 static inline void mfp_set_##symbol(struct mfp_##symbol symbol)		\
 {									\
 	mfp_set8_##symbol(symbol.u8);					\
+}									\
+									\
+static inline void mfp_clr8_##symbol(uint8_t mask)			\
+{									\
+	ioand8(~mask, MFP_ADDR_##label);				\
+}									\
+									\
+static inline void mfp_clr_##symbol(struct mfp_##symbol symbol)		\
+{									\
+	mfp_clr8_##symbol(symbol.u8);					\
 }
 
-MFP_DEFINE_SET_IEMRAB(iera, IERA);
-MFP_DEFINE_SET_IEMRAB(ierb, IERB);
-MFP_DEFINE_SET_IEMRAB(imra, IMRA);
-MFP_DEFINE_SET_IEMRAB(imrb, IMRB);
+MFP_DEFINE_RDWR_IEMRAB(iera, IERA);
+MFP_DEFINE_RDWR_IEMRAB(ierb, IERB);
+MFP_DEFINE_RDWR_IEMRAB(imra, IMRA);
+MFP_DEFINE_RDWR_IEMRAB(imrb, IMRB);
 
 #define mfp_sets_iera(...) mfp_set_iera((struct mfp_iera) __VA_ARGS__)
 #define mfp_sets_ierb(...) mfp_set_ierb((struct mfp_ierb) __VA_ARGS__)
 #define mfp_sets_imra(...) mfp_set_imra((struct mfp_imra) __VA_ARGS__)
 #define mfp_sets_imrb(...) mfp_set_imrb((struct mfp_imrb) __VA_ARGS__)
 
-#define MFP_DEFINE_SET_IEMR(symbol, label)				\
+#define mfp_clrs_iera(...) mfp_clr_iera((struct mfp_iera) __VA_ARGS__)
+#define mfp_clrs_ierb(...) mfp_clr_ierb((struct mfp_ierb) __VA_ARGS__)
+#define mfp_clrs_imra(...) mfp_clr_imra((struct mfp_imra) __VA_ARGS__)
+#define mfp_clrs_imrb(...) mfp_clr_imrb((struct mfp_imrb) __VA_ARGS__)
+
+#define MFP_DEFINE_RDWR_IEMR(symbol, label)				\
+static inline struct mfp_##symbol mfp_rd_##symbol()			\
+{									\
+	/* FIXME: Can this be optimised with a 32-bit read? */		\
+	return (struct mfp_##symbol) {					\
+		.a = mfp_rd_##symbol##a(),				\
+		.b = mfp_rd_##symbol##b()				\
+	};								\
+}									\
+									\
 static inline void mfp_set16_##symbol(uint16_t mask)			\
 {									\
 	/* FIXME: Is the bitorder correct? */				\
@@ -249,13 +283,34 @@ static inline void mfp_set_##symbol(struct mfp_##symbol symbol)		\
 	/* FIXME: Can this be optimised with a 32-bit write? */		\
 	if (symbol.a.u8) mfp_set_##symbol##a(symbol.a);			\
 	if (symbol.b.u8) mfp_set_##symbol##b(symbol.b);			\
+}									\
+									\
+static inline void mfp_clr16_##symbol(uint16_t mask)			\
+{									\
+	/* FIXME: Is the bitorder correct? */				\
+	const uint8_t a = mask >> 8;					\
+	const uint8_t b = mask & 0xff;					\
+									\
+	/* FIXME: Can this be optimised with a 32-bit write? */		\
+	if (a) mfp_clr8_##symbol##a(a);					\
+	if (b) mfp_clr8_##symbol##b(b);					\
+}									\
+									\
+static inline void mfp_clr_##symbol(struct mfp_##symbol symbol)		\
+{									\
+	/* FIXME: Can this be optimised with a 32-bit write? */		\
+	if (symbol.a.u8) mfp_clr_##symbol##a(symbol.a);			\
+	if (symbol.b.u8) mfp_clr_##symbol##b(symbol.b);			\
 }
 
 #define mfp_sets_ier(...) mfp_set_ier((struct mfp_ier) __VA_ARGS__)
 #define mfp_sets_imr(...) mfp_set_imr((struct mfp_imr) __VA_ARGS__)
 
-MFP_DEFINE_SET_IEMR(ier, IER);
-MFP_DEFINE_SET_IEMR(imr, IMR);
+#define mfp_clrs_ier(...) mfp_clr_ier((struct mfp_ier) __VA_ARGS__)
+#define mfp_clrs_imr(...) mfp_clr_imr((struct mfp_imr) __VA_ARGS__)
+
+MFP_DEFINE_RDWR_IEMR(ier, IER);
+MFP_DEFINE_RDWR_IEMR(imr, IMR);
 
 #define MFP_DEFINE_CLR_IPSRAB(symbol, label)				\
 static inline void mfp_clr8_##symbol(uint8_t mask)			\
