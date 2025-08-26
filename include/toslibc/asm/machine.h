@@ -34,6 +34,9 @@
 
 /* Derived clock frequencies */
 
+#define ATARI_STE_PAL_CPU_DIV	4		/* Relative ATARI_STE_PAL_MCLK */
+#define ATARI_STE_NTSC_CPU_DIV	4		/* Relative ATARI_STE_NTSC_MCLK */
+
 #define ATARI_STE_SND_PSG_DIV	4		/* Relative ATARI_STE_EXT_OSC */
 #define ATARI_STE_SND_DMA_DIV	(4 * 8 * 5)	/* Relative ATARI_STE_EXT_OSC */
 
