@@ -36,6 +36,7 @@
 
 /* Relative ATARI_STE_PAL_MCLK and ATARI_STE_NTSC_MCLK */
 #define ATARI_STE_CPU_CLK_DIV		4
+#define ATARI_STE_MFP_CLK_DIV		8
 
 /* Relative ATARI_STE_EXT_OSC */
 #define ATARI_STE_SND_PSG_DIV	4
