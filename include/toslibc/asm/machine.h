@@ -39,7 +39,7 @@
 #define ATARI_STE_MFP_CLK_DIV		8
 
 /* Relative ATARI_STE_EXT_OSC */
-#define ATARI_STE_SND_PSG_DIV	4
-#define ATARI_STE_SND_DMA_DIV	(4 * 8 * 5)
+#define ATARI_STE_SND_PSG_CLK_DIV	4
+#define ATARI_STE_SND_DMA_CLK_DIV	(4 * 8 * 5)
 
 #endif /* TOSLIBC_ASM_MACHINE_H */
