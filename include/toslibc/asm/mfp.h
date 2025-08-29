@@ -3,6 +3,10 @@
 #ifndef TOSLIBC_ASM_MFP_H
 #define TOSLIBC_ASM_MFP_H
 
+#include <stdint.h>
+
+#include <asm/io.h>
+
 #define MFP_REGISTERS(mfp)						\
 	mfp( 0, gpip,  GPIP,  "General-purpose I/O data register")	\
 	mfp( 1, aer,   AER,   "Active edge register")			\

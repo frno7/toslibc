@@ -33,6 +33,7 @@ TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_lib_dir),			\
 	memcpy.c							\
 	memmove.c							\
 	memset.c							\
+	mfp.c								\
 	mkdir.c								\
 	open.c								\
 	printf.c							\
