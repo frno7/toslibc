@@ -144,7 +144,7 @@ struct mfp_##type {							\
 struct mfp_##type {							\
 	union {								\
 		struct {						\
-			uint8_t unused : 3;				\
+			uint8_t : 3;					\
 			uint8_t reset : 1;				\
 			uint8_t event : 1;				\
 			uint8_t ctrl : 3;				\
@@ -156,26 +156,37 @@ struct mfp_##type {							\
 struct mfp_tcdcr {
 	union {
 		struct {
-			uint8_t tc_unused : 1;
+			uint8_t : 1;
 			uint8_t tc_ctrl : 3;
-			uint8_t td_unused : 1;
+			uint8_t : 1;
 			uint8_t td_ctrl : 3;
 		};
 		uint8_t u8;
 	};
 };
 
-/* Virtual separate C and D registers for struct mfp_tcdcr. */
-#define MFP_DEFINE_TCDCR(type)						\
-struct mfp_##type {							\
-	union {								\
-		struct {						\
-			uint8_t unused : 5;				\
-			uint8_t ctrl : 3;				\
-		};							\
-		uint8_t u8;						\
-	};								\
-}
+/* Virtual timer C control register for struct mfp_tcdcr. */
+struct mfp_tccr {
+	union {
+		struct {
+			uint8_t : 1;
+			uint8_t ctrl : 3;
+			uint8_t : 4;
+		};
+		uint8_t u8;
+	};
+};
+
+/* Virtual timer D control register for struct mfp_tcdcr. */
+struct mfp_tdcr {
+	union {
+		struct {
+			uint8_t : 5;
+			uint8_t ctrl : 3;
+		};
+		uint8_t u8;
+	};
+};
 
 #define MFP_DEFINE_TDR(type)						\
 struct mfp_##type {							\
@@ -207,8 +218,6 @@ MFP_DEFINE_IR(imr);
 
 MFP_DEFINE_TABCR(tacr);
 MFP_DEFINE_TABCR(tbcr);
-MFP_DEFINE_TCDCR(tccr);
-MFP_DEFINE_TCDCR(tdcr);
 
 MFP_DEFINE_TDR(tadr);
 MFP_DEFINE_TDR(tbdr);
@@ -415,20 +424,12 @@ static inline struct mfp_tdcr mfp_rd_tdcr()
 
 static inline void mfp_wr_tccr(struct mfp_tccr tccr)
 {
-	/* FIXME: IRQ disable/restore */
-	mfp_wrs_tcdcr({
-		.tc_ctrl = tccr.ctrl,		/* Write timer C control */
-		.td_ctrl = mfp_rd_tdcr().ctrl	/* Retain timer D control */
-	});
+	ioxor8((mfp_rd_tccr().u8 ^ tccr.u8) & 0x70, MFP_ADDR_TCDCR);
 }
 
 static inline void mfp_wr_tdcr(struct mfp_tdcr tdcr)
 {
-	/* FIXME: IRQ disable/restore */
-	mfp_wrs_tcdcr({
-		.tc_ctrl = mfp_rd_tccr().ctrl,	/* Retain timer C control */
-		.td_ctrl = tdcr.ctrl		/* Write timer D control */
-	});
+	ioxor8((mfp_rd_tdcr().u8 ^ tdcr.u8) & 0x07, MFP_ADDR_TCDCR);
 }
 
 #define mfp_wrs_tccr(...) mfp_wr_tccr((struct mfp_tccr) __VA_ARGS__)
