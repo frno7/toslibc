@@ -7,50 +7,58 @@
 
 #define barrier()	__sync_synchronize()
 
-#define DEFINE_IORD(type, name)						\
-static inline type name(const uint32_t addr)				\
+#define ASM_IO_DEFINE_IORD(size)					\
+static inline uint##size##_t iord##size(const uint32_t addr)		\
 {									\
-	const volatile type *__addr = (const volatile type *)addr;	\
+	const volatile uint##size##_t *addr__ =				\
+		(const volatile uint##size##_t *)addr;			\
 									\
 	barrier();							\
-	const type value = *__addr;					\
+	const uint##size##_t value = *addr__;				\
 	barrier();							\
 									\
 	return value;							\
 }
 
-DEFINE_IORD(uint8_t,  iord8);
-DEFINE_IORD(uint16_t, iord16);
-DEFINE_IORD(uint32_t, iord32);
+ASM_IO_DEFINE_IORD(8)   /* iord8  */
+ASM_IO_DEFINE_IORD(16)  /* iord16 */
+ASM_IO_DEFINE_IORD(32)  /* iord32 */
 
-#define DEFINE_IOWR(type, name)						\
-static inline void name(type value, uint32_t addr)			\
+#define ASM_IO_DEFINE_IOWR(size)					\
+static inline void iowr##size(uint##size##_t value, uint32_t addr)	\
 {									\
-	volatile type *__addr = (volatile type *)addr;			\
+	volatile uint##size##_t *addr__ =				\
+		(volatile uint##size##_t *)addr;			\
 									\
 	barrier();							\
-	*__addr = value;						\
+	*addr__ = value;						\
 	barrier();							\
 }
 
-DEFINE_IOWR(uint8_t,  iowr8);
-DEFINE_IOWR(uint16_t, iowr16);
-DEFINE_IOWR(uint32_t, iowr32);
+ASM_IO_DEFINE_IOWR(8)   /* iowr8  */
+ASM_IO_DEFINE_IOWR(16)  /* iowr16 */
+ASM_IO_DEFINE_IOWR(32)  /* iowr32 */
 
-static inline void ioor8(uint8_t val, uint32_t addr)
-{
-	barrier();
-	__asm__ __volatile__
-		("orb %0,%1" :: "di" (val), "m" (*(uint8_t *)addr) : "memory");
-	barrier();
+#define ASM_IO_DEFINE_WR_OP(name, op, size)				\
+static inline void io##name##size(uint##size##_t val, uint32_t addr)	\
+{									\
+	barrier();							\
+	__asm__ __volatile__						\
+		(#op " %0,%1" :: "di" (val),				\
+			"m" (*(uint##size##_t *)addr) : "memory");	\
+	barrier();							\
 }
 
-static inline void ioand8(uint8_t val, uint32_t addr)
-{
-	barrier();
-	__asm__ __volatile__
-		("andb %0,%1" :: "di" (val), "m" (*(uint8_t *)addr) : "memory");
-	barrier();
-}
+ASM_IO_DEFINE_WR_OP( or,  orb, 8)   /* ioor8   */
+ASM_IO_DEFINE_WR_OP(and, andb, 8)   /* ioand8  */
+ASM_IO_DEFINE_WR_OP(xor, eorb, 8)   /* ioxor8  */
+
+ASM_IO_DEFINE_WR_OP( or,  orw, 16)  /* ioor16  */
+ASM_IO_DEFINE_WR_OP(and, andw, 16)  /* ioand16 */
+ASM_IO_DEFINE_WR_OP(xor, eorw, 16)  /* ioxor16 */
+
+ASM_IO_DEFINE_WR_OP( or,  orl, 32)  /* ioor32  */
+ASM_IO_DEFINE_WR_OP(and, andl, 32)  /* ioand32 */
+ASM_IO_DEFINE_WR_OP(xor, eorl, 32)  /* ioxor32 */
 
 #endif /* TOSLIBC_ASM_IO_H */
