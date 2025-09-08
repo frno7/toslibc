@@ -55,6 +55,7 @@ static void verify_sections(struct file *f)
 		{ ".sndh.title",	data_section,      0, 0, 1 },
 		{ ".sndh.tune.count",	data_section,      0, 0, 1 },
 		{ ".sndh.tune.names",	data_section,      0, 0, 1 },
+		{ ".sndh.tune.times",	data_section,      0, 0, 1 },
 		{ ".sndh.timer",	data_section,      0, 0, 1 },
 	};
 	Elf_Ehdr *ehdr = (Elf_Ehdr *)f->data;

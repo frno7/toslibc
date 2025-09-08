@@ -54,6 +54,10 @@ SECTIONS
 		KEEP (*(.sndh.tune.names));
 	}
 
+	.sndh.tune.times : {
+		KEEP (*(.sndh.tune.times));
+	}
+
 	.sndh.timer : {
 		KEEP (*(.sndh.timer));
 	}

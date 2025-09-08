@@ -109,6 +109,11 @@ static int sndh_tune_names_count_(struct file *ef)
 	return n;
 }
 
+static int sndh_tune_times_count_(struct file *ef)
+{
+	return section_data(ef, ".sndh.tune.times", data_section).size / 2;
+}
+
 static int sndh_tune_count(struct file *ef)
 {
 	struct {
@@ -117,6 +122,7 @@ static int sndh_tune_count(struct file *ef)
 	} sections[] = {
 		{ ".sndh.tune.count", sndh_tune_count_ },
 		{ ".sndh.tune.names", sndh_tune_names_count_ },
+		{ ".sndh.tune.times", sndh_tune_times_count_ },
 	};
 	int n = 0;
 	int k = 0;
@@ -189,6 +195,23 @@ static size_t append_sndh_tune_names(struct file *tf, struct file *ef)
 	return size + append_even(tf, size);
 }
 
+static size_t append_sndh_tune_times(struct file *tf, struct file *ef)
+{
+	const struct section s =
+		section_data(ef, ".sndh.tune.times", data_section);
+
+	if (s.size % 2 != 0)
+		pr_fatal_error("%s: .sndh.tune.times size uneven %zu",
+			ef->path, s.size);
+
+	if (tf) {
+		append_text(tf, "TIME");
+		file_append(tf, s.data, s.size);
+	}
+
+	return 4 + s.size;
+}
+
 static size_t append_sndh_timer(struct file *tf, struct file *ef)
 {
 	const struct section s =
@@ -225,6 +248,7 @@ static size_t append_sndh_metadata(struct file *tf, struct file *ef)
 	const size_t title_length = append_sndh_title(tf, ef);
 	const size_t count_length = append_sndh_tune_count(tf, ef);
 	const size_t names_length = append_sndh_tune_names(tf, ef);
+	const size_t times_length = append_sndh_tune_times(tf, ef);
 	const size_t timer_length = append_sndh_timer(tf, ef);
 
 	if (tf)
@@ -233,6 +257,7 @@ static size_t append_sndh_metadata(struct file *tf, struct file *ef)
 	return 4 + count_length
 		 + title_length
 		 + names_length
+		 + times_length
 		 + timer_length
 		 + 4;
 }
