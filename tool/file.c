@@ -155,6 +155,9 @@ err:
 
 void file_append(struct file *f, const void *buf, size_t nbyte)
 {
+	if (!nbyte)
+		return;
+
 	f->data = xrealloc(f->data, f->size + nbyte);
 
 	uint8_t *b = f->data;
