@@ -204,9 +204,14 @@ static size_t append_sndh_tune_times(struct file *tf, struct file *ef)
 	const struct section s =
 		section_data(ef, ".sndh.tune.times", data_section);
 
-	if (s.size % 2 != 0)
-		pr_fatal_error("%s: .sndh.tune.times size uneven %zu",
-			ef->path, s.size);
+	if (!s.size)
+		return 0;
+
+	const int n = sndh_tune_count(ef);
+
+	if (s.size != 2 * n)
+		pr_fatal_error("%s: .sndh.tune.times size %zu not %d",
+			ef->path, s.size, n);
 
 	if (tf) {
 		append_text(tf, "TIME");
