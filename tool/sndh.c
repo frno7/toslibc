@@ -146,19 +146,32 @@ static int sndh_tune_count(struct file *ef)
 static size_t append_sndh_tune_count(struct file *tf, struct file *ef)
 {
 	const int n = sndh_tune_count(ef);
-	const char count[6] = {
+	const char count3[6] = {
+		'#', '#',
+		((n / 100) % 10) + '0',
+		((n /  10) % 10) + '0',
+		((n /   1) % 10) + '0',
+		'\0'
+	};
+	const char count2[6] = {
 		'#', '#',
 		((n / 10) % 10) + '0',
 		((n /  1) % 10) + '0',
 		'\0', '\0'
 	};
+	const char *count = count3[2] != '0' ? count3 : count2;
+	const size_t size = sizeof(count3);
+
+	BUILD_BUG_ON(sizeof(count3) != sizeof(count2));
 
 	if (!n)
 		return 0;
+	if (n > 999)
+		pr_fatal_error("%s: tune count %d > 999", ef->path, n);
 	if (tf)
-		file_append(tf, count, sizeof(count));
+		file_append(tf, count, size);
 
-	return sizeof(count);
+	return size;
 }
 
 static size_t append_sndh_tune_names(struct file *tf, struct file *ef)
