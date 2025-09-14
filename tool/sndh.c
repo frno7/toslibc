@@ -175,7 +175,11 @@ static size_t append_sndh_tune_names(struct file *tf, struct file *ef)
 	if (tf)
 		append_text(tf, "!#SN");
 
-	for (size_t i = 0; i < n && offset < s.size; i++) {
+	for (size_t i = 0; i < n; i++) {
+		if (offset >= s.size)
+			pr_fatal_error("%s: .sndh.tune.names size error %zu",
+				ef->path, s.size);
+
 		const uint8_t data[2] = {
 			((4 + n * 2 + offset) >> 8) & 0xff,
 			((4 + n * 2 + offset) >> 0) & 0xff
