@@ -75,41 +75,60 @@ struct mfp_##type {							\
 			uint8_t data_carrier_detect : 1;		\
 			uint8_t centronics_busy : 1;			\
 		};							\
+		struct {						\
+			uint8_t gpip7 : 1;				\
+			uint8_t gpip6 : 1;				\
+			uint8_t gpip5 : 1;				\
+			uint8_t gpip4 : 1;				\
+			uint8_t gpip3 : 1;				\
+			uint8_t gpip2 : 1;				\
+			uint8_t gpip1 : 1;				\
+			uint8_t gpip0 : 1;				\
+		};							\
 		uint8_t u8;						\
 	};								\
 }
 
 #define MFP_CHANNELS_A(c)						\
-	c(7, mono_monitor_detect)					\
-	c(6, ring_indicator)						\
-	c(5, timer_a)							\
-	c(4, rx_buffer_full)						\
-	c(3, rx_error)							\
-	c(2, tx_buffer_empty)						\
-	c(1, tx_error)							\
-	c(0, timer_b)
+	c(7, gpip7,           mono_monitor_detect)			\
+	c(6, gpip6,           ring_indicator)				\
+	c(5, timer_a,         )						\
+	c(4, rx_buffer_full,  )						\
+	c(3, rx_error,        )						\
+	c(2, tx_buffer_empty, )						\
+	c(1, tx_error,        )						\
+	c(0, timer_b,         )
 
 #define MFP_CHANNELS_B(c)						\
-	c(7, fdc_hdc)							\
-	c(6, acia)							\
-	c(5, timer_c)							\
-	c(4, timer_d)							\
-	c(3, blitter_ready)						\
-	c(2, clear_to_send)						\
-	c(1, data_carrier_detect)					\
-	c(0, centronics_busy)
+	c(7, gpip5,           fdc_hdc)					\
+	c(6, gpip4,           acia)					\
+	c(5, timer_c,         )						\
+	c(4, timer_d,         )						\
+	c(3, gpip3,           blitter_ready)				\
+	c(2, gpip2,           clear_to_send)				\
+	c(1, gpip1,           data_carrier_detect)			\
+	c(0, gpip0,           centronics_busy)
 
-#define MFP_CHANNEL_U8(bit, symbol)					\
-	uint8_t symbol : 1;
+#define MFP_CHANNEL_GENERIC_U8(bit, generic, atari)			\
+	uint8_t generic : 1;
 
-#define MFP_CHANNEL_U16(bit, symbol)					\
-	uint16_t symbol : 1;
+#define MFP_CHANNEL_GENERIC_U16(bit, generic, atari)			\
+	uint16_t generic : 1;
+
+#define MFP_CHANNEL_ATARI_U8(bit, generic, atari)			\
+	uint8_t atari : 1;
+
+#define MFP_CHANNEL_ATARI_U16(bit, generic, atari)			\
+	uint16_t atari : 1;
 
 #define MFP_DEFINE_IRA(type)						\
 struct mfp_##type {							\
 	union {								\
 		struct {						\
-			MFP_CHANNELS_A(MFP_CHANNEL_U8)			\
+			MFP_CHANNELS_A(MFP_CHANNEL_GENERIC_U8)		\
+		};							\
+		struct {						\
+			MFP_CHANNELS_A(MFP_CHANNEL_ATARI_U8)		\
 		};							\
 		uint8_t u8;						\
 	};								\
@@ -119,7 +138,10 @@ struct mfp_##type {							\
 struct mfp_##type {							\
 	union {								\
 		struct {						\
-			MFP_CHANNELS_B(MFP_CHANNEL_U8)			\
+			MFP_CHANNELS_B(MFP_CHANNEL_GENERIC_U8)		\
+		};							\
+		struct {						\
+			MFP_CHANNELS_B(MFP_CHANNEL_ATARI_U8)		\
 		};							\
 		uint8_t u8;						\
 	};								\
@@ -129,8 +151,12 @@ struct mfp_##type {							\
 struct mfp_##type {							\
 	union {								\
 		struct {						\
-			MFP_CHANNELS_A(MFP_CHANNEL_U16)			\
-			MFP_CHANNELS_B(MFP_CHANNEL_U16)			\
+			MFP_CHANNELS_A(MFP_CHANNEL_GENERIC_U16)		\
+			MFP_CHANNELS_B(MFP_CHANNEL_GENERIC_U16)		\
+		};							\
+		struct {						\
+			MFP_CHANNELS_A(MFP_CHANNEL_ATARI_U16)		\
+			MFP_CHANNELS_B(MFP_CHANNEL_ATARI_U16)		\
 		};							\
 		struct {						\
 			struct mfp_##type##a a;				\
