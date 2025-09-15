@@ -281,16 +281,22 @@ static inline void mfp_clr_##symbol(struct mfp_##symbol symbol)		\
 	mfp_clr8_##symbol(symbol.u8);					\
 }
 
+MFP_DEFINE_RDWR_IEMRAB(aer,  AER);
+MFP_DEFINE_RDWR_IEMRAB(ddr,  DDR);
 MFP_DEFINE_RDWR_IEMRAB(iera, IERA);
 MFP_DEFINE_RDWR_IEMRAB(ierb, IERB);
 MFP_DEFINE_RDWR_IEMRAB(imra, IMRA);
 MFP_DEFINE_RDWR_IEMRAB(imrb, IMRB);
 
+#define mfp_sets_aer(...)  mfp_set_aer((struct mfp_aer) __VA_ARGS__)
+#define mfp_sets_ddr(...)  mfp_set_ddr((struct mfp_ddr) __VA_ARGS__)
 #define mfp_sets_iera(...) mfp_set_iera((struct mfp_iera) __VA_ARGS__)
 #define mfp_sets_ierb(...) mfp_set_ierb((struct mfp_ierb) __VA_ARGS__)
 #define mfp_sets_imra(...) mfp_set_imra((struct mfp_imra) __VA_ARGS__)
 #define mfp_sets_imrb(...) mfp_set_imrb((struct mfp_imrb) __VA_ARGS__)
 
+#define mfp_clrs_aer(...)  mfp_clr_aer((struct mfp_aer) __VA_ARGS__)
+#define mfp_clrs_ddr(...)  mfp_clr_ddr((struct mfp_ddr) __VA_ARGS__)
 #define mfp_clrs_iera(...) mfp_clr_iera((struct mfp_iera) __VA_ARGS__)
 #define mfp_clrs_ierb(...) mfp_clr_ierb((struct mfp_ierb) __VA_ARGS__)
 #define mfp_clrs_imra(...) mfp_clr_imra((struct mfp_imra) __VA_ARGS__)
