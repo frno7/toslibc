@@ -58,6 +58,10 @@ SECTIONS
 		KEEP (*(.sndh.tune.times));
 	}
 
+	.sndh.tune.frames : {
+		KEEP (*(.sndh.tune.frames));
+	}
+
 	.sndh.timer : {
 		KEEP (*(.sndh.timer));
 	}

@@ -18,6 +18,9 @@
 #define SNDH_TUNE_DEFINE_NAME_vtn(value, time, name)			\
 	name "\0"
 
+#define SNDH_TUNE_DEFINE_NAME_vfn(value, frames, name)			\
+	name "\0"
+
 /* Each entry ends with "\0", so the whole section ends with "\0\0". */
 #define sndh_tune_names(type, entries, kind)				\
 	__attribute__((section(".sndh.tune.names")))			\
@@ -30,16 +33,33 @@
 		((time) >> 0) & 0xff					\
 	},
 
+#define SNDH_TUNE_DEFINE_FRAMES_vfn(value, frames,  name)		\
+	{								\
+		((frames) >> 24) & 0xff,				\
+		((frames) >> 16) & 0xff,				\
+		((frames) >>  8) & 0xff,				\
+		((frames) >>  0) & 0xff					\
+	},
+
 #define sndh_tune_times(type, entries, kind)				\
 	__attribute__((section(".sndh.tune.times")))			\
 	const unsigned char _sndh_tune_times[][2] = {			\
 		entries(SNDH_TUNE_DEFINE_TIME_##kind)			\
 	}
 
+#define sndh_tune_frames(type, entries, kind)				\
+	__attribute__((section(".sndh.tune.frames")))			\
+	const unsigned char _sndh_tune_frames[][4] = {			\
+		entries(SNDH_TUNE_DEFINE_FRAMES_##kind)			\
+	}
+
 #define SNDH_TUNE_DEFINE_VALUE_vn(value, name)				\
 	value,
 
 #define SNDH_TUNE_DEFINE_VALUE_vtn(value, time,  name)			\
+	value,
+
+#define SNDH_TUNE_DEFINE_VALUE_vfn(value, frames,  name)		\
 	value,
 
 #define sndh_tune_types(type, entries, kind)				\
@@ -55,6 +75,11 @@
 	sndh_tune_names(type, entries, vtn);				\
 	sndh_tune_times(type, entries, vtn);				\
 	sndh_tune_types(type, entries, vtn)
+
+#define sndh_tune_value_frames_names(type, entries)			\
+	sndh_tune_names(type, entries, vfn);				\
+	sndh_tune_frames(type, entries, vfn);				\
+	sndh_tune_types(type, entries, vfn)
 
 #define sndh_tune_select_value(tune)					\
 	(_sndh_tune_values[(tune) - 1])

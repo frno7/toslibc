@@ -234,6 +234,28 @@ static size_t append_sndh_tune_times(struct file *tf, struct file *ef)
 	return 4 + s.size;
 }
 
+static size_t append_sndh_tune_frames(struct file *tf, struct file *ef)
+{
+	const struct section s =
+		section_data(ef, ".sndh.tune.frames", data_section);
+
+	if (!s.size)
+		return 0;
+
+	const int n = sndh_tune_count(ef);
+
+	if (s.size != 4 * n)
+		pr_fatal_error("%s: .sndh.tune.frames size %zu not %d",
+			ef->path, s.size, n);
+
+	if (tf) {
+		append_text(tf, "FRMS");
+		file_append(tf, s.data, s.size);
+	}
+
+	return 4 + s.size;
+}
+
 static size_t append_sndh_timer(struct file *tf, struct file *ef)
 {
 	const struct section s =
@@ -267,11 +289,12 @@ static size_t append_sndh_metadata(struct file *tf, struct file *ef)
 	if (tf)
 		append_text(tf, "SNDH");
 
-	const size_t title_length = append_sndh_title(tf, ef);
-	const size_t count_length = append_sndh_tune_count(tf, ef);
-	const size_t names_length = append_sndh_tune_names(tf, ef);
-	const size_t times_length = append_sndh_tune_times(tf, ef);
-	const size_t timer_length = append_sndh_timer(tf, ef);
+	const size_t title_length  = append_sndh_title(tf, ef);
+	const size_t count_length  = append_sndh_tune_count(tf, ef);
+	const size_t names_length  = append_sndh_tune_names(tf, ef);
+	const size_t times_length  = append_sndh_tune_times(tf, ef);
+	const size_t frames_length = append_sndh_tune_frames(tf, ef);
+	const size_t timer_length  = append_sndh_timer(tf, ef);
 
 	if (tf)
 		append_text(tf, "HDNS");
@@ -280,6 +303,7 @@ static size_t append_sndh_metadata(struct file *tf, struct file *ef)
 		 + title_length
 		 + names_length
 		 + times_length
+		 + frames_length
 		 + timer_length
 		 + 4;
 }
