@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e
 set -o pipefail
 
 gen_cc()
 {
-	echo '#!/bin/bash
+	echo '#!/usr/bin/env bash
 
 set -e
 set -o pipefail
