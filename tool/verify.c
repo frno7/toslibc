@@ -54,6 +54,7 @@ static void verify_sections(struct file *f)
 
 		{ ".sndh.title",	data_section,      0, 0, 1 },
 		{ ".sndh.composer",	data_section,      0, 0, 1 },
+		{ ".sndh.year",		data_section,      0, 0, 1 },
 		{ ".sndh.tune.count",	data_section,      0, 0, 1 },
 		{ ".sndh.tune.names",	data_section,      0, 0, 1 },
 		{ ".sndh.tune.times",	data_section,      0, 0, 1 },

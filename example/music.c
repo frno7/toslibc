@@ -9,6 +9,7 @@
 
 sndh_title("Music");
 sndh_composer("Pitch Tone");
+sndh_year(2025);
 sndh_tune_value_names(int, tune_value_names);
 sndh_timer(SNDH_TIMER_C, 200);
 

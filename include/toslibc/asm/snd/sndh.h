@@ -9,6 +9,9 @@
 #define sndh_composer(composer) const char _sndh_composer[]		\
 	__attribute__((section(".sndh.composer"))) = composer
 
+#define sndh_year(year) const char _sndh_year[]				\
+	__attribute__((section(".sndh.year"))) = #year
+
 #define sndh_tune_count(count) const unsigned char _sndh_tune_count[2]	\
 	__attribute__((section(".sndh.tune.count"))) = {		\
 		((count) >> 8) & 0xff,					\

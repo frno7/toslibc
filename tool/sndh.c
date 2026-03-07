@@ -101,6 +101,21 @@ static size_t append_sndh_composer(struct file *tf, struct file *ef)
 	return 4 + size + append_even(tf, size);
 }
 
+static size_t append_sndh_year(struct file *tf, struct file *ef)
+{
+	const size_t size = section_size(ef, ".sndh.year", data_section);
+
+	if (!size)
+		return 0;
+
+	if (tf) {
+		file_append(tf, "YEAR", 4);
+		append_section(tf, ef, ".sndh.year", data_section);
+	}
+
+	return 4 + size + append_even(tf, size);
+}
+
 static int sndh_tune_count_(struct file *ef)
 {
 	const struct section s =
@@ -307,6 +322,7 @@ static size_t append_sndh_metadata(struct file *tf, struct file *ef)
 	const size_t count_length    = append_sndh_tune_count(tf, ef);
 	const size_t title_length    = append_sndh_title(tf, ef);
 	const size_t composer_length = append_sndh_composer(tf, ef);
+	const size_t year_length     = append_sndh_year(tf, ef);
 	const size_t names_length    = append_sndh_tune_names(tf, ef);
 	const size_t times_length    = append_sndh_tune_times(tf, ef);
 	const size_t frames_length   = append_sndh_tune_frames(tf, ef);
@@ -318,6 +334,7 @@ static size_t append_sndh_metadata(struct file *tf, struct file *ef)
 	return 4 + count_length
 		 + title_length
 		 + composer_length
+		 + year_length
 		 + names_length
 		 + times_length
 		 + frames_length

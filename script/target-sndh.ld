@@ -50,6 +50,10 @@ SECTIONS
 		KEEP (*(.sndh.composer));
 	}
 
+	.sndh.year : {
+		KEEP (*(.sndh.year));
+	}
+
 	.sndh.tune.count : {
 		KEEP (*(.sndh.tune.count));
 	}
