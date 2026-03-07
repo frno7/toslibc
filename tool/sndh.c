@@ -86,6 +86,21 @@ static size_t append_sndh_title(struct file *tf, struct file *ef)
 	return 4 + size + append_even(tf, size);
 }
 
+static size_t append_sndh_composer(struct file *tf, struct file *ef)
+{
+	const size_t size = section_size(ef, ".sndh.composer", data_section);
+
+	if (!size)
+		return 0;
+
+	if (tf) {
+		file_append(tf, "COMM", 4);
+		append_section(tf, ef, ".sndh.composer", data_section);
+	}
+
+	return 4 + size + append_even(tf, size);
+}
+
 static int sndh_tune_count_(struct file *ef)
 {
 	const struct section s =
@@ -289,18 +304,20 @@ static size_t append_sndh_metadata(struct file *tf, struct file *ef)
 	if (tf)
 		append_text(tf, "SNDH");
 
-	const size_t title_length  = append_sndh_title(tf, ef);
-	const size_t count_length  = append_sndh_tune_count(tf, ef);
-	const size_t names_length  = append_sndh_tune_names(tf, ef);
-	const size_t times_length  = append_sndh_tune_times(tf, ef);
-	const size_t frames_length = append_sndh_tune_frames(tf, ef);
-	const size_t timer_length  = append_sndh_timer(tf, ef);
+	const size_t count_length    = append_sndh_tune_count(tf, ef);
+	const size_t title_length    = append_sndh_title(tf, ef);
+	const size_t composer_length = append_sndh_composer(tf, ef);
+	const size_t names_length    = append_sndh_tune_names(tf, ef);
+	const size_t times_length    = append_sndh_tune_times(tf, ef);
+	const size_t frames_length   = append_sndh_tune_frames(tf, ef);
+	const size_t timer_length    = append_sndh_timer(tf, ef);
 
 	if (tf)
 		append_text(tf, "HDNS");
 
 	return 4 + count_length
 		 + title_length
+		 + composer_length
 		 + names_length
 		 + times_length
 		 + frames_length

@@ -8,6 +8,7 @@
 	t(262, "C4 middle C 262 Hz")
 
 sndh_title("Music");
+sndh_composer("Pitch Tone");
 sndh_tune_value_names(int, tune_value_names);
 sndh_timer(SNDH_TIMER_C, 200);
 

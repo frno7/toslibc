@@ -4,7 +4,10 @@
 #define TOSLIBC_ASM_SNDH_H
 
 #define sndh_title(title) const char _sndh_title[]			\
-	__attribute__((section(".sndh.title")))	= title
+	__attribute__((section(".sndh.title"))) = title
+
+#define sndh_composer(composer) const char _sndh_composer[]		\
+	__attribute__((section(".sndh.composer"))) = composer
 
 #define sndh_tune_count(count) const unsigned char _sndh_tune_count[2]	\
 	__attribute__((section(".sndh.tune.count"))) = {		\

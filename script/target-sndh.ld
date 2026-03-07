@@ -46,6 +46,10 @@ SECTIONS
 		KEEP (*(.sndh.title));
 	}
 
+	.sndh.composer : {
+		KEEP (*(.sndh.composer));
+	}
+
 	.sndh.tune.count : {
 		KEEP (*(.sndh.tune.count));
 	}
