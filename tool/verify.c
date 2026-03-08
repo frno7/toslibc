@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "internal/macro.h"
+
 #include "tool/elf32.h"
 #include "tool/print.h"
 #include "tool/section.h"
@@ -69,7 +71,7 @@ static void verify_sections(struct file *f)
 			f->path, ehdr->e_entry);
 
 	elf_for_each_section (shdr, ehdr) {
-		for (int i = 0; i < ARRAY_SIZE(sections); i++) {
+		for (int i = 0; i < __ARRAY_SIZE(sections); i++) {
 			if (!sections[i].section(shdr, ehdr))
 				continue;
 
@@ -97,7 +99,7 @@ static void verify_sections(struct file *f)
 next:
 	}
 
-	for (int i = 0; i < ARRAY_SIZE(sections); i++)
+	for (int i = 0; i < __ARRAY_SIZE(sections); i++)
 		if (sections[i].n < sections[i].min ||
 		    sections[i].n > sections[i].max)
 		pr_fatal_error("%s: unexpected section count %d name \"%s\", min %d, max %d",

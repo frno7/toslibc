@@ -8,6 +8,7 @@
 #include <string.h>
 
 #include "internal/compare.h"
+#include "internal/macro.h"
 #include "internal/struct.h"
 
 #include "tool/file.h"
@@ -157,7 +158,7 @@ static int sndh_tune_count(struct file *ef)
 	int n = 0;
 	int k = 0;
 
-	for (size_t i = 0; i < ARRAY_SIZE(sections); i++) {
+	for (size_t i = 0; i < __ARRAY_SIZE(sections); i++) {
 		const int m = sections[i].f(ef);
 
 		if (!m) {
@@ -400,7 +401,7 @@ void append_section_bss(struct file *tf,
 	static const uint8_t zero[256] = { };
 
 	while (size > 0) {
-		const ssize_t n = min_t(ssize_t, size, ARRAY_SIZE(zero));
+		const ssize_t n = min_t(ssize_t, size, __ARRAY_SIZE(zero));
 
 		file_append(tf, zero, n);
 
