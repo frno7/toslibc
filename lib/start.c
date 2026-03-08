@@ -68,4 +68,3 @@ void _main(void)
 
 	exit(main(argc, argv));
 }
-

@@ -30,6 +30,8 @@ Makefile options:
 
   V                - set to 1 to compile verbosely
   S                - set to 1 for sanitation checks
+  INT16            - set to 1 for 16-bit integers (default is 32-bit integers)
+
   TARGET_COMPILE   - set the m68k target compiler suite to use for Atari ST code
 
 Examples:
@@ -37,6 +39,10 @@ Examples:
 Build all:
 
 	$ make TARGET_COMPILE=m68k-elf-
+
+Build all with 16-bit integers:
+
+	$ make TARGET_COMPILE=m68k-elf- INT16=1
 
 Build only lib/libc.a:
 

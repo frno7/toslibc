@@ -31,7 +31,22 @@ jobs:
           ls -lR ~/.local/usr/m68k-atari-tos-gnu
           export PATH=~/.local/usr/m68k-atari-tos-gnu/bin:"$PATH"
           (cd ~/.local/usr/m68k-atari-tos-gnu/share/toslibc/example && make clean && make)
-          mkdir local && cp -ra ~/.local/usr/m68k-atari-tos-gnu/share/toslibc/example local
+          mkdir local32 && cp -ra ~/.local/usr/m68k-atari-tos-gnu/share/toslibc/example local32
+          cp -ra example example32
+          cp -ra test test32
+          :
+          rm -rf ~/.local/usr/m68k-atari-tos-gnu
+          make clean
+          git clean -fdx -e example32 -e local32 -e test32
+          :
+          make -j"$JOBS" V=1 INT16=1 prefix="$HOME/.local/usr/m68k-atari-tos16-gnu"
+          make -j"$JOBS" V=1 INT16=1 prefix="$HOME/.local/usr/m68k-atari-tos16-gnu" install
+          ls -lR ~/.local/usr/m68k-atari-tos16-gnu
+          export PATH=~/.local/usr/m68k-atari-tos16-gnu/bin:"$PATH"
+          (cd ~/.local/usr/m68k-atari-tos16-gnu/share/toslibc/example && make clean && make)
+          mkdir local16 && cp -ra ~/.local/usr/m68k-atari-tos16-gnu/share/toslibc/example local16
+          cp -ra example example16
+          cp -ra test test16
 
       - name: Publish examples and test suite
         if: ${{ success() }}
@@ -41,14 +56,22 @@ jobs:
           if-no-files-found: error
           compression-level: 9
           path: |
-            example/*.PRG
-            example/*.TOS
-            example/*.SNDH
-            local/example/*.PRG
-            local/example/*.TOS
-            local/example/*.SNDH
-            test/SUITE.TOS
-            test/test.txt
+            example16/*.PRG
+            example16/*.TOS
+            example16/*.SNDH
+            example32/*.PRG
+            example32/*.TOS
+            example32/*.SNDH
+            local16/example/*.PRG
+            local16/example/*.TOS
+            local16/example/*.SNDH
+            local32/example/*.PRG
+            local32/example/*.TOS
+            local32/example/*.SNDH
+            test16/SUITE.TOS
+            test16/test.txt
+            test32/SUITE.TOS
+            test32/test.txt
 
   build-mac:
     runs-on: macos-latest
@@ -78,3 +101,13 @@ jobs:
           ls -lR ~/.local/usr/m68k-atari-tos-gnu
           export PATH=~/.local/usr/m68k-atari-tos-gnu/bin:"$PATH"
           (cd ~/.local/usr/m68k-atari-tos-gnu/share/toslibc/example && make clean && make)
+          :
+          rm -rf ~/.local/usr/m68k-atari-tos-gnu
+          make clean
+          git clean -fdx
+          :
+          make -j"$JOBS" V=1 CC="$brew_gcc" INT16=1 prefix="$HOME/.local/usr/m68k-atari-tos16-gnu"
+          make -j"$JOBS" V=1 CC="$brew_gcc" INT16=1 prefix="$HOME/.local/usr/m68k-atari-tos16-gnu" install
+          ls -lR ~/.local/usr/m68k-atari-tos16-gnu
+          export PATH=~/.local/usr/m68k-atari-tos16-gnu/bin:"$PATH"
+          (cd ~/.local/usr/m68k-atari-tos16-gnu/share/toslibc/example && make clean && make)

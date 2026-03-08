@@ -33,6 +33,10 @@ endif
 
 TARGET_CFLAGS = $(CFLAGS)
 
+ifeq (1,$(INT16))
+INT_CFLAGS = -mshort
+endif
+
 export TARGET_CC TARGET_LD
 
 COMPILER_ALIASES = cc:gcc
@@ -59,7 +63,7 @@ include script/Makefile
 include lib/Makefile
 include tool/Makefile
 
-TOSLIBC_PROGRAM_BASIC_CFLAGS = -march=68000 -fno-PIC -nostdlib
+TOSLIBC_PROGRAM_BASIC_CFLAGS = -march=68000 -fno-PIC -nostdlib $(INT_CFLAGS)
 TOSLIBC_PROGRAM_BASIC_LDFLAGS = --relocatable --gc-sections --strip-all --entry _start
 
 export TOSLIBC_PROGRAM_BASIC_CFLAGS TOSLIBC_PROGRAM_BASIC_LDFLAGS

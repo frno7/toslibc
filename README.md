@@ -1,23 +1,21 @@
 ![compilation workflow](https://github.com/frno7/toslibc/actions/workflows/compilation.yml/badge.svg)
 
-TOS/libc is a 32-bit
+TOS/libc is a 16/32-bit
 [C standard library](https://en.wikipedia.org/wiki/C_standard_library)
 to compile programs for [Atari TOS](https://en.wikipedia.org/wiki/Atari_TOS)
 and the [Atari ST](https://en.wikipedia.org/wiki/Atari_ST) family of computers.
 
-Many, if not most, other libc for Atari TOS are 16-bit. There are two
-significant advantages with a 32-bit libc:
+Many, if not most, other libc for Atari TOS are 16-bit only. TOS/libc is
+32-bit by default. A 16-bit TOS/libc can be compiled by supplying `INT16=1`
+to `make`. Review the file
+[`INSTALL`](https://github.com/frno7/toslibc/blob/main/INSTALL) for details.
 
-- the [GNU compiler collection](https://en.wikipedia.org/wiki/GNU_Compiler_Collection)
-  (GCC) for the `m68k-elf` target works unmodified also for Atari TOS;
-
-- modern C programs and libraries often assume the C integer type `int` is
-  at least 32 bits, since that has been the case for most modern operating
-  systems in use during at least 25 years.
-
-The are also two potentially significant disadvantages compared with a 16-bit
-libc: lower performance and greater memory use. However, with judicious
-optimisations such losses can often be recovered.
+Modern C programs and libraries often assume the C integer type `int` is
+at least 32 bits, since that has been the case for most modern operating
+systems in use during at least 25 years. There are also two potentially
+significant disadvantages compared with a 16-bit libc: lower performance
+and greater memory use. However, with judicious optimisations such losses
+can often be recovered.
 
 Programs linked with TOS/libc can use the `--gc-sections` option to the
 GNU linker and thereby drastically reduce their size. The supplied example

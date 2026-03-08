@@ -3,6 +3,8 @@
 #ifndef TOSLIBC_ASM_SNDH_H
 #define TOSLIBC_ASM_SNDH_H
 
+#include <stdint.h>
+
 #define sndh_title(title) const char _sndh_title[]			\
 	__attribute__((section(".sndh.title"))) = title
 
@@ -106,7 +108,7 @@ enum {
 		((frequency) >> 0) & 0xff				\
 	}
 
-void sndh_init(int tune);
+void sndh_init(int32_t tune);
 void sndh_exit();
 void sndh_play();
 

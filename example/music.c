@@ -13,7 +13,7 @@ sndh_year(2025);
 sndh_tune_value_names(int, tune_value_names);
 sndh_timer(SNDH_TIMER_C, 200);
 
-void sndh_init(int tune)
+void sndh_init(int32_t tune)
 {
 	const int pitch = sndh_tune_select_value(tune);
 

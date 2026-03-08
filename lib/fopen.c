@@ -77,10 +77,9 @@ FILE *fopen(const char *pathname, const char *mode)
 	 * Cast the file descriptor (fd) integer to a pseudo-pointer,
 	 * as the size of the pointer is at least as great as the integer.
 	 * For the Atari ST, the pointer is 32 bits, and the integer is
-	 * either 16 or 32 bits; however TOS/libc requires 32-bit integers.
-	 * This avoids mallocing or otherwise storing the fd only to have
-	 * a FILE pointer to it.
+	 * either 16 or 32 bits. This avoids mallocing or otherwise storing
+	 * the fd only to have a FILE pointer to it.
 	 */
 	BUILD_BUG_ON(sizeof(FILE *) < sizeof(fd));
-	return (FILE *)fd;
+	return (FILE *)(uint32_t)fd;
 }
