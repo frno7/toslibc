@@ -16,8 +16,8 @@
 	.equ	bios_opcode_##name_,opcode_;
 BIOS_CALL(BIOS_OPCODE_EQU)
 
-.macro trap_bios opcode_ n_=0
-	trap_opcode 13 \opcode_ \n_
+.macro trap_bios opcode_ t_=0
+	trap_opcode 13 \opcode_ \t_
 .endm
 
 #define BIOS_MACRO(opcode_, rtype_, name_, ptypes_, ...)		\

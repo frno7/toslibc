@@ -16,8 +16,8 @@
 	.equ	xbios_opcode_##name_,opcode_;
 XBIOS_CALL(XBIOS_OPCODE_EQU)
 
-.macro trap_xbios opcode_ n_=0
-	trap_opcode 14 \opcode_ \n_
+.macro trap_xbios opcode_ t_=0
+	trap_opcode 14 \opcode_ \t_
 .endm
 
 #define XBIOS_MACRO(opcode_, rtype_, name_, ptypes_, ...)		\

@@ -16,7 +16,7 @@
 	.equ	gemdos_opcode_##name_,opcode_;
 GEMDOS_CALL(GEMDOS_OPCODE_EQU)
 
-.macro trap_gemdos opcode_ n_=0
+.macro trap_gemdos opcode_ t_=0
 .if \opcode_ == gemdos_opcode_pterm0
 	clr.w	-(sp)
 	trap	#1
@@ -24,7 +24,7 @@ GEMDOS_CALL(GEMDOS_OPCODE_EQU)
 	move.w	#\opcode_,-(sp)
 	trap	#1
 .else
-	trap_opcode 1 \opcode_ \n_
+	trap_opcode 1 \opcode_ \t_
 .endif
 .endm
 

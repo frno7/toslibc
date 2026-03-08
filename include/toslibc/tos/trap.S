@@ -84,13 +84,13 @@ TRAP_ARGS(TRAP_ARG_SIZE)
 .endm;
 TRAP_ARGS(TRAP_ARG_MACRO)
 
-.macro trap_opcode trap_ opcode_ n_=0
+.macro trap_opcode trap_ opcode_ t_=0
 	move.w	#\opcode_,-(sp)
 	trap	#\trap_
-.if 2+\n_ <= 8
-	addq.l	#2+\n_,sp
+.if 2+\t_ <= 8
+	addq.l	#2+\t_,sp
 .else
-	lea	2+\n_(sp),sp
+	lea	2+\t_(sp),sp
 .endif
 .endm
 
