@@ -63,6 +63,8 @@ TOSLIBC_LIB_SRC = $(addprefix $(TOSLIBC_lib_dir),			\
 	strtoumax.c							\
 	supexecarg.c							\
 	system-variable.c						\
+	unicode-atari.c							\
+	unicode-utf8.c							\
 	unlink.c							\
 	vdi.c								\
 	vdprintf.c							\
