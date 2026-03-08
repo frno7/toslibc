@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "internal/macro.h"
 #include "internal/version.h"
 
 #include "tool/option.h"
@@ -33,13 +34,13 @@ static void help(FILE *file)
 		progname, progname);
 }
 
-static void NORETURN help_exit(void)
+static void __NORETURN help_exit(void)
 {
 	help(stdout);
 	exit(EXIT_SUCCESS);
 }
 
-static void NORETURN version_exit(void)
+static void __NORETURN version_exit(void)
 {
 	printf("%s version %s\n", progname, toslibc_version());
 

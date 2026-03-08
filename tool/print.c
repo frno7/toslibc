@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "internal/macro.h"
+
 #include "tool/print.h"
 
 static void report(const char *prefix, const char *suffix,
@@ -53,7 +55,7 @@ void pr_error(const char *fmt, ...)
 	va_end(ap);
 }
 
-void NORETURN pr_fatal_error(const char *fmt, ...)
+void __NORETURN pr_fatal_error(const char *fmt, ...)
 {
 	va_list ap;
 
@@ -64,7 +66,7 @@ void NORETURN pr_fatal_error(const char *fmt, ...)
 	exit(EXIT_FAILURE);
 }
 
-void NORETURN pr_fatal_errno(const char *fmt, ...)
+void __NORETURN pr_fatal_errno(const char *fmt, ...)
 {
 	va_list ap;
 

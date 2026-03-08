@@ -5,6 +5,4 @@
 
 extern char progname[];
 
-#define NORETURN __attribute__((__noreturn__))
-
 #endif /* TOSLIBC_TOOL_TOOL_H */
