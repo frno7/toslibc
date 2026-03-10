@@ -133,6 +133,16 @@ A test suite for TOS/libc is installed in `$prefix/share/toslibc/test`.
 
 The examples and test suite can run on Atari ST hardware or an emulator.
 
+# How to debug
+
+The `tool/m68k-atari-tos-gnu-toslink` linker retains debug symbols in the
+final Atari TOS program files. For example, the
+[Devpac](https://www.atarimania.com/utility-atari-st-devpac_35299.html) Mon
+debugger displays symbols for
+[`example/hello.c`](https://github.com/frno7/toslibc/blob/main/example/hello.c):
+
+![MON.PRG](https://raw.githubusercontent.com/frno7/toslibc/main/example/mon.png)
+
 # How it works
 
 TOS/libc automatically converts between 32-bit and 16-bit integers for
