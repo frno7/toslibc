@@ -11,7 +11,7 @@
 
 #define TEST_TEXT_FILE "test.txt"
 
-const char *test___fopen_mode_flags()
+const char *test___fopen_mode_flags(void)
 {
 	static const struct {
 		const char *mode;
@@ -70,7 +70,7 @@ const char *test___fopen_mode_flags()
 	return NULL;
 }
 
-const char *test_fopen_r()
+const char *test_fopen_r(void)
 {
 	FILE *file = fopen(TEST_TEXT_FILE, "r");
 	if (!file)
@@ -88,7 +88,7 @@ const char *test_fopen_r()
 	return NULL;
 }
 
-const char *test_fopen_a()
+const char *test_fopen_a(void)
 {
 	FILE *file = fopen(TEST_TEXT_FILE, "a");
 	if (!file)

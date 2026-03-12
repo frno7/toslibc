@@ -7,7 +7,7 @@
 
 #include "internal/build-assert.h"
 
-void mfp_build_bug_on()
+void mfp_build_bug_on(void)
 {
 	BUILD_BUG_ON(sizeof(struct mfp_gpip) != 1);
 	BUILD_BUG_ON(sizeof(struct mfp_aer) != 1);

@@ -11,12 +11,12 @@
 #include "test/suite.h"
 
 #define TEST_DECLARE(identifier)					\
-	const char *identifier();
+	const char *identifier(void);
 TEST_SUITE(TEST_DECLARE)
 
 static const struct {
 	const char *name;
-	const char *(*test)();
+	const char *(*test)(void);
 } suite[] = {
 #define TEST_ENTRY(identifier)						\
 	{ #identifier, identifier },

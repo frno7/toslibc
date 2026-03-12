@@ -11,7 +11,7 @@ extern struct option_ {
 	bool strip;
 } option;
 
-static inline bool option_symbols()
+static inline bool option_symbols(void)
 {
 	return !option.strip;
 }

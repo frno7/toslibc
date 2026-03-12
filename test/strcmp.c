@@ -17,7 +17,7 @@ static int sign(int n)
 				s1, s2, sign(result), sign(expect));	\
 })
 
-const char *test_strcmp()
+const char *test_strcmp(void)
 {
 	TEST_STRCMP("foo", "foo",  0);
 	TEST_STRCMP("foo", "bar",  1);

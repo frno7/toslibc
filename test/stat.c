@@ -11,7 +11,7 @@
 #define TEST_NOENT_FILE "noent.tmp"
 #define TEST_CUR_DIR    "."
 
-const char *test_stat_noent()
+const char *test_stat_noent(void)
 {
 	struct stat sb;
 
@@ -24,7 +24,7 @@ const char *test_stat_noent()
 	return NULL;
 }
 
-const char *test_stat_reg()
+const char *test_stat_reg(void)
 {
 	struct stat sb;
 
@@ -47,7 +47,7 @@ const char *test_stat_reg()
 	return NULL;
 }
 
-const char *test_stat_dir()
+const char *test_stat_dir(void)
 {
 	struct stat sb;
 

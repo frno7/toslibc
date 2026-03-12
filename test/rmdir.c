@@ -10,7 +10,7 @@
 
 #define TEST_RMDIR_DIR "rmdir.tmp"
 
-const char *test_rmdir()
+const char *test_rmdir(void)
 {
 	if (file_exists(TEST_RMDIR_DIR))
 		return TEST_RMDIR_DIR " already exists";

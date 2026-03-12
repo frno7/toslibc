@@ -7,9 +7,9 @@
 #define _TOSLIBC_TOS_XGEMDOS_CALL_H
 
 #define XGEMDOS_CALL(call)						\
-	call(0x00, void __NORETURN, reset,)				\
+	call(0x00, void __NORETURN, reset, void)			\
 	call(0x73, void, vdi, struct vdi_pb *pb)			\
 	call(0xc8, void, aes, struct aes_pb *pb)			\
-	call(0xfe, int16_t, gdos_version,)
+	call(0xfe, int16_t, gdos_version, void)
 
 #endif /* _TOSLIBC_TOS_XGEMDOS_CALL_H */

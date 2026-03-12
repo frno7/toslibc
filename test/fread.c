@@ -8,7 +8,7 @@
 
 #define TEST_TEXT_FILE "test.txt"
 
-const char *test_fread()
+const char *test_fread(void)
 {
 	FILE *file = fopen(TEST_TEXT_FILE, "r");
 	if (!file)

@@ -6,7 +6,7 @@
 #include <tos/cookie.h>
 #include <tos/system-variable.h>
 
-int cookie_jar_size()
+int cookie_jar_size(void)
 {
 	volatile struct cookie *cookie = __system_variables->_p_cookies;
 

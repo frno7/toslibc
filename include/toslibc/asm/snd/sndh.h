@@ -109,7 +109,7 @@ enum {
 	}
 
 void sndh_init(int32_t tune);
-void sndh_exit();
-void sndh_play();
+void sndh_exit(void);
+void sndh_play(void);
 
 #endif /* TOSLIBC_ASM_SNDH_H */

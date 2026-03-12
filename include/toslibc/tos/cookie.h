@@ -69,7 +69,7 @@ COOKIES(DEFINE_COOKIE_VALUE)
 	COOKIE__FPU_NONE = 0,
 };
 
-int cookie_jar_size();
+int cookie_jar_size(void);
 
 struct __cookie_cid { char s[5]; };
 

@@ -14,7 +14,7 @@ static off_t tell(int fd)
 	return lseek(fd, 0, SEEK_CUR);
 }
 
-const char *test_open_rdonly()
+const char *test_open_rdonly(void)
 {
 	int fd = open(TEST_TEXT_FILE, O_RDONLY);
 	if (fd == -1)
@@ -32,7 +32,7 @@ const char *test_open_rdonly()
 	return NULL;
 }
 
-const char *test_open_wronly_append()
+const char *test_open_wronly_append(void)
 {
 	int fd = open(TEST_TEXT_FILE, O_WRONLY | O_APPEND);
 	if (fd == -1)

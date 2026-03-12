@@ -13,7 +13,7 @@
 				&buf[dst], dst, &s[src], src, len, buf, expect);\
 })
 
-const char *test_memmove()
+const char *test_memmove(void)
 {
 	TEST_MEMMOVE("abcdefghij", 0, 2, 4, "ababcdghij");
 	TEST_MEMMOVE("abcdefghij", 2, 0, 4, "cdefefghij");

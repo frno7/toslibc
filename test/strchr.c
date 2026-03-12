@@ -12,7 +12,7 @@
 				s, c, result, &s[expect]);		\
 })
 
-const char *test_strchr()
+const char *test_strchr(void)
 {
 	TEST_STRCHR("",    '.', -1);
 	TEST_STRCHR("foo", 'o',  1);

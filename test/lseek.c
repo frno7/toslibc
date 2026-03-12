@@ -44,7 +44,7 @@ static const char *test_seek(int fd, off_t offset, int whence,
 		return failure;						\
 })
 
-const char *test_lseek()
+const char *test_lseek(void)
 {
 	int fd = open(TEST_TEXT_FILE, O_RDONLY);
 	if (fd == -1)

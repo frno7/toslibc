@@ -251,12 +251,12 @@ MFP_DEFINE_TDR(tcdr);
 MFP_DEFINE_TDR(tddr);
 
 #define MFP_DEFINE_RDWR_IEMRAB(symbol, label)				\
-static inline uint8_t mfp_rd8_##symbol()				\
+static inline uint8_t mfp_rd8_##symbol(void)				\
 {									\
 	return iord8(MFP_ADDR_##label);					\
 }									\
 									\
-static inline struct mfp_##symbol mfp_rd_##symbol()			\
+static inline struct mfp_##symbol mfp_rd_##symbol(void)			\
 {									\
 	return (struct mfp_##symbol) { .u8 = mfp_rd8_##symbol() };	\
 }									\
@@ -303,7 +303,7 @@ MFP_DEFINE_RDWR_IEMRAB(imrb, IMRB);
 #define mfp_clrs_imrb(...) mfp_clr_imrb((struct mfp_imrb) __VA_ARGS__)
 
 #define MFP_DEFINE_RDWR_IEMR(symbol, label)				\
-static inline struct mfp_##symbol mfp_rd_##symbol()			\
+static inline struct mfp_##symbol mfp_rd_##symbol(void)			\
 {									\
 	/* FIXME: Can this be optimised with a 32-bit read? */		\
 	return (struct mfp_##symbol) {					\
@@ -404,12 +404,12 @@ MFP_DEFINE_CLR_IPSR(ipr, IPR);
 MFP_DEFINE_CLR_IPSR(isr, ISR);
 
 #define MFP_DEFINE_RDWR_U8S(symbol, label)				\
-static inline uint8_t mfp_rd8_##symbol()				\
+static inline uint8_t mfp_rd8_##symbol(void)				\
 {									\
 	return iord8(MFP_ADDR_##label);					\
 }									\
 									\
-static inline struct mfp_##symbol mfp_rd_##symbol()			\
+static inline struct mfp_##symbol mfp_rd_##symbol(void)			\
 {									\
 	return (struct mfp_##symbol) { .u8 = mfp_rd8_##symbol() };	\
 }									\
@@ -444,12 +444,12 @@ MFP_DEFINE_RDWR_U8S(tddr, TDDR)
 #define mfp_wrs_tcdr(...) mfp_wr_tcdr((struct mfp_tcdr) __VA_ARGS__)
 #define mfp_wrs_tddr(...) mfp_wr_tddr((struct mfp_tddr) __VA_ARGS__)
 
-static inline struct mfp_tccr mfp_rd_tccr()
+static inline struct mfp_tccr mfp_rd_tccr(void)
 {
 	return (struct mfp_tccr) { .ctrl = mfp_rd_tcdcr().tc_ctrl };
 }
 
-static inline struct mfp_tdcr mfp_rd_tdcr()
+static inline struct mfp_tdcr mfp_rd_tdcr(void)
 {
 	return (struct mfp_tdcr) { .ctrl = mfp_rd_tcdcr().td_ctrl };
 }

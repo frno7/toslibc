@@ -10,7 +10,7 @@
 
 #define TEST_WRITE_FILE "fwrite.tmp"
 
-const char *test_fwrite()
+const char *test_fwrite(void)
 {
 	if (file_exists(TEST_WRITE_FILE))
 		return TEST_WRITE_FILE " already exists";

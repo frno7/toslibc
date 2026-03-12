@@ -10,7 +10,7 @@
 
 #define TEST_UNLINK_FILE "unlink.tmp"
 
-const char *test_unlink()
+const char *test_unlink(void)
 {
 	if (file_exists(TEST_UNLINK_FILE))
 		return TEST_UNLINK_FILE " already exists";
