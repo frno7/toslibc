@@ -15,6 +15,7 @@ typedef __UINT64_TYPE__ uint64_t;
 
 typedef __INTMAX_TYPE__ intmax_t;
 typedef __UINTMAX_TYPE__ uintmax_t;
+typedef __INTPTR_TYPE__ intptr_t;
 typedef __UINTPTR_TYPE__ uintptr_t;
 
 #endif /* _TOSLIBC_STDINT_H */
