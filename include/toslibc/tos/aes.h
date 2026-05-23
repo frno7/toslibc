@@ -242,7 +242,11 @@ struct aes_mesag {
 			union {
 				struct {
 					int16_t id;
-				} wm_closed;
+				} ac_close, wm_closed;
+				struct {
+					int16_t unused;
+					int16_t id;
+				} ac_open;
 				struct {
 					int16_t id;
 					struct aes_bar b;
