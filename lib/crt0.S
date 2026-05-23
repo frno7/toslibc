@@ -11,7 +11,11 @@
 
 	.globl	_start
 	.type	_start,@function
-_start:	move.l	4(sp),a0	/* Basepage address */
+_start:
+	move.l	a0,_basepage
+	bne.s	_accessory
+
+	move.l	4(sp),a0	/* Basepage address */
 	move.l	a0,_basepage
 	lea	_stack,sp
 
@@ -28,6 +32,10 @@ _start:	move.l	4(sp),a0	/* Basepage address */
 	beq	_main
 	move.w	d0,-(sp)
 	trap_gemdos_pterm
+
+_accessory:
+	lea	_stack,sp
+	bra	_main
 
 	.bss
 

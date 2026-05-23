@@ -34,7 +34,7 @@ TOS/libc includes interfaces for the following Atari TOS specific libraries:
 The AES and VDI interfaces are part of the
 [GEM desktop environment](https://en.wikipedia.org/wiki/GEM_(desktop_environment)).
 
-In addition to `APP`, `GEM`, `GTP`, `PRG`, `TOS` and `TTP` programs,
+In addition to `ACC`, `APP`, `GEM`, `GTP`, `PRG`, `TOS` and `TTP` programs,
 TOS/libc can link [`SNDH`](https://sndh.atari.org/) (music) programs.
 
 # Examples
