@@ -75,6 +75,9 @@ int main(int argc, char *argv[])
 	aes_graf_mouse(&aes, AES_GRAF_MOUSE_ARROW, NULL);
 
 	const int16_t vdi_id = vdi_v_opnvwk(&aes, NULL, NULL, NULL);
+	if (!vdi_id)
+		return EXIT_FAILURE;
+
 	const struct aes_bar desktop_work =
 		aes_wind_get_workxywh(&aes, AES_WIND_ID_DESKTOP);
 	const struct aes_bar win_bar = {
