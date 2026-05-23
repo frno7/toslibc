@@ -3,6 +3,7 @@
 *.o.d
 *.elf
 *.tmp
+*.ACC
 *.PRG
 *.TOS
 *.TTP

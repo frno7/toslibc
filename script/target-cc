@@ -14,7 +14,7 @@ shopt -s nocasematch
 file_type()
 {
 	case "$(echo "$1" | tr '[:lower:]' '[:upper:]')" in
-		*.APP | *.GEM | *.GTP | *.PRG | *.TOS | *.TTP)
+		*.ACC | *.APP | *.GEM | *.GTP | *.PRG | *.TOS | *.TTP)
 			echo "PRG"
 			;;
 		*.SNDH)

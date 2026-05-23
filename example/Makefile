@@ -5,6 +5,7 @@ TOSLIBC_example_dir := $(dir $(lastword $(MAKEFILE_LIST)))
 TOSLIBC_EXAMPLE_PRG = $(addprefix $(TOSLIBC_example_dir),		\
 	ALERT.PRG							\
 	COOKIE.TOS							\
+	DESK.ACC							\
 	HELLO.TOS							\
 	MUSIC.SNDH							\
 	WINDOW.PRG							\

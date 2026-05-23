@@ -5,6 +5,7 @@ TARGET_CC = m68k-atari-tos-gnu-gcc
 EXAMPLES =								\
 	ALERT.PRG							\
 	COOKIE.TOS							\
+	DESK.ACC							\
 	HELLO.TOS							\
 	MUSIC.SNDH							\
 	WINDOW.PRG							\
