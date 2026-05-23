@@ -77,7 +77,7 @@ automatically built with
 Review the file [`INSTALL`](https://github.com/frno7/toslibc/blob/main/INSTALL)
 for installation instructions. A preinstalled m68k/GCC compiler is required.
 Assuming the compiler is `m68k-elf-gcc`, build TOS/libc with
-`make TARGET_COMPILE=m68k-elf-` to produce a `lib/toslibc.a`
+`make TARGET_COMPILE=m68k-elf-` to produce a `lib/libc.a`
 [static library](https://en.wikipedia.org/wiki/Static_library),
 an `m68k-atari-tos-gnu-gcc` compiler, example applications,
 and a test suite `test/SUITE.TOS`.
