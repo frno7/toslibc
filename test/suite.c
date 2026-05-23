@@ -38,12 +38,12 @@ int main(int argc, char *argv[])
 
 		const char *failure = suite[i].test();
 		if (!failure) {
-			puts("OK\r\n");
+			puts("OK");
 			continue;
 		}
 
 		failed++;
-		puts("FAIL\r\n");
+		puts("FAIL");
 		printf(": %s\r\n", failure);
 	}
 
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 	else
 		printf("\r\nAll %zu tests succeeded\r\n", SUITE_SIZE);
 
-	puts("Press enter to exit\r\n");
+	puts("Press enter to exit");
 	gemdos_cnecin();
 
 	return EXIT_SUCCESS;

@@ -10,7 +10,8 @@
 int puts(const char *s)
 {
 	const size_t length = strlen(s);
-	const ssize_t w = write(STDOUT_FILENO, s, length);
+	const ssize_t ws = write(STDOUT_FILENO, s, length);
+	const ssize_t wn = write(STDOUT_FILENO, "\r\n", 2);
 
-	return w == length ? w : EOF;
+	return ws + wn == length + 2 ? ws + wn : EOF;
 }
