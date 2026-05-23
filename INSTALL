@@ -3,7 +3,7 @@ Makefile targets:
   all              - compile TOS/libc, tools, test suite, and examples (default)
   lib              - compile lib/libc.a
   test             - compile test/SUITE.TOS
-  tool             - compile tool/toslink
+  tool             - compile tool/m68k-atari-tos-gnu-toslink
   script           - compile scripts
   binutils         - compile binutils scripts
   compiler         - compile compiler scripts
