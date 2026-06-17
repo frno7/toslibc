@@ -137,16 +137,16 @@ static inline void snd_dma_wr_base(const void *buffer)
 	snd_dma_wr32_base((uint32_t)buffer);
 }
 
-static inline uint32_t snd_dma_rd32_count(void)
+static inline uint32_t snd_dma_rd32_counter(void)
 {
-	return (snd_dma_rd8_counthi() << 16) |
-	       (snd_dma_rd8_countmi() <<  8) |
-	        snd_dma_rd8_countlo();
+	return (snd_dma_rd8_counterhi() << 16) |
+	       (snd_dma_rd8_countermi() <<  8) |
+	        snd_dma_rd8_counterlo();
 }
 
-static inline void *snd_dma_rd_count(void)
+static inline void *snd_dma_rd_counter(void)
 {
-	return (void *)snd_dma_rd32_count();
+	return (void *)snd_dma_rd32_counter();
 }
 
 static inline uint32_t snd_dma_rd32_end(void)
